@@ -36,12 +36,12 @@ function App() {
   return (
     <Router>
       <div className="flex flex-col min-h-screen">
-          <Header />
+        <Header />
         <main className="flex-grow mt-32">
           <Routes>
             <Route path="/" element={<LandingPage />} />
             <Route path="/trending" element={<ProductList category="trending" />} />
-            <Route path="/cart" element={<Cart/>} />
+            <Route path="/cart" element={<Cart />} />
             <Route path="/new-arrivals" element={<ProductList category="new-arrivals" />} />
             <Route path="/embroidered-abaya" element={<ProductList category="embroidered-abaya" />} />
             <Route path="/product/:id" element={<ProductDetails />} />

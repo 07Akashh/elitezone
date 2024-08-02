@@ -1,4 +1,3 @@
-// src/redux/slices/productSlice.js
 import { createSlice } from '@reduxjs/toolkit';
 import { demoProducts } from '../../demo';
 
