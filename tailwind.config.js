@@ -9,6 +9,7 @@ module.exports = {
         TenorSans: ["Tenor Sans", "sans-serif"],
         PlayfairDisplay: ["Playfair Display", "serif"],
         BerkshireSwash: ["Berkshire Swash", "serif"],
+        Poppins: ["Poppins", "sans-serif"],
       },
     },
   },

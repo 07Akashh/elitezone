@@ -1,12 +1,14 @@
-import React, { useRef } from 'react';
-import { useSelector } from 'react-redux';
+import React, { useEffect, useRef } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import ProductCard from './ProductCard';
-import { GoArrowRight } from "react-icons/go";
-import { GoArrowLeft } from "react-icons/go";
+import { GoArrowRight, GoArrowLeft } from 'react-icons/go';
+import { fetchCategory } from '../../redux/slices/productSlice';
 
 const ProductList = ({ category }) => {
-    const products = useSelector((state) => state.products.products);
-    const filteredProducts = products.filter((product) => product.category === category);
+    const dispatch = useDispatch();
+    const categoryState = useSelector((state) => state.products['newarrivals']);
+    const { data, isLoading, error } = categoryState || {};
+
     const scrollContainerRef = useRef(null);
 
     const scrollLeft = () => {
@@ -17,42 +19,81 @@ const ProductList = ({ category }) => {
         scrollContainerRef.current.scrollBy({ left: 300, behavior: 'smooth' });
     };
 
+    useEffect(() => {
+        dispatch(fetchCategory(category));
+    }, [dispatch, category]);
+
     return (
-        <div className="mx-5">
-            {category === 'trending' ? (
-                <div className="relative">
-                    <button
-                        className="absolute left-[-50px] top-[35%] z-10 p-2"
-                        onClick={scrollLeft}
-                    >
-                        <GoArrowLeft className=' h-[24px] w-[24px]'/>
-                    </button>
-                    <div
-                        className="flex overflow-x-auto no-scrollbar space-x-7"
-                        ref={scrollContainerRef}
-                    >
-                        {filteredProducts.map((product) => (
-                            <div key={product.id} className="min-w-max">
-                                <ProductCard product={product} />
-                            </div>
-                        ))}
-                    </div>
-                    <button
-                        className="absolute right-[-50px] z-10 top-[35%] p-2"
-                        onClick={scrollRight}
-                    >
-                        <GoArrowRight className=' h-[24px] w-[24px]'/>
-                    </button>
-                </div>
+        <div className=" mx-auto md:px-10 ">
+            {isLoading ? (
+                <div className="text-center py-10">Loading...</div>
+            ) : error ? (
+                <div className="text-center py-10">Error: {error}</div>
             ) : (
-                <div className="grid justify-center mx-auto w-auto grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4">
-                    {filteredProducts.map((product) => (
-                        <ProductCard key={product.id} product={product} />
-                    ))}
-                </div>
+                <>
+                    {category === 'trending' ? (
+                        <div className="relative">
+                            <button
+                                className="absolute hidden sm:block left-[-50px] top-[35%] z-10 p-2"
+                                onClick={scrollLeft}
+                            >
+                                <GoArrowLeft className='h-[24px] w-[24px]' />
+                            </button>
+                            <div
+                                className="flex overflow-x-auto no-scrollbar space-x-12 lg:space-x-48"
+                                ref={scrollContainerRef}
+                            >
+                                {data && data.map((product) => (
+                                    <div key={product.id} className="min-w-max">
+                                        <ProductCard product={product} />
+                                    </div>
+                                ))}
+                            </div>
+                            <button
+                                className="absolute right-[-50px] top-[35%] hidden sm:block z-10 p-2"
+                                onClick={scrollRight}
+                            >
+                                <GoArrowRight className='h-[24px] w-[24px]' />
+                            </button>
+                        </div>
+                    ) : (
+                        <div className="flex flex-wrap gap-5  justify-center md:justify-between border-black mx-auto py-4">
+                            {data && data.length > 0 ? (
+                                data.map((product) => (
+                                    <div key={product.id} className="md:flex-shrink-0  xl:w-[340px] mb-20 sm:mb-5">
+                                        <ProductCard product={product} />
+                                    </div>
+                                ))
+                            ) : (
+                                <div className="text-center py-10 w-full">No products available</div>
+                            )}
+                        </div>
+                    )}
+                </>
             )}
         </div>
     );
 };
 
 export default ProductList;
+
+
+
+
+//  <div >
+//     {data ? (
+//         <div className="text-center py-10">Loading...</div>
+//     ) : (
+//         <div className="grid justify-center mx-auto w-auto grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-4">
+//             {data ? (
+//                 data.map((product) => (
+//                     <div key={product.id} >
+//                         <ProductCard product={product} />
+//                     </div>
+//                 ))
+//             ) : (
+//                 <div className="text-center py-10">No products available</div>
+//             )}
+//         </div>
+//     )}
+// </div>

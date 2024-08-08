@@ -1,51 +1,14 @@
+import { createSlice } from '@reduxjs/toolkit';
+import {
+    fetchUserData,
+    loginUser,
+    registerUser,
+    googleLogin,
+    logoutUser,
+    updateUserData
+} from '../actions/authThunk';
 
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { auth,  registerWithEmailAndPassword, signInWithEmailAndPassword, signInWithGoogle } from '../../services/firebase';
-
-
-export const loginUser = createAsyncThunk(
-    'auth/loginUser',
-    async ({ email, password }, { rejectWithValue }) => {
-        try {
-            await signInWithEmailAndPassword(email, password);
-        } catch (error) {
-            return rejectWithValue(error.message);
-        }
-    }
-);
-
-export const registerUser = createAsyncThunk(
-    'auth/registerUser',
-    async ({ name, email, password, phone, address, pincode }, { rejectWithValue }) => {
-        try {
-            await registerWithEmailAndPassword(name, email, password, phone, address, pincode);
-        } catch (error) {
-            return rejectWithValue(error.message);
-        }
-    }
-);
-
-export const googleLogin = createAsyncThunk(
-    'auth/googleLogin',
-    async (_, { rejectWithValue }) => {
-        try {
-            await signInWithGoogle();
-        } catch (error) {
-            return rejectWithValue(error.message);
-        }
-    }
-);
-
-export const logoutUser = createAsyncThunk(
-    'auth/logoutUser',
-    async (_, { rejectWithValue }) => {
-        try {
-            await auth.signOut();
-        } catch (error) {
-            return rejectWithValue(error.message);
-        }
-    }
-);
+import * as reducers from '../reducers/authReducer';
 
 const authSlice = createSlice({
     name: 'auth',
@@ -61,57 +24,36 @@ const authSlice = createSlice({
     },
     extraReducers: (builder) => {
         builder
-            .addCase(loginUser.pending, (state) => {
-                state.loading = true;
-                state.error = null;
-            })
-            .addCase(loginUser.fulfilled, (state, action) => {
-                state.loading = false;
-                state.user = action.payload;
-            })
-            .addCase(loginUser.rejected, (state, action) => {
-                state.loading = false;
-                state.error = action.payload;
-            })
-            .addCase(registerUser.pending, (state) => {
-                state.loading = true;
-                state.error = null;
-            })
-            .addCase(registerUser.fulfilled, (state, action) => {
-                state.loading = false;
-                state.user = action.payload;
-            })
-            .addCase(registerUser.rejected, (state, action) => {
-                state.loading = false;
-                state.error = action.payload;
-            })
-            .addCase(googleLogin.pending, (state) => {
-                state.loading = true;
-                state.error = null;
-            })
-            .addCase(googleLogin.fulfilled, (state, action) => {
-                state.loading = false;
-                state.user = action.payload;
-            })
-            .addCase(googleLogin.rejected, (state, action) => {
-                state.loading = false;
-                state.error = action.payload;
-            })
-            .addCase(logoutUser.pending, (state) => {
-                state.loading = true;
-                state.error = null;
-            })
-            .addCase(logoutUser.fulfilled, (state) => {
-                state.loading = false;
-                state.user = null;
-            })
-            .addCase(logoutUser.rejected, (state, action) => {
-                state.loading = false;
-                state.error = action.payload;
-            });
+            .addCase(fetchUserData.pending, reducers.fetchUserPending)
+            .addCase(fetchUserData.fulfilled, reducers.fetchUserFulfilled)
+            .addCase(fetchUserData.rejected, reducers.fetchUserRejected)
+            .addCase(loginUser.pending, reducers.loginUserPending)
+            .addCase(loginUser.fulfilled, reducers.loginUserFulfilled)
+            .addCase(loginUser.rejected, reducers.loginUserRejected)
+            .addCase(registerUser.pending, reducers.registerUserPending)
+            .addCase(registerUser.fulfilled, reducers.registerUserFulfilled)
+            .addCase(registerUser.rejected, reducers.registerUserRejected)
+            .addCase(googleLogin.pending, reducers.googleLoginPending)
+            .addCase(googleLogin.fulfilled, reducers.googleLoginFulfilled)
+            .addCase(googleLogin.rejected, reducers.googleLoginRejected)
+            .addCase(logoutUser.pending, reducers.logoutUserPending)
+            .addCase(logoutUser.fulfilled, reducers.logoutUserFulfilled)
+            .addCase(logoutUser.rejected, reducers.logoutUserRejected)
+            .addCase(updateUserData.pending, reducers.updateUserPending)
+            .addCase(updateUserData.fulfilled, reducers.updateUserFulfilled)
+            .addCase(updateUserData.rejected, reducers.updateUserRejected);
     },
 });
 
 export const { setUser } = authSlice.actions;
+
+export {
+    fetchUserData,
+    loginUser,
+    registerUser,
+    googleLogin,
+    logoutUser,
+    updateUserData,
+};
 
 export default authSlice.reducer;

@@ -1,0 +1,74 @@
+import { createAsyncThunk } from '@reduxjs/toolkit';
+import {
+    registerWithEmailAndPassword,
+    signInWithEmailAndPassword,
+    signInWithGoogle,
+    logout
+} from '../../services/authService';
+import {
+    fetchUser,
+    updateUser
+} from '../../services/userService';
+
+export const fetchUserData = createAsyncThunk('auth/fetchUser', async () => {
+    const user = await fetchUser();
+    return user;
+});
+
+export const loginUser = createAsyncThunk(
+    'auth/loginUser',
+    async ({ email, password }, { rejectWithValue }) => {
+        try {
+            const response = await signInWithEmailAndPassword(email, password);
+            return response.data;
+        } catch (error) {
+            return rejectWithValue(error.message);
+        }
+    }
+);
+
+export const registerUser = createAsyncThunk(
+    'auth/registerUser',
+    async (formData, { rejectWithValue }) => {
+        console.log(formData);
+        try {
+            await registerWithEmailAndPassword(formData);
+        } catch (error) {
+            return rejectWithValue(error.message);
+        }
+    }
+);
+
+export const googleLogin = createAsyncThunk(
+    'auth/googleLogin',
+    async (_, { rejectWithValue }) => {
+        try {
+            await signInWithGoogle();
+        } catch (error) {
+            return rejectWithValue(error.message);
+        }
+    }
+);
+
+export const logoutUser = createAsyncThunk(
+    'auth/logoutUser',
+    async (_, { rejectWithValue }) => {
+        try {
+            await logout();
+        } catch (error) {
+            return rejectWithValue(error.message);
+        }
+    }
+);
+
+export const updateUserData = createAsyncThunk(
+    'auth/updateUser',
+    async (userData, { rejectWithValue }) => {
+        try {
+            const updatedUser = await updateUser(userData);
+            return updatedUser;
+        } catch (error) {
+            return rejectWithValue(error.message);
+        }
+    }
+);
