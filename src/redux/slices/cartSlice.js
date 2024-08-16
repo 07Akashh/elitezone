@@ -1,35 +1,72 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import { getCartItems } from '../../services/cartService';
 
 const initialState = {
-  items: [],
-  itemCount: 0,
+    items: [],
+    coupons: [],
+    itemCount: 0,
+    subtotal: 0,
+    shippingCharges: 0,
+    total: 0,
+    loading: false,
+    error: null,
 };
 
+export const fetchCartItems = createAsyncThunk(
+    'cart/fetchCartItems',
+    async (_, { rejectWithValue }) => {
+        try {
+            const response = await getCartItems();
+            return response.data;
+        } catch (error) {
+            return rejectWithValue(error.response.data);
+        }
+    }
+);
+
 const cartSlice = createSlice({
-  name: 'cart',
-  initialState,
-  reducers: {
-    setCartItems: (state, action) => {
-      state.items = action.payload;
-      state.itemCount = action.payload.length;
+    name: 'cart',
+    initialState,
+    reducers: {
+        updateItemCount: (state, action) => {
+            state.itemCount = action.payload;
+        },
+        addItem: (state, action) => {
+            state.items.push(action.payload);
+            state.itemCount = state.items.length;
+        },
+        removeItem: (state, action) => {
+            state.items = state.items.filter(item => item.id !== action.payload.id);
+            state.itemCount = state.items.length;
+        },
+        updateQuantity: (state, action) => {
+            const item = state.items.find(i => i.id === action.payload.id);
+            if (item) {
+                item.quantity = action.payload.quantity;
+            }
+        },
     },
-    updateItemCount: (state, action) => {
-      state.itemCount = action.payload;
+    extraReducers: (builder) => {
+        builder
+            .addCase(fetchCartItems.pending, (state) => {
+                state.loading = true;
+                state.error = null;
+            })
+            .addCase(fetchCartItems.fulfilled, (state, action) => {
+                state.items = action.payload.items;
+                state.coupons = action.payload.coupons;
+                state.itemCount = action.payload.items.length;
+                state.subtotal = action.payload.subtotal;
+                state.shippingCharges = action.payload.shipingCharges;
+                state.total = action.payload.total;
+                state.loading = false;
+            })
+            .addCase(fetchCartItems.rejected, (state, action) => {
+                state.loading = false;
+                state.error = action.payload || 'Failed to fetch cart items';
+            });
     },
-    addItem: (state, action) => {
-      state.items.push(action.payload);
-    },
-    removeItem: (state, action) => {
-      state.items = state.items.filter(item => item.id !== action.payload.id);
-    },
-    updateQuantity: (state, action) => {
-      const item = state.items.find(i => i.id === action.payload.id);
-      if (item) {
-        item.quantity = action.payload.quantity;
-      }
-    },
-  },
 });
 
-export const { setCartItems, updateItemCount, updateQuantity, removeItem, addItem } = cartSlice.actions;
+export const { updateItemCount, updateQuantity, removeItem, addItem } = cartSlice.actions;
 export default cartSlice.reducer;

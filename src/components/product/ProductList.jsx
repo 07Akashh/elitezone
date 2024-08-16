@@ -32,7 +32,8 @@ const ProductList = ({ category }) => {
             ) : (
                 <>
                     {category === 'trending' ? (
-                        <div className="relative">
+                        <>
+                        <div className="relative hidden sm:block">
                             <button
                                 className="absolute hidden sm:block left-[-50px] top-[35%] z-10 p-2"
                                 onClick={scrollLeft}
@@ -40,7 +41,7 @@ const ProductList = ({ category }) => {
                                 <GoArrowLeft className='h-[24px] w-[24px]' />
                             </button>
                             <div
-                                className="flex overflow-x-auto no-scrollbar space-x-12 lg:space-x-48"
+                                className="flex overflow-x-auto no-scrollbar space-x-12 xl:space-x-48"
                                 ref={scrollContainerRef}
                             >
                                 {data && data.map((product) => (
@@ -56,18 +57,31 @@ const ProductList = ({ category }) => {
                                 <GoArrowRight className='h-[24px] w-[24px]' />
                             </button>
                         </div>
+                        <div className="sm:hidden grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-5 border-black py-4">
+                        {data && data.length > 0 ? (
+                            data.map((product) => (
+                                <div key={product.id} className=" mb-10 sm:mb-5 border-black mx-auto">
+                                    <ProductCard product={product} />
+                                </div>
+                            ))
+                        ) : (
+                            <div className="text-center py-10 col-span-full">No products available</div>
+                        )}
+                    </div>
+                        </>
                     ) : (
-                        <div className="flex flex-wrap gap-5  justify-center md:justify-between border-black mx-auto py-4">
-                            {data && data.length > 0 ? (
-                                data.map((product) => (
-                                    <div key={product.id} className="md:flex-shrink-0  xl:w-[340px] mb-20 sm:mb-5">
-                                        <ProductCard product={product} />
-                                    </div>
-                                ))
-                            ) : (
-                                <div className="text-center py-10 w-full">No products available</div>
-                            )}
-                        </div>
+                        <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-5 border-black py-4">
+                        {data && data.length > 0 ? (
+                            data.map((product) => (
+                                <div key={product.id} className=" mb-10 sm:mb-5 border-black mx-auto">
+                                    <ProductCard product={product} />
+                                </div>
+                            ))
+                        ) : (
+                            <div className="text-center py-10 col-span-full">No products available</div>
+                        )}
+                    </div>
+                    
                     )}
                 </>
             )}

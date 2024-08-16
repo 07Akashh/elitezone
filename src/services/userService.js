@@ -4,6 +4,7 @@ const API_URL = 'http://44.201.127.209:4000/v1';
 const token = localStorage.getItem('token');
 
 export const fetchUser = async () => {
+    const token = localStorage.getItem('token');
     const response = await axios.get(`${API_URL}/user`, {
         headers: { Authorization: `Bearer ${token}` }
     });
@@ -11,6 +12,8 @@ export const fetchUser = async () => {
 };
 
 export const updateUser = (formData) => {
+    const token = localStorage.getItem('token');
+    console.log(formData)
     const response = axios.patch(`${API_URL}/user`, {
         'firstName': formData.firstName,
         'lastName': formData.lastName,
@@ -24,6 +27,7 @@ export const updateUser = (formData) => {
 }
 
 export const fetchWishlists = async () => {
+    const token = localStorage.getItem('token');
     const response = await axios.get(`${API_URL}/user/wishlist`, {
         headers: { Authorization: `Bearer ${token}` }
     });

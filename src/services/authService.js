@@ -5,7 +5,6 @@ const API_URL = 'http://44.201.127.209:4000/v1';
 
 export const registerWithEmailAndPassword = async (formData) => {
     try {
-        console.log(formData)
         const userCredential = await createUserWithEmailAndPassword(auth, formData.email, formData.password);
         const user = userCredential.user;
         const fbToken = user.accessToken;
@@ -47,7 +46,6 @@ export const signInWithEmailAndPassword = async (email, password) => {
     try {
         const userCredential = await signInWithEmailAndPasswordFirebase(auth, email, password);
         const user = userCredential.user;
-        console.log(user.accessToken)
         const token = await user.getIdToken();
         try {
             const response = await axios.post(`${API_URL}/auth`, { 'fbToken':token  });

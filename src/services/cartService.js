@@ -5,6 +5,8 @@ const token = localStorage.getItem('token');
 
 
 export const getCartItems = async () => {
+    const token = localStorage.getItem('token');
+    // console.log(token)
     try {
         const response = await axios.get(`${API_URL}/cart`, {
             headers: { Authorization: `Bearer ${token}` }
@@ -25,6 +27,7 @@ export const getCartItems = async () => {
 };
 
 export const updateCartQuantity = async (productId, quantity) => {
+    const token = localStorage.getItem('token');
     try {
         const response = await axios.patch(`${API_URL}/cart/${productId}`, { quantity },{
             headers: { Authorization: `Bearer ${token}` }
@@ -37,6 +40,7 @@ export const updateCartQuantity = async (productId, quantity) => {
 };
 
 export const removeCartItem = async (productId) => {
+    
     try {
         const response = await axios.delete(`${API_URL}/cart/${productId}`, {
             headers: { Authorization: `Bearer ${token}` }

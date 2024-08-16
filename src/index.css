@@ -78,5 +78,54 @@ body{
 
 .header-with-border {
   animation: borderBottomFadeIn 0.3s forwards;
-  border-bottom: 2px solid #754F23; /* Customize as needed */
+  border-bottom: 2px solid #754F23;
+}
+
+.loading-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+
+@keyframes pulse {
+  0% {
+      opacity: 1;
+  }
+  50% {
+      opacity: 0.4;
+  }
+  100% {
+      opacity: 1;
+  }
+}
+/* Ensure smooth transitions for max-height */
+.accordion-content {
+  overflow: hidden;
+  max-height: 0; /* Start with closed state */
+}
+
+.accordion-content.open {
+  max-height: 500px; /* Adjust this value based on your content height */
+}
+
+/* Additional styling for rotating the icon */
+.transition-transform {
+  transition: transform 0.3s ease-in-out;
+}
+
+.rotate-0 {
+  transform: rotate(0deg);
+}
+
+.rotate-90 {
+  transform: rotate(90deg);
 }

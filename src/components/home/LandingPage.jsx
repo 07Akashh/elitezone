@@ -11,7 +11,7 @@ const LandingPage = () => {
         }
     };
     return (
-        <div className="py-20 mx-5 text-[#2F2F2F] no-scrollbar">
+        <div className="sm:py-20 mx-5 text-[#2F2F2F] no-scrollbar">
             <HeroSection handleExploreClick={handleExploreClick} />
             <div ref={trendingRef}>
                 <CategorySection

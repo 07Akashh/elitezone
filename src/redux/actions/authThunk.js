@@ -43,7 +43,8 @@ export const googleLogin = createAsyncThunk(
     'auth/googleLogin',
     async (_, { rejectWithValue }) => {
         try {
-            await signInWithGoogle();
+            const res= await signInWithGoogle();
+            return res.user;
         } catch (error) {
             return rejectWithValue(error.message);
         }

@@ -1,19 +1,12 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { fetchCategoryData, fetchProductById, fetchProductRating } from '../../services/productService';
+import { fetchCategoryData, fetchProductById, fetchProducts } from '../../services/productService';
 
 const initialState = {
   products: [],
   selectedProduct: {
-    id: null,
-    name: '',
-    rating: 0,
-    price: 0,
-    category: '',
-    images: [],
-    description: '',
+    product: {},
     colors: [],
-    sizes: [],
-    reviews: [],
+    images: []
   },
   trending: {
     data: [],
@@ -26,6 +19,11 @@ const initialState = {
     error: null,
   },
   embroideredAbaya: {
+    data: [],
+    isLoading: false,
+    error: null,
+  },
+  allProducts: {
     data: [],
     isLoading: false,
     error: null,
@@ -43,16 +41,38 @@ export const fetchCategory = createAsyncThunk(
 export const fetchProduct = createAsyncThunk(
   'products/fetchProduct',
   async (id) => {
-    const [productResponse, ratingResponse] = await Promise.all([
-      fetchProductById(id),
-      fetchProductRating(id),
-    ]);
-    
-    const product = productResponse;
-    const reviews = ratingResponse.data;
-    const averageRating = reviews.reduce((acc, review) => acc + review.rating, 0) / reviews.length;
-    
-    return { ...product, reviews, averageRating };
+    try {
+      const [productResponse, ratingResponse] = await Promise.all([
+        fetchProductById(id),
+        // fetchProductRating(id),
+      ]);
+
+      if (ratingResponse && ratingResponse.data && ratingResponse.data.length > 0) {
+        const reviews = ratingResponse.data;
+        const averageRating = reviews.reduce((acc, review) => acc + review.rating, 0) / reviews.length;
+        
+        return { ...productResponse, reviews, averageRating };
+      } else {
+        console.log('No ratings available.');
+        return { ...productResponse, reviews: [], averageRating: 0 };
+      }
+    } catch (error) {
+      console.error('Error fetching product or ratings:', error);
+      throw error;
+    }
+  }
+);
+
+export const fetchAllProducts = createAsyncThunk(
+  'products/fetchAllProducts',
+  async ({ categoryId, subCategoryId, color, page, sorting, priceRange }, { rejectWithValue }) => {
+    try {
+      const response = await fetchProducts({ categoryId, subCategoryId, color, page, sorting, priceRange });
+      return response.data;
+
+    } catch (error) {
+      return rejectWithValue(error);
+    }
   }
 );
 
@@ -141,18 +161,12 @@ const productSlice = createSlice({
         };
       })
       .addCase(fetchProduct.fulfilled, (state, action) => {
-        const product = action.payload;
+        const { product, colors, images } = action.payload.data;
         state.selectedProduct = {
-          id: product.data.product.id,
-          name: product.data.product.productName,
-          rating: product.data.averageRating || 0,
-          price: product.data.product.price,
-          category: product.data.product.categoryId,
-          images: [product.data.images],
-          description: product.data.product.description,
-          colors: [product.data.colors],
-          sizes: [],
-          reviews: product.reviews || [],
+          product: product,
+          images: images.length > 0 ? images : [],
+          colors: colors.length > 0 ? colors : [],
+          reviews:[],
         };
       })
       .addCase(fetchProduct.rejected, (state, action) => {
@@ -168,6 +182,17 @@ const productSlice = createSlice({
           sizes: [],
           reviews: [],
         };
+      })
+      .addCase(fetchAllProducts.pending, (state) => {
+        state.allProducts.isLoading = true;
+        state.allProducts.error = null;
+      })
+      .addCase(fetchAllProducts.fulfilled, (state, action) => {
+        state.allProducts.isLoading = false;
+        state.allProducts.data = action.payload;
+      })
+      .addCase(fetchAllProducts.rejected, (state, action) => {
+        state.allProducts.isLoading = false;
       });
   },
 });

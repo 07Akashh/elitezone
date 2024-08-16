@@ -1,20 +1,48 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { loginUser, googleLogin } from '../../redux/slices/authSlice';
+import { loginUser, googleLogin, updateUserData, fetchUserData } from '../../redux/slices/authSlice';
+import UserDetailsModal from '../../shared/UserDetailsModal';
+import { useNavigate } from 'react-router-dom';
 
 const Login = ({ switchToRegister }) => {
+    const navigate = useNavigate()
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [showModal, setShowModal] = useState(false);
+
     const dispatch = useDispatch();
-    const { loading, error } = useSelector((state) => state.auth);
+    const { loading, error, user } = useSelector((state) => state.auth);
+
+    useEffect(() => {
+        if (user) {
+            if (user.firstName === null) {
+                console.log("object");
+                setShowModal(true);
+            } else{
+                window.location.reload()
+            }
+        }
+    }, [user,navigate]);
 
     const handleLogin = (e) => {
         e.preventDefault();
         dispatch(loginUser({ email, password }));
     };
 
-    const handleGoogleLogin = () => {
-        dispatch(googleLogin());
+    const handleGoogleLogin = async () => {
+        try {
+            await dispatch(googleLogin()).unwrap();
+            setTimeout(() => {
+                dispatch(fetchUserData());
+            }, 100);
+        } catch (error) {
+            console.error('Error during Google login:', error);
+        }
+    };
+
+    const handleModalSubmit = (details) => {
+        dispatch(updateUserData(details));
+        setShowModal(false);
     };
 
     return (
@@ -47,12 +75,13 @@ const Login = ({ switchToRegister }) => {
                 <button onClick={switchToRegister} className="text-[15px] text-[#754f23]">
                     Sign Up
                 </button>
-            <p className='font-extrabold text-[#C1C1C1]'>-OR-</p>
+                <p className='font-extrabold text-[#C1C1C1]'>-OR-</p>
             </h2>
             <button onClick={handleGoogleLogin} disabled={loading} className='mt-3 text-[#928f8f] border-2 flex m-auto gap-1 px-2 py-1 rounded-lg'>
-                <img src="https://img.icons8.com/?size=100&id=17949&format=png&color=000000" alt="google logo"  className='h-8 w-8'/>
+                <img src="https://img.icons8.com/?size=100&id=17949&format=png&color=000000" alt="google logo" className='h-8 w-8' />
                 <p className='m-auto'> Continue with Google</p>
             </button>
+            {showModal && <UserDetailsModal onSubmit={handleModalSubmit} onClose={() => setShowModal(false)} />}
         </div>
     );
 };

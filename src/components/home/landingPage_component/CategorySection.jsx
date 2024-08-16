@@ -14,7 +14,7 @@ const CategorySection = ({ title, subtitle, category }) => {
                     )}
                 </div>
             </div>
-            <div className='mx-1 sm:mx-10 mt-[36px]'>
+            <div className=' mt-[36px]'>
                 <ProductList  category={category}/>
             </div>
         </div>

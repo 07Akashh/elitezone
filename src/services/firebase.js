@@ -19,7 +19,6 @@ export const registerWithEmailAndPassword = async (name, email, password, phone,
     try {
         const res = await auth.createUserWithEmailAndPassword(email, password);
         const user = res.user;
-        
         await user.updateProfile({ displayName: name });
     } catch (error) {
         console.error(error.message);
@@ -38,7 +37,8 @@ export const signInWithEmailAndPassword = async (email, password) => {
 
 export const signInWithGoogle = async () => {
     try {
-        await auth.signInWithPopup(googleProvider);
+        const res = await auth.signInWithPopup(googleProvider);
+        return res
     } catch (error) {
         console.error(error.message);
         throw error;

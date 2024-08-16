@@ -7,9 +7,11 @@ const CategoryProducts = ({ category }) => {
     const filteredProducts = products.filter((product) => product.category === category);
 
     return (
-        <div className="grid justify-center mx-auto w-auto grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4">
+        <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-5 gap-5 border-black mx-auto py-4">
             {filteredProducts.map((product) => (
-                <ProductCard key={product.id} product={product} />
+                <div key={product.id} className="mb-10 sm:mb-5  w-auto mx-auto">
+                <ProductCard product={product} />
+            </div>
             ))}
         </div>
     );

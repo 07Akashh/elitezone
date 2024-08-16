@@ -1,8 +1,11 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { registerUser, googleLogin } from '../../redux/slices/authSlice';
+import { registerUser, googleLogin, fetchUserData, updateUserData } from '../../redux/slices/authSlice';
+import UserDetailsModal from '../../shared/UserDetailsModal';
+import { useNavigate } from 'react-router-dom';
 
 const Register = ({ switchToLogin }) => {
+    const [showModal, setShowModal] = useState(false);
     const [formData, setFormData] = useState({
         "firstName": '',
         "lastName": '',
@@ -14,7 +17,7 @@ const Register = ({ switchToLogin }) => {
     });
     
     const dispatch = useDispatch();
-    const { loading, error } = useSelector((state) => state.auth);
+    const { loading, error, user } = useSelector((state) => state.auth);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -24,6 +27,17 @@ const Register = ({ switchToLogin }) => {
         });
     };
 
+    const navigate = useNavigate();
+    useEffect(() => {
+        if (user) {
+            if (user.firstName === null) {
+                console.log("object");
+                setShowModal(true);
+            } else{
+                window.location.reload()
+            }
+        }
+    }, [user, navigate]);
     const handleRegister = (e) => {
         e.preventDefault();
         console.log(formData)
@@ -31,9 +45,18 @@ const Register = ({ switchToLogin }) => {
 
     };
 
-    const handleGoogleLogin = () => {
-        dispatch(googleLogin());
+    const handleGoogleLogin = async() => {
+        await dispatch(googleLogin()).unwrap();
+        setTimeout(() => {
+            dispatch(fetchUserData());
+        }, 100);
     };
+
+    const handleModalSubmit = (details) => {
+        dispatch(updateUserData(details));
+        setShowModal(false);
+    };
+
 
     return (
         <div className='font-PlayfairDisplay'>
@@ -118,6 +141,7 @@ const Register = ({ switchToLogin }) => {
                 <img src="https://img.icons8.com/?size=100&id=17949&format=png&color=000000" alt="google logo"  className='h-8 w-8'/>
                 <p className='m-auto'> Continue with Google</p>
             </button>
+            {showModal && <UserDetailsModal onSubmit={handleModalSubmit} onClose={() => setShowModal(false)} />}
         </div>
     );
 };

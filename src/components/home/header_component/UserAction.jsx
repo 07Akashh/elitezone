@@ -37,15 +37,19 @@ const UserActions = () => {
     };
 
     return (
-        <div className='gap-3 flex'>
+        <div className='sm:gap-3 gap-1 flex border-black'>
+            <div className='hidden sm:block'>
             <SearchBar />
-            <Link to="/wishlist"><IoMdHeartEmpty className='h-[24px] w-[24px]' /></Link>
+            </div>
+            <Link to="/wishlist" className="relative flex">
+                <IoMdHeartEmpty className='sm:h-[24px] sm:w-[24px] h-[20px] w-[20px] border-black my-auto' />
+            </Link>
             <Link to="/cart" className="relative flex">
-                <IoCartOutline className='h-[24px] w-[24px]' />
+                <IoCartOutline className='sm:h-[24px] sm:w-[24px] h-[20px] w-[20px] my-auto' />
                 <span className='text-xl font-PlayfairDisplay'>{itemCount}</span>
             </Link>
             <button onClick={handleUserIconClick}>
-                <FiUser className='h-[24px] w-[24px]' />
+                <FiUser className='sm:h-[24px] sm:w-[24px] h-[20px] w-[20px] align-middle border-black my-auto' />
             </button>
             <Modals isOpen={open} closeModal={handleClose} handleClose={handleClose} contentLabel="Login Modal">
                 {isLogin ? (
