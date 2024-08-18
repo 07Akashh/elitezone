@@ -126,9 +126,15 @@ const ProductDetails = () => {
 
 
   const fetchProductDetailsByColor = async (color) => {
-    const productName = products.product.productName
+    const productName = products.product.productName;
     try {
-      await dispatch(fetchProductByColor({ color, productName }));
+      const response = await dispatch(fetchProductByColor({ color, productName }));
+      const updatedProduct = response.payload;
+      if (updatedProduct) {
+        setSelectedSize(updatedProduct.product.size?.[0] || '');
+        setMainImage(updatedProduct.images?.[0]?.url || '');
+        setIsInWishlist(updatedProduct.product.isLike || false);
+      }
     } catch (error) {
       console.error('Error fetching product details by color:', error);
     }
