@@ -8,9 +8,9 @@ const UserProfileLayout = () => {
 
     return (
         <>
-            <div className="mx-4 md:mx-10 flex flex-col md:flex-row justify-between items-center font-Poppins">
+            <div className="mx-4 md:mx-10 flex flex-col md:flex-row sm:justify-between sm:items-center font-Poppins">
                 <Breadcrumbs />
-                <p className="mt-2 md:mt-0">Welcome {user.firstName}!</p>
+                <p className="mt-2 md:mt-0 text-center sm:text-justify">Welcome {user.firstName}!</p>
             </div>
             <div className="my-5 mx-4 md:mx-10 flex flex-col md:flex-row justify-between h-full">
                 <Sidebar className="md:w-1/4 lg:w-1/5" />

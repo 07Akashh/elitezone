@@ -1,7 +1,7 @@
 import axios from "axios";
 
 
-const API_URL = 'http://44.201.127.209:4000/v1';
+const API_URL = 'http://18.204.217.233:4000/v1';
 
 /**
  * Fetch products based on search query

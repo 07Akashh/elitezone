@@ -18,7 +18,7 @@ export const addToWishlist = createAsyncThunk(
     async (id, { rejectWithValue }) => {
         try {
             const response = await addWishlistItem(id);
-            return response.data;
+            return response;
         } catch (error) {
             return rejectWithValue(error.response.data);
         }
@@ -28,9 +28,11 @@ export const addToWishlist = createAsyncThunk(
 export const removeFromWishlist = createAsyncThunk(
     'wishlist/removeFromWishlist',
     async (id, { rejectWithValue }) => {
+        
         try {
             const response = await deleteWishlistItem(id)
-            return response.data;
+            return response;
+            
         } catch (error) {
             return rejectWithValue(error.response.data);
         }

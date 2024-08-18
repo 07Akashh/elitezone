@@ -12,7 +12,7 @@ const SimilarProductsPage = ({ categoryId, subCategoryId }) => {
             dispatch(fetchAllProducts({ categoryId, subCategoryId }))
                 .unwrap()
                 .then(response => {
-                    setProducts(response.products);
+                    setProducts(response.data);
                 })
                 .catch(error => {
                     console.error('Error fetching similar products:', error);

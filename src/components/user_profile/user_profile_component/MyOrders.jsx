@@ -28,7 +28,7 @@ const MyOrders = () => {
             date: '10 April 2024',
         },
         {
-            id: 2,
+            id: 4,
             photo: 'https://via.placeholder.com/100',
             name: 'Product 2',
             price: 75.00,

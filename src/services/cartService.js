@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = 'http://44.201.127.209:4000/v1/user';
+const API_URL = 'http://18.204.217.233:4000/v1/user';
 const token = localStorage.getItem('token');
 
 
@@ -9,7 +9,7 @@ export const getCartItems = async () => {
     // console.log(token)
     try {
         const response = await axios.get(`${API_URL}/cart`, {
-            headers: { Authorization: `Bearer ${token}` }
+            headers: { Authorization: `Bearer ${token}` },
         });
         return response.data;
     } catch (error) {
@@ -56,7 +56,7 @@ export const addItemToCart = async (productId, quantity) => {
     try {
         const response = await axios.post(`${API_URL}/cart`, { productId, quantity }, {
             headers: { Authorization: `Bearer ${token}` }
-        });;
+        });
         return response.data;
     } catch (error) {
         if (error.response) {

@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_URL = 'http://44.201.127.209:4000/v1';
+const API_URL = 'http://18.204.217.233:4000/v1';
 const token = localStorage.getItem('token');
 
 export const fetchUser = async () => {
@@ -13,7 +13,6 @@ export const fetchUser = async () => {
 
 export const updateUser = (formData) => {
     const token = localStorage.getItem('token');
-    console.log(formData)
     const response = axios.patch(`${API_URL}/user`, {
         'firstName': formData.firstName,
         'lastName': formData.lastName,
@@ -28,10 +27,23 @@ export const updateUser = (formData) => {
 
 export const fetchWishlists = async () => {
     const token = localStorage.getItem('token');
-    const response = await axios.get(`${API_URL}/user/wishlist`, {
-        headers: { Authorization: `Bearer ${token}` }
-    });
-    return response.data;
+    try {
+        const response = await axios.get(`${API_URL}/user/wishlist `, {
+            headers: { Authorization: `Bearer ${token}` }
+        });
+        return response.data;
+    } catch (error) {
+        if (error.response) {
+            console.log('Server responded with a status other than 2xx:', error.response.status);
+            console.log('Data:', error.response.data);
+            console.log('Headers:', error.response.headers);
+        } else if (error.request) {
+            console.log('Request made but no response received:', error.request);
+        } else {
+            console.log('Error setting up the request:', error.message);
+        }
+        console.log('Config:', error.config);
+    }
 };
 
 export const addWishlistItem = async (id) => {

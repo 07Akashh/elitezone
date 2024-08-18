@@ -21,6 +21,8 @@ import { getWishlist } from './redux/slices/wishListSlice';
 
 import PrivateRoute from './shared/PrivateRoute';
 import ProductFilterPage from './shared/ProductFilter';
+import Checkout from './components/checkout_page/Checkout';
+import Apps from './color';
 
 
 
@@ -30,9 +32,12 @@ function App() {
   const token = localStorage.getItem('token')
   const dispatch = useDispatch();
   const user = useSelector((state) => state.auth.user);
+
+
   useEffect(() => {
     dispatch(setProducts(demoProducts));
   }, [dispatch]);
+
 
   useEffect(() => {
     if (token) {
@@ -40,16 +45,11 @@ function App() {
     }
   }, [dispatch, token]);
 
+
   useEffect(() => {
     dispatch(fetchAllProducts())
     dispatch(fetchCategory('newarrivals'));
-    if (user) {
-      dispatch(getWishlist());
-    }
   }, [dispatch, user])
-
-
-
 
 
   useEffect(() => {
@@ -57,6 +57,7 @@ function App() {
       const fetchCartItem = async () => {
         try {
           dispatch(fetchCartItems())
+          dispatch(getWishlist());
         } catch (error) {
           console.error('Error fetching cart items:', error);
         }
@@ -94,12 +95,17 @@ function App() {
             {/* <Route path="/abayas/tiktok-fabric" element={<ProductFilterPage categoryId="abayas-001" title="TikTok" subtitle="Fabric" subCategoryId="tiktok-fabric"/>} /> */}
             {/* <Route path="/abayas/harira-fabric" element={<ProductFilterPage categoryId="abayas-001" title="Harira" subtitle="Fabric" subCategoryId="harira-fabric"/>} /> */}
             <Route path="/wishlist" element={<Wishlist />} />
+            <Route path="/color" element={<Apps />}/>
+
             <Route path="/trending" element={<ProductList category="trending" />} />
             <Route path="/category/:category" element={<CategoryPage />} />
             <Route path="/cart" element={<Cart />} />
             <Route path="/new-arrivals" element={<ProductList category="new-arrivals" />} />
             <Route path="/embroidered-abaya" element={<ProductList category="embroidered-abaya" />} />
             <Route path="/:categoryId/:subCategoryId/:id" element={<ProductDetails />} />
+
+
+            <Route path="/checkout" element={<Checkout/>} />
           </Routes>
         </main>
         <Footer />

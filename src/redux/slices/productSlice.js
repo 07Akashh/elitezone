@@ -1,12 +1,12 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { fetchCategoryData, fetchProductById, fetchProducts } from '../../services/productService';
+import { fetchCategoryData, fetchProductById, fetchProducts, fetchProductsByColor } from '../../services/productService';
 
 const initialState = {
   products: [],
   selectedProduct: {
     product: {},
     colors: [],
-    images: []
+    images: [],
   },
   trending: {
     data: [],
@@ -25,6 +25,7 @@ const initialState = {
   },
   allProducts: {
     data: [],
+    colors: [],
     isLoading: false,
     error: null,
   },
@@ -44,7 +45,6 @@ export const fetchProduct = createAsyncThunk(
     try {
       const [productResponse, ratingResponse] = await Promise.all([
         fetchProductById(id),
-        // fetchProductRating(id),
       ]);
 
       if (ratingResponse && ratingResponse.data && ratingResponse.data.length > 0) {
@@ -65,16 +65,48 @@ export const fetchProduct = createAsyncThunk(
 
 export const fetchAllProducts = createAsyncThunk(
   'products/fetchAllProducts',
-  async ({ categoryId, subCategoryId, color, page, sorting, priceRange }, { rejectWithValue }) => {
+  async ({ categoryId, subCategoryId, color, page, sorting, priceRange }, { rejectWithValue, getState }) => {
+
     try {
       const response = await fetchProducts({ categoryId, subCategoryId, color, page, sorting, priceRange });
-      return response.data;
 
+      // Ensure response.data is an object and extract products and colors
+      const products = response.data.products || [];
+      const newColors = response.data.colors || [];
+      // Retrieve previously stored colors
+      // const previousColors = getState().products.allProducts.colors || [];
+
+      // Return combined data
+      return {
+        data: products,
+        // colors: [...new Set([...previousColors, ...newColors])]
+        colors: [...newColors]
+      };
     } catch (error) {
       return rejectWithValue(error);
     }
   }
 );
+
+
+export const fetchProductByColor = createAsyncThunk(
+  'products/fetchProductByColor',
+  async ({ color, productName }, { rejectWithValue }) => {
+    try {
+
+      const response = await fetchProductsByColor(color, productName);
+      
+      if (!response) {
+        throw new Error('Product not found');
+      }
+
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+);
+
 
 const productSlice = createSlice({
   name: 'products',
@@ -189,10 +221,35 @@ const productSlice = createSlice({
       })
       .addCase(fetchAllProducts.fulfilled, (state, action) => {
         state.allProducts.isLoading = false;
-        state.allProducts.data = action.payload;
+        state.allProducts.data = action.payload.data;
+        state.allProducts.colors = action.payload.colors;
       })
       .addCase(fetchAllProducts.rejected, (state, action) => {
         state.allProducts.isLoading = false;
+        state.allProducts.error = action.payload;
+      })
+      .addCase(fetchProductByColor.pending, (state) => {
+        state.selectedProduct = {
+          ...state.selectedProduct,
+          isLoading: true,
+          error: null,
+        };
+      })
+      .addCase(fetchProductByColor.fulfilled, (state, action) => {
+        const { product, colors, images } = action.payload;
+        state.selectedProduct = {
+          product: product,
+          images: images.length > 0 ? images : [],
+          colors: colors.length > 0 ? colors : [],
+          reviews:[],
+        };
+      })
+      .addCase(fetchProductByColor.rejected, (state, action) => {
+        state.selectedProduct = {
+          ...state.selectedProduct,
+          isLoading: false,
+          error: action.payload || 'Failed to fetch product by color',
+        };
       });
   },
 });

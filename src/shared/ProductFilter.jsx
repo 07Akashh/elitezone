@@ -9,9 +9,8 @@ import { useParams } from 'react-router-dom';
 
 const ProductFilterPage = ({ title, subtitle }) => {
     const { categoryId, subCategoryId } = useParams();
-
     const dispatch = useDispatch();
-    const allProducts = useSelector((state) => state.products.allProducts.data);
+    const {  colors } = useSelector((state) => state.products.allProducts);
     const isLoading = useSelector((state) => state.products.allProducts.isLoading);
     const error = useSelector((state) => state.products.allProducts.error);
     const [selectedSizes, setSelectedSizes] = useState([]);
@@ -19,9 +18,10 @@ const ProductFilterPage = ({ title, subtitle }) => {
     const [selectedPriceRange, setSelectedPriceRange] = useState([]);
     const [page, setPage] = useState(0);
     const [hasMore, setHasMore] = useState(true);
-    const [products, setProducts] = useState([]);
+    const [product, setProduct] = useState([]);
     const [sortOption, setSortOption] = useState('');
     const [showFilter, setShowFilter] = useState(false);
+
 
     useEffect(() => {
         if (categoryId) {
@@ -39,8 +39,8 @@ const ProductFilterPage = ({ title, subtitle }) => {
             }))
                 .unwrap()
                 .then(response => {
-                    setProducts(response.products);
-                    if (response.products.length === 0) {
+                    setProduct(response.data);
+                    if (response.data.length === 0) {
                         setHasMore(false);
                     }
                     setShowFilter(false);
@@ -66,8 +66,8 @@ const ProductFilterPage = ({ title, subtitle }) => {
             }))
                 .unwrap()
                 .then(response => {
-                    setProducts(prevProducts => [...prevProducts, ...response.products]);
-                    if (response.products.length === 0) {
+                    setProduct(prevProducts => [...prevProducts, ...response.data]);
+                    if (response.data.length === 0) {
                         setHasMore(false);
                     }
                 })
@@ -76,8 +76,6 @@ const ProductFilterPage = ({ title, subtitle }) => {
                 });
         }
     }, [page, categoryId, subCategoryId, selectedColor, selectedSizes, selectedPriceRange, dispatch, hasMore, sortOption]);
-
-    const colors = allProducts?.colors || [];
 
     const handleSizeChange = (size) => {
         setSelectedSizes(prev =>
@@ -95,7 +93,6 @@ const ProductFilterPage = ({ title, subtitle }) => {
         );
     };
 
-
     const handleLoadMore = () => {
         if (hasMore) {
             setPage(prevPage => prevPage + 1);
@@ -108,7 +105,7 @@ const ProductFilterPage = ({ title, subtitle }) => {
         setSelectedPriceRange([]);
         setPage(0);
         setHasMore(true);
-        setProducts([]);
+        setProduct([]);
 
         dispatch(fetchAllProducts({
             categoryId,
@@ -117,8 +114,8 @@ const ProductFilterPage = ({ title, subtitle }) => {
         }))
             .unwrap()
             .then(response => {
-                setProducts(response.products);
-                if (response.products.length === 0) {
+                setProduct(response.data);
+                if (response.data.length === 0) {
                     setHasMore(false);
                 }
             })
@@ -164,8 +161,8 @@ const ProductFilterPage = ({ title, subtitle }) => {
                 </select>
             </div>
 
-            <div className="flex flex-col lg:flex-row">
-                <aside className={`fixed inset-0 z-50 bg-white p-4 lg:w-[300px] xl:w-auto lg:h-full lg:bg-transparent overflow-y-auto lg:sticky lg:top-28 ${showFilter ? 'block' : 'hidden'} lg:block`}>
+            <div className="flex  flex-col  border-black lg:flex-row">
+                <aside className={`fixed inset-0 z-50 bg-white p-4 lg:w-[300px]  border-black xl:w-[400px] lg:h-full lg:bg-transparent overflow-y-auto lg:sticky lg:top-28 ${showFilter ? 'block' : 'hidden'} lg:block`}>
                     <p className='text-black text-base font-medium font-PlayfairDisplay tracking-widest'>Filters</p>
                     <FilterAccordion title="Sizes">
                         <div className="flex flex-wrap gap-2">
@@ -183,7 +180,7 @@ const ProductFilterPage = ({ title, subtitle }) => {
 
                     <FilterAccordion title="Colors">
                         <div className="flex flex-wrap gap-2">
-                            {colors.map(color => (
+                            {colors && colors.map(color => (
                                 <ColorCircle
                                     key={color}
                                     color={color}
@@ -195,10 +192,12 @@ const ProductFilterPage = ({ title, subtitle }) => {
                     </FilterAccordion>
 
                     <FilterAccordion title="Price Range">
-                        {[
+                    {[
                             { range: 'Under 1000', lowPrice: 0, highPrice: 1000 },
                             { range: '1000 - 2000', lowPrice: 1000, highPrice: 2000 },
-                            { range: '2000 - 3000', lowPrice: 2000, highPrice: 3000 }
+                            { range: '2000 - 3000', lowPrice: 2000, highPrice: 3000 },
+                            { range: '3000 - 4000', lowPrice: 3000, highPrice: 4000 },
+                            { range: '4000 - 5000', lowPrice: 4000, highPrice: 5000 }
                         ].map(({ range, lowPrice, highPrice }) => (
                             <label key={range} className="flex items-center gap-2">
                                 <input
@@ -212,7 +211,6 @@ const ProductFilterPage = ({ title, subtitle }) => {
                         ))}
                     </FilterAccordion>
 
-
                     {/* Reset Filters Button */}
                     <div className="my-4">
                         <button
@@ -224,7 +222,7 @@ const ProductFilterPage = ({ title, subtitle }) => {
                     </div>
                 </aside>
 
-                <main className="w-full font-PlayfairDisplay px-5 lg:border-black overflow-y-auto">
+                <main className="w-full font-PlayfairDisplay px-5  lg:border-black overflow-y-auto">
                     {/* Sticky Sort and Filter Bar */}
                     <div className="px-5 bg-transparent hidden lg:flex justify-end">
                         <select
@@ -239,7 +237,7 @@ const ProductFilterPage = ({ title, subtitle }) => {
                     </div>
                     <div className=''>
                         <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-5 gap-5 border-black mx-auto py-4">
-                            {products.map(product => (
+                            {product.map(product => (
                                 <div key={product.id} className="mb-10 sm:mb-5  w-auto mx-auto">
                                     <ProductCard product={product} />
                                 </div>

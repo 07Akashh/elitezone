@@ -3,10 +3,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 
 import { IoMdHeart, IoMdHeartEmpty } from "react-icons/io";
-// import { TbTruckDelivery } from "react-icons/tb";
-// import { HiArrowPath } from "react-icons/hi2";
+import { TbTruckDelivery } from "react-icons/tb";
+import { HiArrowPath } from "react-icons/hi2";
 
-import { fetchProduct } from '../../redux/slices/productSlice';
+import { fetchProduct, fetchProductByColor } from '../../redux/slices/productSlice';
 import { addItemToCart } from '../../services/cartService';
 import Breadcrumbs from '../../shared/Breadcrumbs';
 import ProductReviews from '../../shared/StarRating';
@@ -43,15 +43,12 @@ const ProductDetails = () => {
     });
   }, [id, dispatch]);
 
-
   useEffect(() => {
     if (products.product?.id) {
       setSelectedColor(products.product.color || '');
       setSelectedSize(products.product.size?.[0] || '');
       setMainImage(products.images?.[0]?.url || '');
-      if (wishlistItems) {
-        setIsInWishlist(wishlistItems.some(item => item.id === products.product.id));
-      }
+      setIsInWishlist(products.product.isLike || false);
     }
   }, [products, wishlistItems, wishlistLoading]);
 
@@ -87,18 +84,30 @@ const ProductDetails = () => {
   const handleWishlistToggle = async () => {
     try {
       if (isInWishlist) {
-        await dispatch(removeFromWishlist(products.product.id));
+        await dispatch(removeFromWishlist(id));
       } else {
-        await dispatch(addToWishlist(products.product.id));
+        await dispatch(addToWishlist(id));
       }
-      dispatch(getWishlist()).then(({ payload }) => {
-        setLocalWishlist(payload);
-        setIsInWishlist(!isInWishlist);
-      });
+      
+      // Fetch the product again
+      const resultAction = await dispatch(fetchProduct(id));
+      if (fetchProduct.fulfilled.match(resultAction)) {
+        const updatedProduct = resultAction.payload;
+        
+        if (updatedProduct && updatedProduct.product) {
+          setSelectedColor(updatedProduct.product.color || '');
+          setSelectedSize(updatedProduct.product.size?.[0] || '');
+          setMainImage(updatedProduct.images?.[0]?.url || '');
+          setIsInWishlist(updatedProduct.product.isLike || false);
+        }
+      } else {
+        console.error('Failed to fetch the updated product');
+      }
     } catch (error) {
       console.error('Error updating wishlist:', error);
     }
   };
+  
 
   const percentageOffer = products.product.offer.find(o => o.offerType === 'percentOff' && o.percentOff);
   const offerPrice = products.product.offer.find(o => o.offerType === 'offerPrice' && o.offerPrice);
@@ -112,14 +121,24 @@ const ProductDetails = () => {
 
   const handleColorSelect = (color) => {
     setSelectedColor(color);
+    fetchProductDetailsByColor(color);
   };
 
+
+  const fetchProductDetailsByColor = async (color) => {
+    const productName = products.product.productName
+    try {
+      await dispatch(fetchProductByColor({ color, productName }));
+    } catch (error) {
+      console.error('Error fetching product details by color:', error);
+    }
+  };
   // console.log(product)
 
   return (
     <>
       <div className='md:mx-14 '>
-        <Breadcrumbs productName={products.product.productName}/>
+        <Breadcrumbs productName={products.product.productName} />
       </div>
       <div className="md:flex px-2 font-TenorSans  md:justify-around xl:mx-28 border-black">
         <div className='flex justify-center md:w-1/2 border-black'>
@@ -143,7 +162,7 @@ const ProductDetails = () => {
               <ProductReviews reviews={products.product.rating} />
               <span className="text-sm my-auto text-gray-500 mt-2 font-Poppins">({products.product.reviewCount} Reviews) |</span>
               <span className={`text-sm my-auto mt-2 font-Poppins ${products.product.inStock ? 'text-green-500' : 'text-red-500'}`}>
-                {products.inStock ? 'In Stock' : 'Out of Stock'}
+                {products.product.inStock ? 'In Stock' : 'Out of Stock'}
               </span>
             </div>
 
@@ -233,9 +252,9 @@ const ProductDetails = () => {
               </div>
             </div>
 
-                {/* Banner offer Ad Code Here  */}
+            {/* Banner offer Ad Code Here  Do Not Remove This */}
 
-            {/* <div className='border mt-5 py-[24px] border-black rounded'>
+            <div className='border mt-5 py-[24px] border-black rounded'>
               <div className='flex border-b border-black gap-2 px-[16px] pb-[16px]'>
                 <TbTruckDelivery className='w-10 h-10' />
                 <div>
@@ -244,13 +263,13 @@ const ProductDetails = () => {
                 </div>
               </div>
               <div className='flex gap-2 px-[16px] pt-[16px]'>
-                <HiArrowPath className='w-10 h-10'/>
+                <HiArrowPath className='w-10 h-10' />
                 <div>
                   <h1 className='text-black text-base font-normal font-TenorSans leading-normal'>Return Delivery</h1>
                   <p className='text-black text-xs font-normal leading-[18px]'>Free 30 Days Delivery Returns. <span className='underline'>Details</span></p>
                 </div>
               </div>
-            </div> */}
+            </div>
 
 
           </div>
@@ -273,6 +292,8 @@ const getColorValue = (colorName) => {
   switch (colorName) {
     case "Shiny Green":
       return "#66FF66";
+    case "Royal Blue":
+      return "#4169E1";
     case "Cobalt Blue":
       return "#0047AB";
     case "Deep Black":
@@ -281,24 +302,50 @@ const getColorValue = (colorName) => {
       return "#E5E4E2";
     case "Snow White":
       return "#FFFAFA";
+    case "Copper":
+      return "#B87333";
+    case "Midnight Blue":
+      return "#191970";
     case "Emerald Green":
       return "#50C878";
     case "Wine Red":
       return "#722F37";
+    case "Teal":
+      return "#008080";
     case "Mint Green":
       return "#98FF98";
     case "Butterfly White":
       return "#F8F8FF";
+    case "Pastel Pink":
+      return "#FFD1DC";
+    case "Cream":
+      return "#FFFDD0";
     case "Sky Blue":
       return "#87CEEB";
+    case "Lavender":
+      return "#E6E6FA";
     case "Charcoal":
       return "#36454F";
+    case "Steel Blue":
+      return "#4682B4";
     case "Navy Blue":
       return "#000080";
+    case "Turquoise":
+      return "#40E0D0";
+    case "Maroon":
+      return "#800000";
+    case "Blush Pink":
+      return "#FF6FFF";
+    case "Bronze":
+      return "#CD7F32";
     case "White":
       return "#FFFFFF";
+    case "Forest Green":
+      return "#228B22";
     case "Ivory":
       return "#FFFFF0";
+    case "Peach":
+      return "#FFDAB9";
     default:
       return "#FFFFFF";
   }
