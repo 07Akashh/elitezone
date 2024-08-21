@@ -8,14 +8,9 @@ const Wishlist = () => {
     if (loading) return <div>Loading...</div>;
     if (error) return <div>Error: {error}</div>;
 
-    // Filter to get unique wishlist items
-    const uniqueWishlistItems = wishlistItems.filter((item, index, self) =>
-        index === self.findIndex((t) => t.id === item.id)
-    );
-
     // Check if the wishlist is empty
-    if (uniqueWishlistItems.length === 0) {
-        return <p className="text-center">Your wishlist is empty.</p>;
+    if (wishlistItems.length === 0) {
+        return <p className="text-center font-TenorSans">Your wishlist is empty.</p>;
     }
 
     // Render the wishlist items if they are available
@@ -25,9 +20,9 @@ const Wishlist = () => {
                 WishList
             </h2>
             <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-5 gap-5 border-black mx-auto py-4">
-                {uniqueWishlistItems.map((item) => (
+                {wishlistItems.map((item) => (
                     <div key={item.id} className="mb-10 sm:mb-5 w-auto mx-auto">
-                        <ProductCard product={item} />
+                        <ProductCard key={item.id} product={item} />
                     </div>
                 ))}
             </div>

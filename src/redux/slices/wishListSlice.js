@@ -70,7 +70,7 @@ const wishlistSlice = createSlice({
             })
             .addCase(addToWishlist.fulfilled, (state, action) => {
                 state.loading = false;
-                state.wishlistItems.push(action.payload); // Add to wishlist items
+                state.wishlistItems.push(action.payload);
             })
             .addCase(addToWishlist.rejected, (state, action) => {
                 state.loading = false;

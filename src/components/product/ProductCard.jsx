@@ -6,15 +6,20 @@ const ProductCard = ({ product, data }) => {
   const { categoryId, subCategoryId } = useParams();
   const value = product || data;
 
-  const percentageOffer = value.offer.find(o => o.offerType === 'percentOff' && o.percentOff);
-  const offerPrice = value.offer.find(o => o.offerType === 'offerPrice' && o.offerPrice);
 
   let finalPrice = value.price;
-  if (offerPrice) {
-    finalPrice = offerPrice.offerPrice;
-  } else if (percentageOffer) {
-    finalPrice = value.price - (value.price * (percentageOffer.percentOff / 100));
-  }
+
+if(value.offer){
+  var percentageOffer = value.offer.find(o => o.offerType === 'percentOff' && o.percentOff);
+  var offerPrice = value.offer.find(o => o.offerType === 'offerPrice' && o.offerPrice);
+}
+
+
+if (offerPrice) {
+  finalPrice = offerPrice.offerPrice;
+} else if (percentageOffer) {
+  finalPrice = value.price - (value.price * (percentageOffer.percentOff / 100));
+}
 
 
   const generateLink = () => {
@@ -66,7 +71,7 @@ const ProductCard = ({ product, data }) => {
         </div>
       ) : (
         <p className=" text-center text-[18px] font-TenorSans text-[#DD8560]">
-          &#8377;{finalPrice.toFixed(2)}
+          &#8377;{finalPrice?.toFixed(2)}
           {value.price !== finalPrice && (
             <span className='text-[#808080] text-[15px] line-through ml-2'>
               &#8377;{value.price.toFixed(2)}
