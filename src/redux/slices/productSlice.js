@@ -7,6 +7,8 @@ const initialState = {
     product: {},
     colors: [],
     images: [],
+    isLoading: false,
+    error: null,
   },
   trending: {
     data: [],
@@ -50,7 +52,7 @@ export const fetchProduct = createAsyncThunk(
       if (ratingResponse && ratingResponse.data && ratingResponse.data.length > 0) {
         const reviews = ratingResponse.data;
         const averageRating = reviews.reduce((acc, review) => acc + review.rating, 0) / reviews.length;
-        
+
         return { ...productResponse, reviews, averageRating };
       } else {
         console.log('No ratings available.');
@@ -95,7 +97,7 @@ export const fetchProductByColor = createAsyncThunk(
     try {
 
       const response = await fetchProductsByColor(color, productName);
-      
+
       if (!response) {
         throw new Error('Product not found');
       }
@@ -134,6 +136,8 @@ const productSlice = createSlice({
               colors: [foundProduct.color],
               sizes: [],
               reviews: foundProduct.reviews || [],
+              isLoading: false,
+              error: null
             };
           }
         }
@@ -151,6 +155,8 @@ const productSlice = createSlice({
           colors: [],
           sizes: [],
           reviews: [],
+          isLoading: false,
+          error: null,
         };
       }
     },
@@ -179,18 +185,8 @@ const productSlice = createSlice({
         }
       })
       .addCase(fetchProduct.pending, (state) => {
-        state.selectedProduct = {
-          id: null,
-          name: '',
-          rating: 0,
-          price: 0,
-          category: '',
-          images: [],
-          description: '',
-          colors: [],
-          sizes: [],
-          reviews: [],
-        };
+        state.selectedProduct.isLoading = true;
+        state.selectedProduct.error = null;
       })
       .addCase(fetchProduct.fulfilled, (state, action) => {
         const { product, colors, images } = action.payload.data;
@@ -198,22 +194,14 @@ const productSlice = createSlice({
           product: product,
           images: images.length > 0 ? images : [],
           colors: colors.length > 0 ? colors : [],
-          reviews:[],
+          reviews: [],
+          isLoading: false,
+          error: null,
         };
       })
       .addCase(fetchProduct.rejected, (state, action) => {
-        state.selectedProduct = {
-          id: null,
-          name: '',
-          rating: 0,
-          price: 0,
-          category: '',
-          images: [],
-          description: '',
-          colors: [],
-          sizes: [],
-          reviews: [],
-        };
+        state.selectedProduct.isLoading = false;
+        state.selectedProduct.error = action.error.message;
       })
       .addCase(fetchAllProducts.pending, (state) => {
         state.allProducts.isLoading = true;
@@ -229,7 +217,7 @@ const productSlice = createSlice({
         state.allProducts.error = action.payload;
       })
       .addCase(fetchProductByColor.pending, (state) => {
-        state.selectedProduct = {
+        state.colorProduct = {
           ...state.selectedProduct,
           isLoading: true,
           error: null,
@@ -237,15 +225,15 @@ const productSlice = createSlice({
       })
       .addCase(fetchProductByColor.fulfilled, (state, action) => {
         const { product, colors, images } = action.payload;
-        state.selectedProduct = {
+        state.colorProduct = {
           product: product,
           images: images.length > 0 ? images : [],
           colors: colors.length > 0 ? colors : [],
-          reviews:[],
+          reviews: [],
         };
       })
       .addCase(fetchProductByColor.rejected, (state, action) => {
-        state.selectedProduct = {
+        state.colorProduct = {
           ...state.selectedProduct,
           isLoading: false,
           error: action.payload || 'Failed to fetch product by color',

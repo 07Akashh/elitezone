@@ -8,7 +8,7 @@ export const fetchUser = async () => {
     const response = await axios.get(`${API_URL}/user`, {
         headers: { Authorization: `Bearer ${token}` }
     });
-    return response.data.data.dataValues;
+    return response.data.data;
 };
 
 export const updateUser = (formData) => {

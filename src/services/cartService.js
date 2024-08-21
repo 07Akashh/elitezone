@@ -52,7 +52,7 @@ export const removeCartItem = async (productId) => {
     }
 };
 
-export const addItemToCart = async (productId, quantity) => {
+export const addItemToCart = async (productId, quantity, size) => {
     try {
         const response = await axios.post(`${API_URL}/cart`, { productId, quantity }, {
             headers: { Authorization: `Bearer ${token}` }

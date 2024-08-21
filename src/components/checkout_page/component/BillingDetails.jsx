@@ -1,14 +1,15 @@
 import React, { useState } from 'react';
 
+
 const BillingDetails = ({ savedAddresses, onSaveAddress, onProceed }) => {
     const [billingInfo, setBillingInfo] = useState({
         firstName: '',
         lastName: '',
-        streetAddress: '',
-        apartment: '',
+        addressLine1: '',
+        addressLine2: '',
         city: '',
-        phoneNumber: '',
-        email: '',
+        state: '',
+        code: '',
     });
 
     const [saveToAddressList, setSaveToAddressList] = useState(false);
@@ -22,8 +23,8 @@ const BillingDetails = ({ savedAddresses, onSaveAddress, onProceed }) => {
 
     const handleAddressSelect = (index) => {
         const selectedAddress = savedAddresses[index];
-        console.log(selectedAddress)
         setBillingInfo(selectedAddress);
+        onProceed(selectedAddress);
         setSelectedAddressIndex(index);
         setIsAddingNewAddress(false);
     };
@@ -42,81 +43,106 @@ const BillingDetails = ({ savedAddresses, onSaveAddress, onProceed }) => {
         setBillingInfo({
             firstName: '',
             lastName: '',
-            streetAddress: '',
-            apartment: '',
+            addressLine1: '',
+            addressLine2: '',
             city: '',
-            phoneNumber: '',
-            email: '',
+            state: '',
+            code: '',
         });
     };
 
+
+
     return (
-        <div className="billing-details p-4 border rounded-md shadow-md max-w-md mx-auto">
-            <h2 className="text-xl font-semibold mb-4">Billing Details</h2>
-            <ul className="mb-4 space-y-2">
-                {savedAddresses.map((address, index) => (
-                    <li
-                        key={index}
-                        className={`cursor-pointer p-2 ${selectedAddressIndex === index ? 'bg-gray-200' : ''}`}
-                        onClick={() => handleAddressSelect(index)}
-                    >
-                        {address.streetAddress}, {address.city}
-                    </li>
-                ))}
-            </ul>
-            <button
-                className="bg-blue-500 text-white py-2 px-4 rounded mb-4 w-full sm:w-auto"
-                onClick={handleNewAddress}
-            >
-                {isAddingNewAddress ? 'Cancel' : 'Add New Billing Address'}
-            </button>
-            {isAddingNewAddress && (
-                <form onSubmit={handleSubmit} className="flex flex-col gap-2">
-                    <input
-                        type="text"
-                        name="firstName"
-                        placeholder="First Name"
-                        required
-                        value={billingInfo.firstName}
-                        onChange={handleChange}
-                        className="p-2 border rounded"
-                    />
-                    <input
-                        type="text"
-                        name="lastName"
-                        placeholder="Last Name"
-                        required
-                        value={billingInfo.lastName}
-                        onChange={handleChange}
-                        className="p-2 border rounded"
-                    />
-                    <input
-                        type="text"
-                        name="streetAddress"
-                        placeholder="Street Address"
-                        required
-                        value={billingInfo.streetAddress}
-                        onChange={handleChange}
-                        className="p-2 border rounded"
-                    />
-                    <input
-                        type="text"
-                        name="apartment"
-                        placeholder="Apartment, floor, etc. (optional)"
-                        value={billingInfo.apartment}
-                        onChange={handleChange}
-                        className="p-2 border rounded"
-                    />
-                    <input
-                        type="text"
-                        name="city"
-                        placeholder="Town/City"
-                        required
-                        value={billingInfo.city}
-                        onChange={handleChange}
-                        className="p-2 border rounded"
-                    />
-                    <input
+        <>
+            <div className="billing-details rounded-md max-w-md">
+                <h2 className="sm:text-4xl text-2xl m-2 sm:m-5 leading-[30px] tracking-wider mb-5 sm:mb-10">Billing Details</h2>
+                <ul className="mb-4 space-y-2">
+                    {savedAddresses.map((address, index) => (
+                        <li
+                            key={index}
+                            className={`cursor-pointer px-4 p-2 ${selectedAddressIndex === index ? 'bg-[#754f23] text-white rounded' : ''}`}
+                            onClick={() => handleAddressSelect(index)}
+                        >
+                            <h4 className='font-semibold'>{address.firstName} {address.lastName}</h4>
+                            <p className='text-sm'>
+                                {address.addressLine1}, {address.addressLine2 ? `${address.addressLine2}, ` : ''} {address.city}, {address.state}, {address.code}
+                            </p>
+
+                        </li>
+                    ))}
+                </ul>
+                <button
+                    className="bg-[#754F23] text-white py-[16px] px-[48px] text-base font-normal rounded mb-4 w-full sm:w-auto"
+                    onClick={handleNewAddress}
+                >
+                    {isAddingNewAddress ? 'Cancel' : 'Add New Billing Address'}
+                </button>
+                {isAddingNewAddress && (
+                    <form onSubmit={handleSubmit} className="flex flex-col gap-2">
+                        <label htmlFor="firstName">First Name</label>
+                        <input
+                            type="text"
+                            name="firstName"
+                            required
+                            value={billingInfo.firstName}
+                            onChange={handleChange}
+                            className="p-2 rounded w-full h-[50px] relative bg-neutral-100 outline-none"
+                        />
+                        <label htmlFor="firstName">Last Name</label>
+                        <input
+                            type="text"
+                            name="lastName"
+                            required
+                            value={billingInfo.lastName}
+                            onChange={handleChange}
+                            className="p-2 rounded w-full h-[50px] relative bg-neutral-100 outline-none"
+                        />
+                        <label htmlFor="firstName">Street Address</label>
+                        <input
+                            type="text"
+                            name="addressLine1"
+                            required
+                            value={billingInfo.addressLine1}
+                            onChange={handleChange}
+                            className="p-2 rounded w-full h-[50px] relative bg-neutral-100 outline-none"
+                        />
+                        <label htmlFor="firstName">Apartment, floor, etc. (optional)</label>
+                        <input
+                            type="text"
+                            name="addressLine2"
+                            value={billingInfo.addressLine2}
+                            onChange={handleChange}
+                            className="p-2 rounded w-full h-[50px] relative bg-neutral-100 outline-none"
+                        />
+                        <label htmlFor="firstName">Town/City</label>
+                        <input
+                            type="text"
+                            name="city"
+                            required
+                            value={billingInfo.city}
+                            onChange={handleChange}
+                            className="p-2 rounded w-full h-[50px] relative bg-neutral-100 outline-none"
+                        />
+                        <label htmlFor="firstName">State</label>
+                        <input
+                            type="text"
+                            name="state"
+                            required
+                            value={billingInfo.state}
+                            onChange={handleChange}
+                            className="p-2 rounded w-full h-[50px] relative bg-neutral-100 outline-none"
+                        />
+                        <label htmlFor="firstName">Pincode</label>
+                        <input
+                            type="text"
+                            name="code"
+                            required
+                            value={billingInfo.code}
+                            onChange={handleChange}
+                            className="p-2 rounded w-full h-[50px] relative bg-neutral-100 outline-none"
+                        />
+                        {/* <input
                         type="tel"
                         name="phoneNumber"
                         placeholder="Phone Number"
@@ -133,21 +159,23 @@ const BillingDetails = ({ savedAddresses, onSaveAddress, onProceed }) => {
                         value={billingInfo.email}
                         onChange={handleChange}
                         className="p-2 border rounded"
-                    />
-                    <label className="mt-2 flex items-center space-x-2">
-                        <input
-                            type="checkbox"
-                            checked={saveToAddressList}
-                            onChange={() => setSaveToAddressList(!saveToAddressList)}
-                        />
-                        <span>Save to address list</span>
-                    </label>
-                    <button type="submit" className="mt-4 bg-blue-500 text-white py-2 px-4 rounded w-full sm:w-auto">
-                        {isAddingNewAddress ? 'Save Address' : 'Proceed'}
-                    </button>
-                </form>
-            )}
-        </div>
+                    /> */}
+                        <label className="mt-2 flex items-center space-x-2">
+                            <input
+                                type="checkbox"
+                                checked={saveToAddressList}
+                                onChange={() => setSaveToAddressList(!saveToAddressList)}
+                                required
+                            />
+                            <span>Save to address list</span>
+                        </label>
+                        <button type="submit" className="mt-4 bg-[#754F23] text-base font-normal text-white py-[16px] px-[48px] rounded w-full sm:w-auto">
+                            {isAddingNewAddress ? 'Save Address' : 'Proceed'}
+                        </button>
+                    </form>
+                )}
+            </div>
+        </>
     );
 };
 

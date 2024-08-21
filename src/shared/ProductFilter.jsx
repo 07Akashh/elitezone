@@ -7,7 +7,7 @@ import { fetchAllProducts } from '../redux/slices/productSlice';
 import Breadcrumbs from './Breadcrumbs';
 import { useParams } from 'react-router-dom';
 
-const ProductFilterPage = ({ title, subtitle }) => {
+const ProductFilterPage = () => {
     const { categoryId, subCategoryId } = useParams();
     const dispatch = useDispatch();
     const {  colors } = useSelector((state) => state.products.allProducts);
@@ -21,6 +21,23 @@ const ProductFilterPage = ({ title, subtitle }) => {
     const [product, setProduct] = useState([]);
     const [sortOption, setSortOption] = useState('');
     const [showFilter, setShowFilter] = useState(false);
+
+    const getTitleAndSubtitle = (id) => {
+        if (!id) return { title: '', subtitle: '' };
+    
+        const capitalize = (str) => str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
+        
+        const parts = id.split('-').map(capitalize);
+        const subtitle = parts.pop();
+        const title = parts.join(' ');
+    
+        return { title, subtitle };
+    };
+    
+
+    const { title, subtitle } = subCategoryId
+    ? getTitleAndSubtitle(subCategoryId)
+    : getTitleAndSubtitle(categoryId);
 
 
     useEffect(() => {

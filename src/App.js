@@ -23,6 +23,7 @@ import PrivateRoute from './shared/PrivateRoute';
 import ProductFilterPage from './shared/ProductFilter';
 import Checkout from './components/checkout_page/Checkout';
 import Apps from './color';
+import { fetchAddresses } from './redux/slices/addressSlice';
 
 
 
@@ -54,10 +55,11 @@ function App() {
 
   useEffect(() => {
     if (user) {
+      dispatch(fetchAddresses());
+      dispatch(getWishlist());
       const fetchCartItem = async () => {
         try {
           dispatch(fetchCartItems())
-          dispatch(getWishlist());
         } catch (error) {
           console.error('Error fetching cart items:', error);
         }
@@ -81,22 +83,11 @@ function App() {
               </PrivateRoute>} />
             <Route path="/contact" element={<ContactUs />} />
 
-            <Route path="/:categoryId" element={<ProductFilterPage title="Embriodered" subtitle="Abayas" />} />
-            <Route path="/:categoryId/:subCategoryId" element={<ProductFilterPage title="Nida" subtitle="Fabric" />} />
-            <Route path="/:categoryId/:subCategoryId" element={<ProductFilterPage title="TikTok" subtitle="Fabric" />} />
-            <Route path="/:categoryId/:subCategoryId" element={<ProductFilterPage title="Harira" subtitle="Fabric" />} />
-            <Route path="/:categoryId/:subCategoryId" element={<ProductFilterPage title="Shiffon" subtitle="Fabric" />} />
-            <Route path="/:categoryId/:subCategoryId" element={<ProductFilterPage title="Silk Shiny" subtitle="Fabric" />} />
-            <Route path="/:categoryId/:subCategoryId" element={<ProductFilterPage title="Zoom" subtitle="Fabric" />} />
-            <Route path="/:categoryId/:subCategoryId" element={<ProductFilterPage title="Korean Nida" subtitle="Fabric" />} />
+            <Route path="/:categoryId" element={<ProductFilterPage />} />
+            <Route path="/:categoryId/:subCategoryId" element={<ProductFilterPage />} />
 
-
-            <Route path="/product/:categoryId=''" element={<ProductFilterPage title="Our" subtitle="Products" />} />
-            {/* <Route path="/abayas/tiktok-fabric" element={<ProductFilterPage categoryId="abayas-001" title="TikTok" subtitle="Fabric" subCategoryId="tiktok-fabric"/>} /> */}
-            {/* <Route path="/abayas/harira-fabric" element={<ProductFilterPage categoryId="abayas-001" title="Harira" subtitle="Fabric" subCategoryId="harira-fabric"/>} /> */}
             <Route path="/wishlist" element={<Wishlist />} />
-            <Route path="/color" element={<Apps />}/>
-
+            <Route path="/color" element={<Apps />} />
             <Route path="/trending" element={<ProductList category="trending" />} />
             <Route path="/category/:category" element={<CategoryPage />} />
             <Route path="/cart" element={<Cart />} />
@@ -104,8 +95,7 @@ function App() {
             <Route path="/embroidered-abaya" element={<ProductList category="embroidered-abaya" />} />
             <Route path="/:categoryId/:subCategoryId/:id" element={<ProductDetails />} />
 
-
-            <Route path="/checkout" element={<Checkout/>} />
+            <Route path="/checkout" element={<Checkout />} />
           </Routes>
         </main>
         <Footer />

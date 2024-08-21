@@ -1,6 +1,7 @@
 import React, { useRef } from 'react';
 import HeroSection from './landingPage_component/HeroSection';
 import CategorySection from './landingPage_component/CategorySection';
+import Banner from '../../shared/Banner';
 
 const LandingPage = () => {
     const trendingRef = useRef(null);
@@ -11,6 +12,7 @@ const LandingPage = () => {
         }
     };
     return (
+        <>
         <div className="sm:py-20 mx-5 text-[#2F2F2F] no-scrollbar">
             <HeroSection handleExploreClick={handleExploreClick} />
             <div ref={trendingRef}>
@@ -32,7 +34,10 @@ const LandingPage = () => {
                 subtitle="Abaya"
                 category="embroidered-abaya"
             />
+            
         </div>
+        <Banner />
+        </>
     );
 };
 

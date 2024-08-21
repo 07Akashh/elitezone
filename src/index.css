@@ -129,3 +129,42 @@ body{
 .rotate-90 {
   transform: rotate(90deg);
 }
+
+@keyframes shimmer {
+  0% {
+    background-position: -500px 0;
+  }
+  100% {
+    background-position: 500px 0;
+  }
+}
+
+.skeleton {
+  background: #f6f7f8;
+  background-image: linear-gradient(
+    90deg,
+    #f6f7f8 0px,
+    #edeef1 40px,
+    #f6f7f8 80px
+  );
+  background-size: 1000px 100%;
+  animation: shimmer 2s infinite linear;
+}
+
+.skeleton-text {
+  height: 20px;
+  margin-bottom: 10px;
+}
+
+.skeleton-image {
+  height: 300px;
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.skeleton-button {
+  height: 40px;
+  width: 100px;
+  margin-right: 10px;
+  margin-bottom: 10px;
+}

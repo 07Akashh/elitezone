@@ -38,13 +38,13 @@ const ProductCard = ({ product, data }) => {
         <div>
           <div className='sm:h-[360px] h-[200px] relative border-black'>
             {percentageOffer && !offerPrice && (
-              <div className='absolute sm:h-[40px] h-[25px] w-[25px] ml-1 mt-1 sm:w-[40px] sm:mt-3 sm:ml-3 bg-[#DD8560] text-white text-[10px] sm:text-sm font-light rounded-full flex items-center justify-center'>
+              <div className='absolute sm:h-[40px] h-[25px] w-[25px] ml-2 mt-2 sm:w-[40px] sm:mt-3 sm:ml-3 bg-[#DD8560] text-white text-[10px] sm:text-sm font-light rounded-full flex items-center justify-center'>
                 {percentageOffer.percentOff}%
               </div>
             )}
             {isLiked && (
-              <div className='absolute sm:h-[40px] h-[25px] w-[25px] ml-1 right-1 sm:right-3 mt-1 sm:w-[40px] sm:mt-3 sm:ml-3 bg-[#DD8560] text-white text-[10px] sm:text-sm font-light rounded-full flex items-center justify-center'>
-              <CiHeart className=' text-2xl'/>
+              <div className='absolute sm:h-[40px] h-[25px] w-[25px] ml-2 right-2 sm:right-3 mt-2 sm:w-[40px] sm:mt-3 sm:ml-3 bg-[#DD8560] text-white text-[10px] sm:text-sm font-light rounded-full flex items-center justify-center'>
+              <CiHeart className='text-lg sm:text-2xl'/>
             </div>
             )}
             {/* {value.isLike && <CiHeart/>} */}

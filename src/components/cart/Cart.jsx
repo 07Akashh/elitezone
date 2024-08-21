@@ -14,7 +14,6 @@ const Cart = () => {
 
     const cartItems = useSelector((state) => state.cart);
     const user = useSelector((state) => state.auth.user);
-
     const { handleQuantityChange, handleRemoveItem, updatingItemId } = useCartHandlers(dispatch);
 
     useEffect(() => {
@@ -72,15 +71,16 @@ const Cart = () => {
         <div className="py-10 px-4 sm:px-10">
             <Breadcrumbs />
             <div className='mb-5 font-TenorSans'>
-            <div className="flex flex-wrap sm:flex-nowrap justify-center py-5 bg-white">
+            <div className="flex  flex-nowrap justify-center py-5 bg-white">
         <div className="w-full sm:w-1/4 text-center text-xs sm:text-base">Product</div>
         <div className="w-full sm:w-1/4 text-center text-xs sm:text-base">Price</div>
         <div className="w-full sm:w-1/4 text-center text-xs sm:text-base">Quantity</div>
         <div className="w-full sm:w-1/4 text-center text-xs sm:text-base">Subtotal</div>
     </div>
                 <ul className="mb-4">
-                    {cartItems.items.map((item) => (
+                    {cartItems.items.map((item, index) => (
                         <CartItem
+                        index={index}
                             key={item.id}
                             item={item}
                             quantityInputs={quantityInputs}

@@ -1,56 +1,134 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import BillingDetails from './component/BillingDetails';
 import OrderSummary from './component/OrderSummary';
+import { useDispatch, useSelector } from 'react-redux';
+import { addAddresses, fetchAddresses } from '../../redux/slices/addressSlice';
+import { fetchCartForOrder, placeOrder } from '../../redux/slices/orderSlice';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Checkout = () => {
-    const [savedAddresses, setSavedAddresses] = useState([
-        { firstName: "John", lastName: "Doe", streetAddress: "123 Main St", apartment: "Apt 1", city: "New York", phoneNumber: "1234567890", email: "john.doe@example.com" },
-        // Add more demo addresses as needed
-    ]);
+    const dispatch = useDispatch();
+    const cartItems = useSelector((state) => state.cart);
+    const addresses = useSelector((state) => state.addresses.data);
+    const orderData = useSelector((state) => state.orders);
 
     const [billingInfo, setBillingInfo] = useState(null);
+    // const [orderId, setOrderId] = useState(null);
+    const [loading, setLoading] = useState(false);
 
-    const handleSaveAddress = (newAddress) => {
-        setSavedAddresses([...savedAddresses, newAddress]);
+    const createOrder = async (orderSummary) => {
+        setLoading(true);
+        try {
+            const response = await dispatch(placeOrder(orderSummary));
+            // setOrderId(response.payload.orderId.id);
+            setLoading(false);
+            // console.log(response)
+            return response.payload.orderId;
+        } catch (error) {
+            console.error("Error creating order:", error);
+            setLoading(false);
+        }
     };
+
+    const handleSaveAddress = async (newAddress) => {
+        const response = await dispatch(addAddresses(newAddress)).unwrap();
+        dispatch(fetchAddresses());
+        return response.data;
+    };
+
+    useEffect(() => {
+        dispatch(fetchCartForOrder());
+    }, [dispatch]);
 
     const handleProceed = (billingInfo) => {
         setBillingInfo(billingInfo);
     };
 
-    const handlePlaceOrder = () => {
-        console.log("Order placed with billing info:", billingInfo);
+    const handlePlaceOrder = async () => {
+        if (billingInfo) {
+            const orderSummary = {
+                ...orderData,
+                addressId: billingInfo.id,
+            };
+            setLoading(true);
+    
+            try {
+                const response = await createOrder(orderSummary);
+                console.log(response)
+                if (response && response.id) {
+                    // setOrderId(response.id);
+                    const options = {
+                        key: "rzp_test_5ureH41rm3YjF3",
+                        amount: response.amount,
+                        currency: 'INR',
+                        name: "Acme Corp",
+                        description: "your description",
+                        order_id: response.id,
+                        image: "https://www.svgrepo.com/show/530597/hat.svg",
+                        prefill: {
+                            name: "Sachin Minde",
+                            email: "sachinminde9359@gmail.com",
+                            contact: "9359313945",
+                        },
+                        handler: function (response){
+                            console.log(response)
+                            alert(response.razorpay_payment_id);
+                            alert(response.razorpay_order_id);
+                            alert(response.razorpay_signature)
+                        },
+                        notes: {
+                            address: "Razorpay Corporate Office",
+                            userId: "510f7de5-14de-4cd0-b6f6-2ee5528329d4",
+                            planId: "17977236-dd0b-4ea0-b3ef-524a2e850b26",
+                        },
+                        theme: {
+                            color: "#3399cc",
+                        },
+                    };
+
+                    const rzp1 = new window.Razorpay(options);
+                    rzp1.open();
+                } else {
+                    console.error("Order ID not received");
+                    toast.error("Failed to create order. Please try again.");
+                }
+            } catch (error) {
+                console.error("Error creating order:", error);
+                toast.error("An error occurred while placing the order.");
+            } finally {
+                setLoading(false);
+            }
+        } else {
+            toast.error("Please select an address!");
+        }
     };
-
-    const cartItems = [
-        { name: "Item 1", price: 100 },
-        { name: "Item 2", price: 200 },
-    ];
-
-    const subtotal = cartItems.reduce((acc, item) => acc + item.price, 0);
-    const shipping = 50;
-    const total = subtotal + shipping;
+    
 
     return (
-        <div className="checkout-page flex flex-col md:flex-row gap-4 p-4">
-            <div className="left-side w-full md:w-1/3">
-                <BillingDetails
-                    savedAddresses={savedAddresses}
-                    onSaveAddress={handleSaveAddress}
-                    onProceed={handleProceed}
-                />
+        <>
+            <ToastContainer />
+            <div className="checkout-page font-TenorSans sm:flex w-full border-black md:justify-between px-2 sm:px-10">
+                <div className="left-side border-black">
+                    <BillingDetails
+                        savedAddresses={addresses}
+                        onSaveAddress={handleSaveAddress}
+                        onProceed={handleProceed}
+                    />
+                </div>
+                <div className="right-side sm:min-w-[350px] xl:min-w-[460px] lg:min-w-[400px] border-black">
+                    <OrderSummary
+                        cartItems={cartItems.items}
+                        subtotal={cartItems.subtotal}
+                        shipping={cartItems.shippingCharges}
+                        total={cartItems.total}
+                        billingInfo={billingInfo}
+                        onPlaceOrder={handlePlaceOrder}
+                        loading={loading}
+                    />
+                </div>
             </div>
-            <div className="right-side w-full md:w-2/3">
-                <OrderSummary
-                    cartItems={cartItems}
-                    subtotal={subtotal}
-                    shipping={shipping}
-                    total={total}
-                    billingInfo={billingInfo}
-                    onPlaceOrder={handlePlaceOrder}
-                />
-            </div>
-        </div>
+        </>
     );
 };
 
