@@ -5,8 +5,8 @@ import ProductCard from '../product/ProductCard';
 const Wishlist = () => {
     const { wishlistItems, loading, error } = useSelector((state) => state.wishlist);
 
-    if (loading) return <div>Loading...</div>;
-    if (error) return <div>Error: {error}</div>;
+    if (loading) return <div className='text-center font-TenorSans'>Loading...</div>;
+    if (error) return <div className='text-center font-TenorSans'>Error: {error}</div>;
 
     // Check if the wishlist is empty
     if (wishlistItems.length === 0) {
@@ -22,7 +22,7 @@ const Wishlist = () => {
             <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-5 gap-5 border-black mx-auto py-4">
                 {wishlistItems.map((item) => (
                     <div key={item.id} className="mb-10 sm:mb-5 w-auto mx-auto">
-                        <ProductCard key={item.id} product={item} />
+                        <ProductCard product={item} />
                     </div>
                 ))}
             </div>

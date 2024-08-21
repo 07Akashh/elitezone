@@ -26,7 +26,7 @@ export const getCartItems = async () => {
     }
 };
 
-export const updateCartQuantity = async (productId, quantity) => {
+export const updateCartQuantity = async (productId, quantity ) => {
     const token = localStorage.getItem('token');
     try {
         const response = await axios.patch(`${API_URL}/cart/${productId}`, { quantity },{
@@ -53,8 +53,9 @@ export const removeCartItem = async (productId) => {
 };
 
 export const addItemToCart = async (productId, quantity, size) => {
+    console.log(size)
     try {
-        const response = await axios.post(`${API_URL}/cart`, { productId, quantity }, {
+        const response = await axios.post(`${API_URL}/cart`, { productId, quantity, size }, {
             headers: { Authorization: `Bearer ${token}` }
         });
         return response.data;

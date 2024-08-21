@@ -62,7 +62,7 @@ const Checkout = () => {
                         key: "rzp_test_5ureH41rm3YjF3",
                         amount: response.amount,
                         currency: 'INR',
-                        name: "Acme Corp",
+                        name: "Humai",
                         description: "your description",
                         order_id: response.id,
                         image: "https://www.svgrepo.com/show/530597/hat.svg",

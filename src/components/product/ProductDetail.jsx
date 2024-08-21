@@ -86,8 +86,10 @@ const ProductDetails = () => {
     try {
       if (isInWishlist) {
         await dispatch(removeFromWishlist(id));
+        await dispatch(getWishlist());
       } else {
         await dispatch(addToWishlist(id));
+        await dispatch(getWishlist());
       }
 
       const resultAction = await dispatch(fetchProduct(id));

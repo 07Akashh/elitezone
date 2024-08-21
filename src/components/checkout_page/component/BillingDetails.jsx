@@ -142,24 +142,27 @@ const BillingDetails = ({ savedAddresses, onSaveAddress, onProceed }) => {
                             onChange={handleChange}
                             className="p-2 rounded w-full h-[50px] relative bg-neutral-100 outline-none"
                         />
-                        {/* <input
+                        {/*
+                        <label htmlFor="phoneNumber">Phone Number</label>
+                        <input
                         type="tel"
                         name="phoneNumber"
-                        placeholder="Phone Number"
                         required
                         value={billingInfo.phoneNumber}
                         onChange={handleChange}
-                        className="p-2 border rounded"
+                        className="p-2 rounded w-full h-[50px] relative bg-neutral-100 outline-none"
                     />
-                    <input
-                        type="email"
-                        name="email"
-                        placeholder="Email Address"
-                        required
-                        value={billingInfo.email}
-                        onChange={handleChange}
-                        className="p-2 border rounded"
-                    /> */}
+
+                        <label htmlFor="email">Email Address</label>
+                        <input
+                            type="email"
+                            name="email"
+                            required
+                            value={billingInfo.email}
+                            onChange={handleChange}
+                            className="p-2 rounded w-full h-[50px] relative bg-neutral-100 outline-none"
+                        />
+                        */}
                         <label className="mt-2 flex items-center space-x-2">
                             <input
                                 type="checkbox"
