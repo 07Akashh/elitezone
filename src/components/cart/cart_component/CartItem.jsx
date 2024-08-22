@@ -41,7 +41,7 @@ const CartItem = ({ item, quantityInputs, handleQuantityChange, handleRemoveItem
                     min="1"
                     value={quantityInputs[item.id] || item.quantity}
                     onChange={(e) => handleQuantityChange(item.id, e.target.value)}
-                    className="p-1 w-16 border rounded border-black text-center text-sm sm:text-base"
+                    className="p-1 w-16 border no-spinner rounded border-black text-center text-sm sm:text-base outline-none"
                     disabled={updatingItemId === item.id}
                 />
             </div>

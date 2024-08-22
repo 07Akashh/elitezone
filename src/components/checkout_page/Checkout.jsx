@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+
 import BillingDetails from './component/BillingDetails';
 import OrderSummary from './component/OrderSummary';
-import { useDispatch, useSelector } from 'react-redux';
+
 import { addAddresses, fetchAddresses } from '../../redux/slices/addressSlice';
 import { fetchCartForOrder, placeOrder } from '../../redux/slices/orderSlice';
+
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -55,15 +58,14 @@ const Checkout = () => {
     
             try {
                 const response = await createOrder(orderSummary);
-                console.log(response)
                 if (response && response.id) {
                     // setOrderId(response.id);
                     const options = {
                         key: "rzp_test_5ureH41rm3YjF3",
                         amount: response.amount,
                         currency: 'INR',
-                        name: "Humai",
-                        description: "your description",
+                        name: "Humaira Abayas",
+                        description: "Your destination for elegant and modest fashion.",
                         order_id: response.id,
                         image: "https://www.svgrepo.com/show/530597/hat.svg",
                         prefill: {
@@ -78,7 +80,7 @@ const Checkout = () => {
                             alert(response.razorpay_signature)
                         },
                         notes: {
-                            address: "Razorpay Corporate Office",
+                            address: "Humaira Abayas Office",
                             userId: "510f7de5-14de-4cd0-b6f6-2ee5528329d4",
                             planId: "17977236-dd0b-4ea0-b3ef-524a2e850b26",
                         },

@@ -72,17 +72,16 @@ export const fetchAllProducts = createAsyncThunk(
     try {
       const response = await fetchProducts({ categoryId, subCategoryId, color, page, sorting, priceRange });
 
-      // Ensure response.data is an object and extract products and colors
       const products = response.data.products || [];
       const newColors = response.data.colors || [];
-      // Retrieve previously stored colors
-      // const previousColors = getState().products.allProducts.colors || [];
 
-      // Return combined data
+      const previousColors = getState().products.allProducts.colors || [];
+
+      const colorsToStore = newColors.length > 0 ? newColors : previousColors;
+
       return {
         data: products,
-        // colors: [...new Set([...previousColors, ...newColors])]
-        colors: [...newColors]
+        colors: colorsToStore
       };
     } catch (error) {
       return rejectWithValue(error);

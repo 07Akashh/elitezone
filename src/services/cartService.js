@@ -53,7 +53,6 @@ export const removeCartItem = async (productId) => {
 };
 
 export const addItemToCart = async (productId, quantity, size) => {
-    console.log(size)
     try {
         const response = await axios.post(`${API_URL}/cart`, { productId, quantity, size }, {
             headers: { Authorization: `Bearer ${token}` }

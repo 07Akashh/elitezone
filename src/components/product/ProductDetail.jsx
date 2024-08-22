@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
+
 
 import { IoMdHeart, IoMdHeartEmpty } from "react-icons/io";
 // import { TbTruckDelivery } from "react-icons/tb";
@@ -13,6 +15,8 @@ import ProductReviews from '../../shared/StarRating';
 import { addToWishlist, getWishlist, removeFromWishlist } from '../../redux/slices/wishListSlice';
 import { fetchCartItems } from '../../redux/slices/cartSlice';
 import SimilarProductsPage from '../../shared/SimilarProduct';
+
+import 'react-toastify/dist/ReactToastify.css';
 
 
 const ProductDetails = () => {
@@ -35,7 +39,6 @@ const ProductDetails = () => {
   const [isInWishlist, setIsInWishlist] = useState(false);
   const [, setLocalWishlist] = useState([]);
   const [isAddingToCart, setIsAddingToCart] = useState(false);
-
 
 
   useEffect(() => {
@@ -62,14 +65,18 @@ const ProductDetails = () => {
 
   const handleAddToCart = async () => {
     if (!products.product.inStock) {
+      toast.success("Product is not available")
       console.log('Product is not available');
       return;
     }
     try {
       setIsAddingToCart(true);
-      await addItemToCart(products.product.id, quantity, selectedSize);
+      const res = await addItemToCart(products.product.id, quantity, selectedSize);
       dispatch(fetchCartItems())
+      toast.success(res.message)
     } catch (error) {
+
+      toast.error("Error adding item to cart")
       console.error('Error adding item to cart:', error);
     } finally {
       setIsAddingToCart(false);
@@ -85,11 +92,13 @@ const ProductDetails = () => {
   const handleWishlistToggle = async () => {
     try {
       if (isInWishlist) {
-        await dispatch(removeFromWishlist(id));
+        const res = await dispatch(removeFromWishlist(id));
         await dispatch(getWishlist());
+        toast.success(res.payload.message)
       } else {
-        await dispatch(addToWishlist(id));
+        const res= await dispatch(addToWishlist(id));
         await dispatch(getWishlist());
+        toast.success(res.payload.message)
       }
 
       const resultAction = await dispatch(fetchProduct(id));
@@ -103,9 +112,11 @@ const ProductDetails = () => {
           setIsInWishlist(updatedProduct.product.isLike || false);
         }
       } else {
+        toast.error('Failed to fetch the updated product')
         console.error('Failed to fetch the updated product');
       }
     } catch (error) {
+      toast.error('Error updating wishlist')
       console.error('Error updating wishlist:', error);
     }
   };
@@ -143,6 +154,7 @@ const ProductDetails = () => {
 
   return (
     <>
+      <ToastContainer />
       {loading && (
         <div className="loading-overlay">
           <div className="text-white font-TenorSans text-xl">Loading...</div>
@@ -241,8 +253,9 @@ const ProductDetails = () => {
                     id="quantity"
                     name="quantity"
                     value={quantity}
+                    disabled
                     onChange={(e) => setQuantity(Number(e.target.value))}
-                    className="border-y border-[#00000080] bg-transparent p-2 w-20 text-center"
+                    className="border-y spinner outline-none border-[#00000080] bg-transparent p-2 w-20 text-center"
                   />
                   <button onClick={() => handleQuantityChange(1)} className="px-3 py-[9px] bg-[#754F23] text-white text-6 border-[#00000080] font-bold rounded-r">&#43;</button>
                 </div>
