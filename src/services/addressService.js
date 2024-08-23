@@ -2,7 +2,7 @@ import axios from "axios";
 
 
 
-const API_URL = 'http://18.204.217.233:4000/v1';
+const API_URL = 'https://backend.humairaabayas.com/v1';
 // const token = localStorage.getItem('token');
 
 export const fetchAddress = async () => {
