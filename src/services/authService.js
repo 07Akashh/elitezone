@@ -1,7 +1,8 @@
 import axios from 'axios';
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword as signInWithEmailAndPasswordFirebase, signInWithPopup, googleProvider, auth, signOut } from './firebase-config';
+import serverUrl from "../config/serverUrl.js";
 
-const API_URL = 'http://18.204.217.233:4000/v1';
+const API_URL = serverUrl;
 
 export const registerWithEmailAndPassword = async (formData) => {
     try {

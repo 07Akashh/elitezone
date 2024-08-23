@@ -1,7 +1,8 @@
 import axios from "axios";
+import serverUrl from "../config/serverUrl.js";
 
 
-const API_URL = 'http://18.204.217.233:4000/v1';
+const API_URL = serverUrl;
 
 /**
  * Fetch products based on search query

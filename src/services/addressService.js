@@ -1,8 +1,8 @@
 import axios from "axios";
+import serverUrl from "../config/serverUrl.js";
 
 
-
-const API_URL = 'https://backend.humairaabayas.com/v1';
+const API_URL = serverUrl;
 // const token = localStorage.getItem('token');
 
 export const fetchAddress = async () => {
