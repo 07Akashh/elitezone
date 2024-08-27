@@ -15,7 +15,7 @@ const Register = ({ switchToLogin }) => {
         "address": '',
         "pincode": ''
     });
-    
+
     const dispatch = useDispatch();
     const { loading, error, user } = useSelector((state) => state.auth);
 
@@ -33,7 +33,7 @@ const Register = ({ switchToLogin }) => {
             if (user.firstName === null) {
                 console.log("object");
                 setShowModal(true);
-            } else{
+            } else {
                 window.location.reload()
             }
         }
@@ -45,18 +45,38 @@ const Register = ({ switchToLogin }) => {
 
     };
 
-    const handleGoogleLogin = async() => {
+    const handleGoogleLogin = async () => {
         await dispatch(googleLogin()).unwrap();
         setTimeout(() => {
             dispatch(fetchUserData());
         }, 100);
     };
-
     const handleModalSubmit = (details) => {
-        dispatch(updateUserData(details));
-        setShowModal(false);
+        try {
+            const res = dispatch(updateUserData(details))
+                .then(result => {
+                    if (result?.error) {
+                        console.error('Error:', result.error.message);
+                        setShowModal(true);  // Show modal on error
+                    } else {
+                        setShowModal(false); // Close modal on success
+                    }
+                    return result;
+                })
+                .catch(error => {
+                    console.error('Caught error:', error.message);
+                    setShowModal(true); // Ensure modal is shown on caught errors
+                    throw error; // Optionally re-throw if you need to handle this error elsewhere
+                });
+    
+            return res; // Return the promise from dispatch
+        } catch (error) {
+            console.error('Caught error in try/catch:', error.message);
+            setShowModal(true);  // Show modal on error
+            throw error; // Re-throw error to ensure it propagates correctly
+        }
     };
-
+    
 
     return (
         <div className='font-PlayfairDisplay'>
@@ -131,14 +151,14 @@ const Register = ({ switchToLogin }) => {
                 {error && <p>{error}</p>}
             </form>
             <h2 className="mt-4 text-[#969ab8] text-[15px] text-center">
-            Already Have an Account?{' '}
+                Already Have an Account?{' '}
                 <button onClick={switchToLogin} className="text-[15px] text-[#754f23]">
                     Log In
                 </button>
                 <p className='font-extrabold text-[#C1C1C1]'>-OR-</p>
             </h2>
             <button onClick={handleGoogleLogin} disabled={loading} className='mt-3 text-[#928f8f] border-2 flex m-auto gap-1 px-2 py-1 rounded-lg'>
-                <img src="https://img.icons8.com/?size=100&id=17949&format=png&color=000000" alt="google logo"  className='h-8 w-8'/>
+                <img src="https://img.icons8.com/?size=100&id=17949&format=png&color=000000" alt="google logo" className='h-8 w-8' />
                 <p className='m-auto'> Continue with Google</p>
             </button>
             {showModal && <UserDetailsModal onSubmit={handleModalSubmit} onClose={() => setShowModal(false)} />}

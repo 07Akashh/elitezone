@@ -8,22 +8,21 @@ const Footer = () => {
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
         {/* First Column */}
         <div>
-          <h1 className="text-[40px] font-bold">Brand</h1>
-          <p className="mt-2 text-2xl">Complete your style with awesome clothes from us.</p>
+          <h1 className="text-[40px] font-bold">Humaira Abayas</h1>
+          <p className="mt-2 text-2xl">Elegant Saudi Luxury Abayas | Premium Designs & Fast Shipping</p>
           <div className="flex space-x-4 mt-4">
-            <FaFacebookSquare className="w-8 h-8" />
-            <FaInstagramSquare className="w-8 h-8" />
-            <FaTwitterSquare className="w-8 h-8" />
-            <FaLinkedin className="w-8 h-8" />
+            <Link to="https://www.facebook.com/profile.php?id=61564472715844"><FaFacebookSquare className="w-10 h-10" /></Link>
+            <Link to="https://www.instagram.com/humaira_abayas?igsh=anZ5YTJzcmZnajJh&utm_source=qr"><FaInstagramSquare className="w-10 h-10" /></Link>
+            <FaTwitterSquare className="w-10 h-10 " />
+            <FaLinkedin className="w-10 h-10 " />
           </div>
         </div>
-
         {/* Second Column */}
         <div>
-          <h2 className="mb-2 text-2xl font-extralight pr-40 text-left">5123 Market St. #22B Charlottesville, California 44635</h2>
+          <h2 className="mb-2 text-2xl font-extralight pr-40 text-left">1-16, Masjidbanda, Kondapur, Hyderabad, 500084</h2>
 
-          <p className='text-lg mt-[35px]'>(434) 546-4356</p>
-          <p className='text-base mt-[44px]'>contact@brand.agencyr.com</p>
+          <p className='text-lg mt-[35px]'>+91 8639310409</p>
+          <p className='text-base mt-[44px]'>official.humairaabayas@gmail.com</p>
         </div>
 
         {/* Third Column */}

@@ -6,12 +6,13 @@ const HeroSection = ({ handleExploreClick }) => {
         <div className="relative">
             <div className="flex justify-center flex-col md:flex-row items-center md:gap-x-24 lg:gap-x-0 xl:gap-x-24 2xl:gap-x-48 md:mx-8  md:max-h-screen md:mb-5 lg:mb-20">
                 <div className="w-full md:w-[200px] mr-2 lg:mr-0 z-10 xl:w-3/5 lg:w-[480px] mb-10 md:mb-0 ">
-                    <h1 className="hidden md:block text-[40px] w-[350px] lg:text-[45px] lg:w-auto xl:text-[80px] mb-5 text-left font-BerkshireSwash">
+                    <h1 className="hidden md:block text-[38px] w-[350px] border-black lg:text-[45px] lg:w-auto xl:text-[80px] mb-5 text-left font-BerkshireSwash">
                         Empowering Your Modesty with Fashion!
                     </h1>
                     <p className="hidden lg:block text-[16px] md:text-[18px] font-PlayfairDisplay ml-2 md:ml-10 lg:ml-0 xl:ml-10 mb-10 md:mb-20 text-left">
-                        We provide the largest clothing collection for any season. You can choose trendy or classy design according to your preferences. Our services are super fast and we update within 24 hours.
-                    </p>
+                        Explore the largest collection of Saudi luxury abayas at Humaira
+                        Abayas. Whether you're looking for trendy or classic designs, our selection offers something
+                        for every preference. Enjoy super-fast service with updates within 24 hours. </p>
                     <button
                         onClick={handleExploreClick}
                         className="hidden lg:flex bg-[#754F23] text-white font-PlayfairDisplay py-2 px-4 ml-2 md:ml-20 rounded-xl mb-8 text-center items-center justify-start"
@@ -35,16 +36,17 @@ const HeroSection = ({ handleExploreClick }) => {
                 </div>
             </div>
 
-            <p className="lg:hidden text-[12px] mt-5 sm:mt-0 sm:text-[18px] mb-5 font-PlayfairDisplay ml-2 sm:ml-10 md:mb-5 text-left">
-                We provide the largest clothing collection for any season. You can choose trendy or classy design according to your preferences. Our services are super fast and we update within 24 hours.
+            <p className="lg:hidden text-[12px] mt-5 sm:mt-0 sm:text-[18px] mb-5 font-PlayfairDisplay ml-2 sm:ml-10 md:mb-5 text-left">  Explore the largest collection of Saudi luxury abayas at Humaira
+                Abayas. Whether you're looking for trendy or classic designs, our selection offers something
+                for every preference. Enjoy super-fast service with updates within 24 hours.
             </p>
             <div className='flex justify-center sm:justify-start'>
-            <button
-                onClick={handleExploreClick}
-                className="lg:hidden flex bg-[#754F23] text-white font-PlayfairDisplay py-2 px-4 ml-2 sm:ml-20 rounded-xl md:mb-36 text-center items-center justify-center sm:justify-start"
-            >
-                Explore <GoArrowRight className="ml-2 h-[24px] w-[24px] arrow-auto-animate" />
-            </button>
+                <button
+                    onClick={handleExploreClick}
+                    className="lg:hidden flex bg-[#754F23] text-white font-PlayfairDisplay py-2 px-4 ml-2 sm:ml-20 rounded-xl md:mb-36 text-center items-center justify-center sm:justify-start"
+                >
+                    Explore <GoArrowRight className="ml-2 h-[24px] w-[24px] arrow-auto-animate" />
+                </button>
             </div>
         </div>
     );

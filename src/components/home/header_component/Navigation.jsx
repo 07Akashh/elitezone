@@ -7,7 +7,7 @@ const Accordion = ({ title, isOpen, onToggle, children }) => (
     <div className="relative">
         <button
             onClick={onToggle}
-            className="flex items-center gap-1 w-full text-left p-2 hover:text-gray-700"
+            className="flex items-center w-full gap-1 text-left py-1 hover:text-gray-700"
         >
             {title}
         </button>
@@ -165,20 +165,20 @@ const Navigation = () => {
                         Abayas
                     </Link>
                     <div
-                        className={`absolute max-w-[502px] left-1/2 mt-2 -translate-x-1/2 w-[502px] grid grid-cols-3 gap-4 rounded-[10px] bg-white/40 backdrop-blur-[10.80px] shadow-lg p-4 transition-all duration-300 ease-in-out ${showAbayasDropdown ? 'opacity-100 translate-y-0 visible' : 'opacity-0 translate-y-4 invisible'
+                        className={`absolute max-w-[530px] left-1/2 mt-2 -translate-x-1/2 w-[600px] grid grid-cols-3  rounded-[10px] bg-white/40 backdrop-blur-[10.80px] shadow-lg p-4 transition-all duration-300 ease-in-out ${showAbayasDropdown ? 'opacity-100 translate-y-0 visible' : 'opacity-0 translate-y-4 invisible'
                             }`}
                     >
-                        <div className="flex flex-col gap-3 items-center">
+                        <div className="flex flex-col gap-y-2 brder border-black ">
                             <Link to="/abayas-001/nida-fabric" className="block text-[#2F2F2F] ">Nida Fabric</Link>
                             <Link to="/abayas-001/tiktok-fabric" className="block text-[#2F2F2F] ">TikTok Fabric</Link>
                             <Link to="/abayas-001/harira-fabric" className="block text-[#2F2F2F] ">Harira Fabric</Link>
                         </div>
-                        <div className="flex flex-col gap-3 items-center">
+                        <div className="flex flex-col gap-y-2 items-cente">
                             <Link to="/abayas-001/shiffon-fabric" className="block text-[#2F2F2F] ">Shiffon Fabric</Link>
                             <Link to="/abayas-001/silk-shiny-fabric" className="block text-[#2F2F2F]">Silk Shiny Fabric</Link>
                             <Link to="/abayas-001/zoom-fabric" className="block text-[#2F2F2F] ">Zoom Fabric</Link>
                         </div>
-                        <div className="flex flex-col gap-3 items-center">
+                        <div className="flex flex-col gap-y-2 items-ceter">
                             <Link to="/abayas-001/korean-nida-fabric" className="block text-[#2F2F2F] ">Korean Nida Fabric</Link>
                         </div>
                     </div>

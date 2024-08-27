@@ -79,11 +79,11 @@ const Checkout = () => {
                             alert(response.razorpay_order_id);
                             alert(response.razorpay_signature)
                         },
-                        notes: {
-                            address: "Humaira Abayas Office",
-                            userId: "510f7de5-14de-4cd0-b6f6-2ee5528329d4",
-                            planId: "17977236-dd0b-4ea0-b3ef-524a2e850b26",
-                        },
+                        // notes: {
+                        //     address: "Humaira Abayas Office",
+                        //     userId: "510f7de5-14de-4cd0-b6f6-2ee5528329d4",
+                        //     planId: "17977236-dd0b-4ea0-b3ef-524a2e850b26",
+                        // },
                         theme: {
                             color: "#3399cc",
                         },

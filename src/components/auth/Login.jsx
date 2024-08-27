@@ -16,13 +16,12 @@ const Login = ({ switchToRegister }) => {
     useEffect(() => {
         if (user) {
             if (user.firstName === null) {
-                console.log("object");
                 setShowModal(true);
-            } else{
+            } else {
                 window.location.reload()
             }
         }
-    }, [user,navigate]);
+    }, [user, navigate]);
 
     const handleLogin = (e) => {
         e.preventDefault();
@@ -41,10 +40,31 @@ const Login = ({ switchToRegister }) => {
     };
 
     const handleModalSubmit = (details) => {
-        dispatch(updateUserData(details));
-        setShowModal(false);
+        try {
+            const res = dispatch(updateUserData(details))
+                .then(result => {
+                    if (result?.error) {
+                        console.error('Error:', result.error.message);
+                        setShowModal(true);  // Show modal on error
+                    } else {
+                        setShowModal(false); // Close modal on success
+                    }
+                    return result;
+                })
+                .catch(error => {
+                    console.error('Caught error:', error.message);
+                    setShowModal(true); // Ensure modal is shown on caught errors
+                    throw error; // Optionally re-throw if you need to handle this error elsewhere
+                });
+    
+            return res; // Return the promise from dispatch
+        } catch (error) {
+            console.error('Caught error in try/catch:', error.message);
+            setShowModal(true);  // Show modal on error
+            throw error; // Re-throw error to ensure it propagates correctly
+        }
     };
-
+    
     return (
         <div className='font-PlayfairDisplay'>
             <h2 className='text-black text-4xl font-PlayfairDisplay font-extrabold text-center pb-2'>Login</h2>

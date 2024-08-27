@@ -47,7 +47,7 @@ const SearchBar = () => {
                     className="px-2 leading-snug font-normal tracking-wide w-full bg-transparent outline-none sm:border-b border-black"
                 />
             </div>
-            <div className="absolute left-0 right-0 sm:mt-2 mt-4 sm:w-[350px] w-full rounded-[10px] bg-white/40 backdrop-blur-[10.80px] shadow-lg max-h-60 overflow-y-auto z-10">
+            <div className="absolute left-0 right-0 sm:mt-2 mt-4 sm:w-[350px] w-full rounded-[10px] bg-white/80 sm:bg-white/40 backdrop-blur-[10.80px] shadow-lg max-h-60 overflow-y-auto z-10">
                 {loading && <p className="m-2 text-[#3C3C4399]">Loading...</p>}
                 {error && <p className="m-2 text-[#3C3C4399]">{error}</p>}
                 {results?.length > 0 && (

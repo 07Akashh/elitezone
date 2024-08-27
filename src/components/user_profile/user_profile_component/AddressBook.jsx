@@ -68,7 +68,7 @@ const AddressBook = () => {
                             ))}
                         </ul>
                     ) : (
-                        <p>No addresses found.</p>
+                        <p className='font-TenorSans text-center'>No addresses found.</p>
                     )}
                 </div>
             </div>

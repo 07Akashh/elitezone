@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import ProductCard from './ProductCard';
 import { GoArrowRight, GoArrowLeft } from 'react-icons/go';
-import { fetchCategory } from '../../redux/slices/productSlice';
+// import { fetchCategory } from '../../redux/slices/productSlice';
 
 const ProductList = ({ category }) => {
     const dispatch = useDispatch();
@@ -20,7 +20,7 @@ const ProductList = ({ category }) => {
     };
 
     useEffect(() => {
-        dispatch(fetchCategory(category));
+        // dispatch(fetchCategory(category));
     }, [dispatch, category]);
 
     return (

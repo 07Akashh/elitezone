@@ -1,8 +1,9 @@
 import React from 'react';
+import logo from "../../../assets/images/ha_logo.png"
 
 const BrandLogo = () => {
     return (
-        <h1 className='text-[28px] sm:text-[36px] font-PlayfairDisplay'>Brand</h1>
+        <img src={logo} alt="logo" className='lg:h-20 h-10  border-black object-cover w-20 lg:w-44'/>
     );
 };
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import ProductList from '../../product/ProductList';
 
-const CategorySection = ({ title, subtitle, category }) => {
+const CategorySection = ({ title, subtitle, category, description}) => {
     return (
         <div className="mt-12">
             <div className='flex sm:ml-5'>
@@ -9,9 +9,7 @@ const CategorySection = ({ title, subtitle, category }) => {
                     <h2 className="text-5xl font-thin font-BerkshireSwash border-b pb-3 border-[#2F2F2F]">
                         {title} <span className='text-2xl font-BerkshireSwash'>{subtitle}</span>
                     </h2>
-                    {category !== "new-arrivals" && (
-                        <p className='text-[14px] mt-1 font-PlayfairDisplay'>Have a look on what’s trending now!</p>
-                    )}
+                        <p className='text-[14px] mt-1 font-PlayfairDisplay'>{description}</p>
                 </div>
             </div>
             <div className=' mt-[36px]'>

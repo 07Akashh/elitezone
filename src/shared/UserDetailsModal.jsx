@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 
 const UserDetailsModal = ({ onSubmit }) => {
+    const [isPhoneValid, setIsPhoneValid] = useState(true);
+    const [isPinValid, setIsPinValid] = useState(true);
     const [formData, setFormData] = useState({
         firstName: '',
         lastName: '',
@@ -9,6 +11,8 @@ const UserDetailsModal = ({ onSubmit }) => {
         address: '',
     });
 
+
+
     const handleChange = (e) => {
         const { name, value } = e.target;
 
@@ -16,11 +20,21 @@ const UserDetailsModal = ({ onSubmit }) => {
             ...formData,
             [name]: name === 'pincode' ? parseInt(value, 10) || '' : value
         });
+
+        if (name === 'phone') {
+            setIsPhoneValid(value.length === 10);
+        }
+        if (name === 'pincode') {
+            setIsPinValid(value.length === 6);
+        }
     };
+
+
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        onSubmit(formData);
+        const response = onSubmit(formData)
+        console.log(response)
     };
 
     return (
@@ -59,20 +73,38 @@ const UserDetailsModal = ({ onSubmit }) => {
                         type="number"
                         name="pincode"
                         placeholder="Pincode"
+                        minLength="6"
+                        maxLength="6"
+                        pattern="\d*"
+                        inputMode="numeric"
                         value={formData.pincode}
                         onChange={handleChange}
                         className='w-full border-b mt-[15px] outline-none'
                         required
                     />
+                    {!isPinValid && (
+                        <p className='text-red-500 text-[12px] text-start'>
+                            Pincode must be at least 6 digits
+                        </p>
+                    )}
                     <input
-                        type="text"
+                        type="number"
                         name="phone"
                         placeholder="Phone Number"
+                        inputMode="numeric"
                         value={formData.phone}
                         onChange={handleChange}
+                        minLength="10"
+                        maxLength="10"
+                        pattern="\d*"
                         className='w-full border-b mt-[15px] outline-none'
                         required
                     />
+                    {!isPhoneValid && (
+                        <p className='text-red-500 text-[12px] text-start'>
+                            Number must be at least 10 digits
+                        </p>
+                    )}
                     <div className="text-center">
                         <button type="submit" className='mt-[23px] text-lg font-semibold bg-[#754F23] text-white rounded-xl px-10 py-1'>
                             Submit

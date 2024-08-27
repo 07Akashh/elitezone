@@ -14,6 +14,7 @@ export const fetchUser = async () => {
 
 export const updateUser = (formData) => {
     const token = localStorage.getItem('token');
+try {
     const response = axios.patch(`${API_URL}/user`, {
         'firstName': formData.firstName,
         'lastName': formData.lastName,
@@ -23,7 +24,10 @@ export const updateUser = (formData) => {
     }, {
         headers: { Authorization: `Bearer ${token}` }
     })
-    return response.data;
+    return response;
+} catch (error) {
+    throw error;
+}
 }
 
 export const fetchWishlists = async () => {

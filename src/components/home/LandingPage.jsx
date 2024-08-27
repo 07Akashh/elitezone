@@ -20,6 +20,7 @@ const LandingPage = () => {
                     title="Trending"
                     subtitle="Collections"
                     category="trending"
+                    description="Explore the styles everyone's talking about!"
                 />
             </div>
 
@@ -27,12 +28,14 @@ const LandingPage = () => {
                 title="New"
                 subtitle="Arrivals"
                 category='newarrivals'
+                description="Be the first to wear the latest designs!"
             />
 
             <CategorySection
                 title="Embroidered"
                 subtitle="Abaya"
                 category="embroidered-abaya"
+                description="Elegant details that define your style!"
             />
             
         </div>
