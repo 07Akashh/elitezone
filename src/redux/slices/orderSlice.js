@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { createOrder } from '../../services/orderService';
+import { createOrder, getOrder } from '../../services/orderService';
 import { getCartItems } from '../../services/cartService';
 
 
@@ -14,6 +14,10 @@ export const placeOrder = createAsyncThunk('order/placeOrder', async (orderData)
     return response.data;
 });
 
+export const getOrders = createAsyncThunk('order/getOrders', async () => {
+    const response = await getOrder();
+    return response;
+})
 const orderSlice = createSlice({
     name: 'order',
     initialState: {
@@ -52,14 +56,25 @@ const orderSlice = createSlice({
                 state.error = action.error.message;
             })
             .addCase(placeOrder.pending, (state) => {
-                state.orderStatus = 'loading'; // Update order status to loading
+                state.orderStatus = 'loading';
             })
             .addCase(placeOrder.fulfilled, (state, action) => {
-                state.orderStatus = 'succeeded'; // Update order status to succeeded
-                state.orderResponse = action.payload; // Store the response data
+                state.orderStatus = 'succeeded';
+                state.orderResponse = action.payload;
             })
             .addCase(placeOrder.rejected, (state, action) => {
                 state.orderStatus = 'failed'; // Update order status to failed
+                state.error = action.error.message; // Store error message
+            })
+            .addCase(getOrders.pending, (state) => {
+                state.getOrderStatus = 'loading';
+            })
+            .addCase(getOrders.fulfilled, (state, action) => {
+                state.getOrderStatus = 'succeeded';
+                state.getOrders = action.payload;
+            })
+            .addCase(getOrders.rejected, (state, action) => {
+                state.getOrderStatus = 'failed'; // Update order status to failed
                 state.error = action.error.message; // Store error message
             });
     },

@@ -24,6 +24,7 @@ import ProductFilterPage from './shared/ProductFilter';
 import Checkout from './components/checkout_page/Checkout';
 import Apps from './color';
 import { fetchAddresses } from './redux/slices/addressSlice';
+import { getOrders } from './redux/slices/orderSlice';
 
 
 
@@ -55,6 +56,7 @@ function App() {
 
   useEffect(() => {
     if (user) {
+      dispatch(getOrders())
       dispatch(fetchAddresses());
       dispatch(getWishlist());
       const fetchCartItem = async () => {

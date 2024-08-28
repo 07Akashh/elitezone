@@ -60,7 +60,7 @@ const ProductDetails = () => {
     }
   }, [products, wishlistItems, wishlistLoading]);
 
-  if (error || !products.product?.id) return <div>Product not found</div>;
+  if (error || !products.product?.id) return <div className='text-center font-TenorSans'>Product not found</div>;
 
 
   const handleAddToCart = async () => {

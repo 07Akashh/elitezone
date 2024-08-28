@@ -18,7 +18,7 @@ export const createOrder = async (orderData) => {
 export const getOrder = async () => {
     const token = localStorage.getItem('token');
 
-    const response = await axios.post(`${API_URL}/order`, {
+    const response = await axios.get(`${API_URL}/order`, {
         headers: { Authorization: `Bearer ${token}` }
     });
     return response.data;

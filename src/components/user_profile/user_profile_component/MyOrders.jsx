@@ -1,49 +1,36 @@
 import React from 'react';
 import OrderItem from './OrderItem';
+import { useSelector } from 'react-redux';
+
+
+const formatDate = (dateString) => {
+    const options = { day: '2-digit', month: '2-digit', year: 'numeric' };
+    const date = new Date(dateString);
+    return date.toLocaleDateString('en-GB', options); // 'en-GB' for dd/mm/yyyy format
+};
+
+
 
 const MyOrders = () => {
-    const orders = [
-        {
-            id: 1,
-            photo: 'https://via.placeholder.com/100',
-            name: 'Product 1',
-            price: 50.00,
-            status: 'Delivered',
-            date: '24 March 2024',
-        },
-        {
-            id: 2,
-            photo: 'https://via.placeholder.com/100',
-            name: 'Product 2',
-            price: 75.00,
-            status: 'Expected to be delivered',
-            date: '30 March 2024',
-        },
-        {
-            id: 3,
-            photo: 'https://via.placeholder.com/100',
-            name: 'Product 3',
-            price: 100.00,
-            status: 'Delivered',
-            date: '10 April 2024',
-        },
-        {
-            id: 4,
-            photo: 'https://via.placeholder.com/100',
-            name: 'Product 2',
-            price: 75.00,
-            status: 'Expected to be delivered',
-            date: '30 March 2024',
-        },
-    ];
-
+    const orders = useSelector((state) => state.orders.getOrders.data);
     return (
-        <div className='bg-white w-full  py-[40px] font-TenorSans'>
-            {/* <h2 className="text-2xl mb-5 text-[#754F23] font-extralight">My Orders</h2> */}
+        <div className='bg-white w-full h-[480px] no-scrollbar overflow-scroll py-[40px] font-TenorSans'>
             <div>
-                {orders.map(order => (
-                    <OrderItem key={order.id} order={order} />
-                ))}
+                {orders.map(order =>
+                    order.order_items.map(item => (
+                        <OrderItem
+                            id = {item.productId}
+                            categoryId = {item.categoryId}
+                            subCategoryId = {item.subCategoryId}
+                            key = {item.id}
+                            productName = {item.productName}
+                            finalPrice = {item.finalPrice}
+                            status = {order.order_statuses[0].status}
+                            date = {formatDate(item.createdAt)}
+                            photo = "https://via.placeholder.com/100"
+                        />
+                    ))
+                )}
             </div>
         </div>
     );

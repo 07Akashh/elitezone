@@ -73,6 +73,7 @@ const Checkout = () => {
                             email: "sachinminde9359@gmail.com",
                             contact: "9359313945",
                         },
+                        callback_url: "https://eneqd3r9zrjok.x.pipedream.net/",
                         handler: function (response){
                             console.log(response)
                             alert(response.razorpay_payment_id);
