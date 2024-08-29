@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom'
 import { IoCallOutline } from "react-icons/io5";
 import { FaRegEnvelope } from "react-icons/fa";
 
@@ -16,7 +17,7 @@ const ContactUs = () => {
 
                 <div className='space-y-[16px]'>
                     <p className=" font-light leading-[21px] text-sm">We are available 24/7, 7 days a week.</p>
-                    <p className="font-light leading-[21px] text-sm">Phone: +8801611112222</p>
+                    <p className="font-light leading-[21px] text-sm"><Link to='tel:+91 8639310409'>Phone: +91 8639310409</Link></p>
                 </div>
 
                 <div className="border-t border-gray-300 my-[32px]"></div>
@@ -31,8 +32,8 @@ const ContactUs = () => {
 
                 <div className='space-y-[16px]'>
                     <p className='font-light leading-[21px] text-sm'>Fill out our form and we will contact you within 24 hours.</p>
-                    <p className="font-light leading-[21px] text-sm">Emails: customer@exclusive.com</p>
-                    <p className="font-light leading-[21px] text-sm">Emails: support@exclusive.com</p>
+                    <p className="font-light leading-[21px] text-xs">Emails: official.humairaabayas@gmail.com</p>
+                    {/* <p className="font-light leading-[21px] text-sm">Emails: support@exclusive.com</p> */}
                 </div>
 
             </div>

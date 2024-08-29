@@ -63,8 +63,8 @@ const orderSlice = createSlice({
                 state.orderResponse = action.payload;
             })
             .addCase(placeOrder.rejected, (state, action) => {
-                state.orderStatus = 'failed'; // Update order status to failed
-                state.error = action.error.message; // Store error message
+                state.orderStatus = 'failed';
+                state.error = action.error.message;
             })
             .addCase(getOrders.pending, (state) => {
                 state.getOrderStatus = 'loading';
@@ -74,8 +74,8 @@ const orderSlice = createSlice({
                 state.getOrders = action.payload;
             })
             .addCase(getOrders.rejected, (state, action) => {
-                state.getOrderStatus = 'failed'; // Update order status to failed
-                state.error = action.error.message; // Store error message
+                state.getOrderStatus = 'failed';
+                state.error = action.error.message;
             });
     },
 });

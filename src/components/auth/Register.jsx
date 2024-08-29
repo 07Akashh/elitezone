@@ -6,6 +6,8 @@ import { useNavigate } from 'react-router-dom';
 
 const Register = ({ switchToLogin }) => {
     const [showModal, setShowModal] = useState(false);
+    const [isPhoneValid, setIsPhoneValid] = useState(true);
+    const [isPinValid, setIsPinValid] = useState(true);
     const [formData, setFormData] = useState({
         "firstName": '',
         "lastName": '',
@@ -25,13 +27,20 @@ const Register = ({ switchToLogin }) => {
             ...formData,
             [name]: name === 'pincode' ? parseInt(value, 10) : value
         });
+
+        if (name === 'phone') {
+            setIsPhoneValid(value.length === 10);
+        }
+        if (name === 'pincode') {
+            setIsPinValid(value.length === 6);
+        }
+
     };
 
     const navigate = useNavigate();
     useEffect(() => {
         if (user) {
             if (user.firstName === null) {
-                console.log("object");
                 setShowModal(true);
             } else {
                 window.location.reload()
@@ -40,9 +49,18 @@ const Register = ({ switchToLogin }) => {
     }, [user, navigate]);
     const handleRegister = (e) => {
         e.preventDefault();
-        console.log(formData)
         dispatch(registerUser(formData));
 
+    };
+
+    const handleInput = (e) => {
+        const { name, value } = e.target;
+        if (name === 'phone' && value.length > 10) {
+            e.target.value = value.slice(0, 10);
+        }
+        if (name === 'pincode' && value.length > 6) {
+            e.target.value = value.slice(0, 6);
+        }
     };
 
     const handleGoogleLogin = async () => {
@@ -57,26 +75,26 @@ const Register = ({ switchToLogin }) => {
                 .then(result => {
                     if (result?.error) {
                         console.error('Error:', result.error.message);
-                        setShowModal(true);  // Show modal on error
+                        setShowModal(true);
                     } else {
-                        setShowModal(false); // Close modal on success
+                        setShowModal(false);
                     }
                     return result;
                 })
                 .catch(error => {
                     console.error('Caught error:', error.message);
-                    setShowModal(true); // Ensure modal is shown on caught errors
-                    throw error; // Optionally re-throw if you need to handle this error elsewhere
+                    setShowModal(true);
+                    throw error;
                 });
-    
-            return res; // Return the promise from dispatch
+
+            return res;
         } catch (error) {
             console.error('Caught error in try/catch:', error.message);
-            setShowModal(true);  // Show modal on error
-            throw error; // Re-throw error to ensure it propagates correctly
+            setShowModal(true);
+            throw error;
         }
     };
-    
+
 
     return (
         <div className='font-PlayfairDisplay'>
@@ -114,10 +132,19 @@ const Register = ({ switchToLogin }) => {
                     type="tel"
                     name="phone"
                     placeholder="Phone"
+                    minLength="10"
+                    maxLength="10"
+                    pattern="\d*"
+                    onInput={handleInput}
                     value={formData.phone}
                     onChange={handleChange}
                     required
                 />
+                {!isPhoneValid && (
+                    <p className='text-red-500 text-[12px] text-start'>
+                        Number must be at least 10 digits
+                    </p>
+                )}
                 <input
                     className='w-full border-b mt-[15px] outline-none'
                     type="text"
@@ -131,11 +158,20 @@ const Register = ({ switchToLogin }) => {
                     className='w-full border-b mt-[15px] outline-none'
                     type="number"
                     name="pincode"
+                    minLength="6"
+                    maxLength="6"
+                    pattern="\d*"
+                    onInput={handleInput}
                     placeholder="Pincode"
                     value={formData.pincode}
                     onChange={handleChange}
                     required
                 />
+                {!isPinValid && (
+                    <p className='text-red-500 text-[12px] text-start'>
+                        Pincode must be at least 6 digits
+                    </p>
+                )}
                 <input
                     className='w-full border-b mt-[15px] outline-none'
                     type="password"

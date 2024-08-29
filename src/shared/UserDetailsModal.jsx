@@ -29,7 +29,15 @@ const UserDetailsModal = ({ onSubmit }) => {
         }
     };
 
-
+    const handleInput = (e) => {
+        const { name, value } = e.target;
+        if (name === 'phone' && value.length > 10) {
+            e.target.value = value.slice(0, 10);
+        }
+        if (name === 'pincode' && value.length > 6) {
+            e.target.value = value.slice(0, 6);
+        }
+    };
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -78,6 +86,7 @@ const UserDetailsModal = ({ onSubmit }) => {
                         pattern="\d*"
                         inputMode="numeric"
                         value={formData.pincode}
+                        onInput={handleInput}
                         onChange={handleChange}
                         className='w-full border-b mt-[15px] outline-none'
                         required
@@ -94,6 +103,7 @@ const UserDetailsModal = ({ onSubmit }) => {
                         inputMode="numeric"
                         value={formData.phone}
                         onChange={handleChange}
+                        onInput={handleInput}
                         minLength="10"
                         maxLength="10"
                         pattern="\d*"

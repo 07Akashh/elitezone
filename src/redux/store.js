@@ -16,5 +16,8 @@ export const store = configureStore({
     addresses: addressReducer,
     orders: orderReducer
   },
-  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(thunk),
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: false,
+    }).concat(thunk),
 });

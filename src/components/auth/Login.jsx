@@ -45,23 +45,23 @@ const Login = ({ switchToRegister }) => {
                 .then(result => {
                     if (result?.error) {
                         console.error('Error:', result.error.message);
-                        setShowModal(true);  // Show modal on error
+                        setShowModal(true);
                     } else {
-                        setShowModal(false); // Close modal on success
+                        setShowModal(false);
                     }
                     return result;
                 })
                 .catch(error => {
                     console.error('Caught error:', error.message);
-                    setShowModal(true); // Ensure modal is shown on caught errors
-                    throw error; // Optionally re-throw if you need to handle this error elsewhere
+                    setShowModal(true);
+                    throw error;
                 });
     
-            return res; // Return the promise from dispatch
+            return res;
         } catch (error) {
             console.error('Caught error in try/catch:', error.message);
-            setShowModal(true);  // Show modal on error
-            throw error; // Re-throw error to ensure it propagates correctly
+            setShowModal(true);
+            throw error;
         }
     };
     
