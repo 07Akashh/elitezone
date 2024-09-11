@@ -21,6 +21,7 @@ const ProductFilterPage = () => {
     const [product, setProduct] = useState([]);
     const [sortOption, setSortOption] = useState('');
     const [showFilter, setShowFilter] = useState(false);
+    const [isError, setIsError] = useState('')
 
     const getTitleAndSubtitle = (id) => {
         if (!id) return { title: '', subtitle: '' };
@@ -63,6 +64,7 @@ const ProductFilterPage = () => {
                     setShowFilter(false);
                 })
                 .catch(error => {
+                    setIsError(error)
                     console.error('Error fetching products:', error);
                 });
         } else {
@@ -89,6 +91,7 @@ const ProductFilterPage = () => {
                     }
                 })
                 .catch(error => {
+                    setIsError(error)
                     console.error('Error fetching products:', error);
                 });
         }
@@ -137,6 +140,7 @@ const ProductFilterPage = () => {
                 }
             })
             .catch(error => {
+                setIsError(error)
                 console.error('Error fetching products:', error);
             });
     };
@@ -149,8 +153,10 @@ const ProductFilterPage = () => {
         setShowFilter(!showFilter);
     };
 
-    if (isLoading && page === 0) return <p className="text-center">Loading...</p>;
-    if (error) return <p>Error: {error}</p>;
+    
+    if(product.length === 0) return <p className="text-center font-TenorSans">{isError.message}</p>
+    if (isLoading && page === 0) return <p className="text-center font-TenorSans">Loading...</p>;
+    if (error) return <p className='text-center font-TenorSans'>Error: {error}</p>;
 
     return (
         <>

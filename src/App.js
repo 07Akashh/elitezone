@@ -25,6 +25,7 @@ import Checkout from './components/checkout_page/Checkout';
 import Apps from './color';
 import { fetchAddresses } from './redux/slices/addressSlice';
 import { getOrders } from './redux/slices/orderSlice';
+import OrderDetailsPage from './components/user_profile/user_profile_component/order_component/OrderDetails';
 
 
 
@@ -98,6 +99,8 @@ function App() {
             <Route path="/:categoryId/:subCategoryId/:id" element={<ProductDetails />} />
 
             <Route path="/checkout" element={<Checkout />} />
+
+            <Route path="detail" element={<OrderDetailsPage />} />
           </Routes>
         </main>
         <Footer />

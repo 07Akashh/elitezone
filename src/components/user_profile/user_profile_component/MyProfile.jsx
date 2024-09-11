@@ -136,7 +136,7 @@ const MyProfile = () => {
                                         maxLength="10"
                                         pattern="\d*"
                                         onInput={handleInput}
-                                        className='bg-[#F5F5F5] text-[#4f4f4fd6] w-full h-[40px] sm:h-[50px] px-3 sm:px-5 outline-none'
+                                        className='bg-[#F5F5F5] spinner text-[#4f4f4fd6] w-full h-[40px] sm:h-[50px] px-3 sm:px-5 outline-none'
                                         value={formData.phone}
                                         onChange={handleChange}
                                     />
@@ -154,7 +154,7 @@ const MyProfile = () => {
                                         name="pincode"
                                         id="pincode"
                                         onInput={handleInput}
-                                        className='bg-[#F5F5F5] text-[#4f4f4fd6] w-full h-[40px] sm:h-[50px] px-3 sm:px-5 outline-none'
+                                        className='bg-[#F5F5F5] spinner text-[#4f4f4fd6] w-full h-[40px] sm:h-[50px] px-3 sm:px-5 outline-none'
                                         maxLength="6"
                                         pattern="\d*"
                                         value={formData.pincode}

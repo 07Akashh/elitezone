@@ -19,6 +19,63 @@ const Accordion = ({ title, isOpen, onToggle, children }) => (
     </div>
 );
 
+const abayaData = [
+    { name: 'Nida Fabric', catId: 'abayas-001', subCatId: 'nida-fabric' },
+    { name: 'TikTok Fabric', catId: 'abayas-001', subCatId: 'tiktok-fabric' },
+    { name: 'Harira Fabric', catId: 'abayas-001', subCatId: 'harira-fabric' },
+    { name: 'Shiffon Fabric', catId: 'abayas-001', subCatId: 'shiffon-fabric' },
+    { name: 'Silk Shiny Fabric', catId: 'abayas-001', subCatId: 'silk-shiny-fabric' },
+    { name: 'Zoom Fabric', catId: 'abayas-001', subCatId: 'zoom-fabric' },
+    { name: 'Korean Nida Fabric', catId: 'abayas-001', subCatId: 'korean-nida-fabric' },
+];
+
+const abayaGroups = [
+    abayaData.slice(0, 3),
+    abayaData.slice(3, 6),
+    abayaData.slice(6),
+];
+
+const hijabData = [
+    { name: 'Nida Fabric', catId: 'abayas-001', subCatId: 'nida-fabric' },
+    { name: 'TikTok Fabric', catId: 'abayas-001', subCatId: 'tiktok-fabric' },
+    { name: 'Harira Fabric', catId: 'abayas-001', subCatId: 'harira-fabric' },
+
+];
+
+
+const hijabGroups = [
+    hijabData.slice(0, 3),
+    hijabData.slice(3, 6),
+    hijabData.slice(6)
+];
+
+
+const accessoriesData = [
+    { name: 'Accessories1', catId: 'abayas-001', subCatId: 'nida-fabric' },
+    { name: 'Accessories1.1', catId: 'abayas-001', subCatId: 'tiktok-fabric' },
+    { name: 'Accessories1.2', catId: 'abayas-001', subCatId: 'harira-fabric' },
+    { name: 'Accessories1.3', catId: 'abayas-001', subCatId: 'shiffon-fabric' },
+    { name: 'Accessories2', catId: 'abayas-001', subCatId: 'silk-shiny-fabric' },
+    { name: 'Accessories2.1', catId: 'abayas-001', subCatId: 'zoom-fabric' },
+    { name: 'Accessories2.2', catId: 'abayas-001', subCatId: 'korean-nida-fabric' },
+    { name: 'Accessories2.3', catId: 'abayas-001', subCatId: 'korean-nida-fabric' },
+    { name: 'Accessories3', catId: 'abayas-001', subCatId: 'korean-nida-fabric' },
+    { name: 'Accessories3.1', catId: 'abayas-001', subCatId: 'korean-nida-fabric' },
+    { name: 'Accessories3.2', catId: 'abayas-001', subCatId: 'korean-nida-fabric' },
+    { name: 'Accessories3.3', catId: 'abayas-001', subCatId: 'korean-nida-fabric' },
+
+
+
+];
+
+
+const accessoriesGroups = [
+    accessoriesData.slice(0, 4),
+    accessoriesData.slice(4, 8),
+    accessoriesData.slice(8, 12)
+];
+
+
 const Navigation = () => {
     const [showHijabDropdown, setShowHijabDropdown] = useState(false);
     const [showAbayasDropdown, setShowAbayasDropdown] = useState(false);
@@ -69,9 +126,11 @@ const Navigation = () => {
                                 isOpen={openAccordion === 'hijab'}
                                 onToggle={() => handleAccordionToggle('hijab')}
                             >
-                                <Link to="/hijab/silk" className="block text-[#2F2F2F]">Silk Hijabs</Link>
-                                <Link to="/hijab/cotton" className="block text-[#2F2F2F] mt-2">Cotton Hijabs</Link>
-                                <Link to="/hijab/chiffon" className="block text-[#2F2F2F] mt-2">Chiffon Hijabs</Link>
+                                <div className='space-y-2'>
+                                {hijabData.map((item)=>
+                                <Link to={`/${item.catId}/${item.subCatId}`} className="block text-[#2F2F2F]">{item.name}</Link>
+                                )}
+                                </div>
                             </Accordion>
 
                             {/* Abayas Accordion */}
@@ -80,13 +139,12 @@ const Navigation = () => {
                                 isOpen={openAccordion === 'abayas'}
                                 onToggle={() => handleAccordionToggle('abayas')}
                             >
-                                <Link to="/abayas-001/nida-fabric" className="block text-[#2F2F2F]">Nida Fabric</Link>
-                                <Link to="/abayas-001/tiktok-fabric" className="block text-[#2F2F2F] mt-2">TikTok Fabric</Link>
-                                <Link to="/abayas-001/harira-fabric" className="block text-[#2F2F2F] mt-2">Harira Fabric</Link>
-                                <Link to="/abayas-001/shiffon-fabric" className="block text-[#2F2F2F] mt-2">Shiffon Fabric</Link>
-                                <Link to="/abayas-001/silk-shiny-fabric" className="block text-[#2F2F2F] mt-2">Silk Shiny Fabric</Link>
-                                <Link to="/abayas-001/zoom-fabric" className="block text-[#2F2F2F] mt-2">Zoom Fabric</Link>
-                                <Link to="/abayas-001/korean-nida-fabric" className="block text-[#2F2F2F] mt-2">Korean Nida Fabric</Link>
+                                {
+                                    abayaData.map((item) =>
+
+                                        <Link to={`/${item.catId}/${item.subCatId}`} className="block text-[#2F2F2F] mt-2">{item.name}</Link>
+                                    )
+                                }
                             </Accordion>
 
                             {/* Accessories Accordion */}
@@ -95,29 +153,35 @@ const Navigation = () => {
                                 isOpen={openAccordion === 'accessories'}
                                 onToggle={() => handleAccordionToggle('accessories')}
                             >    <div className="flex flex-col items-center">
-                                    <Link to="/accessories/bags" className="block text-[#2F2F2F] ">Accessories1</Link>
-                                    <div className="flex flex-col mt-2 space-y-1 text-[#2F2F2F]">
-                                        <Link to="/accessories/bags/handbags" className="block">Accessories1.1</Link>
-                                        <Link to="/accessories/bags/backpacks" className="block">Accessories1.2</Link>
-                                        <Link to="/accessories/bags/totes" className="block">Accessories1.3</Link>
+                                    <div className="flex flex-col mt-1 space-y-1 text-[#2F2F2F]">
+
+                                        {
+                                            accessoriesGroups[0].map((item) =>
+                                                <Link to={`/${item.catId}/${item.subCatId}`} className="block">{item.name}</Link>
+                                            )
+                                        }
                                     </div>
                                 </div>
                                 {/* Accessories Item 2 */}
                                 <div className="flex flex-col items-center">
-                                    <Link to="/accessories/jewelry" className="block text-[#2F2F2F] ">Accessories2</Link>
-                                    <div className="flex flex-col mt-2 space-y-1 text-[#2F2F2F]">
-                                        <Link to="/accessories/jewelry/necklaces" className="block">Accessories2.1</Link>
-                                        <Link to="/accessories/jewelry/rings" className="block">Accessories2.2</Link>
-                                        <Link to="/accessories/jewelry/bracelets" className="block">Accessories2.3</Link>
+                                    <div className="flex flex-col mt-1 space-y-1 text-[#2F2F2F]">
+
+                                        {
+                                            accessoriesGroups[1].map((item) =>
+                                                <Link to={`/${item.catId}/${item.subCatId}`} className="block">{item.name}</Link>
+                                            )
+                                        }
                                     </div>
                                 </div>
                                 {/* Accessories Item 3 */}
                                 <div className="flex flex-col items-center">
-                                    <Link to="/accessories/scarves" className="block text-[#2F2F2F] ">Accessories3</Link>
-                                    <div className="flex flex-col mt-2 space-y-1 text-[#2F2F2F]">
-                                        <Link to="/accessories/scarves/silk" className="block">Accessories3.1</Link>
-                                        <Link to="/accessories/scarves/wool" className="block">Accessories3.2</Link>
-                                        <Link to="/accessories/scarves/cotton" className="block">Accessories3.3</Link>
+                                    <div className="flex flex-col mt-1 space-y-1 text-[#2F2F2F]">
+
+                                        {
+                                            accessoriesGroups[2].map((item) =>
+                                                <Link to={`/${item.catId}/${item.subCatId}`} className="block">{item.name}</Link>
+                                            )
+                                        }
                                     </div>
                                 </div>
                             </Accordion>
@@ -146,11 +210,30 @@ const Navigation = () => {
                         className={`absolute w-[200px] left-1/2 mt-2 -translate-x-1/2 max-w-[502px] grid grid-cols-1 gap-4 rounded-[10px] bg-white/40 backdrop-blur-[10.80px] shadow-lg p-4 transition-all duration-300 ease-in-out ${showHijabDropdown ? 'opacity-100 translate-y-0 visible' : 'opacity-0 translate-y-4 invisible'
                             }`}
                     >
-                        <div className="flex flex-col items-center">
-                            <Link to="/hijab/silk" className="block text-[#2F2F2F] ">Silk Hijabs</Link>
-                            <Link to="/hijab/cotton" className="block text-[#2F2F2F] mt-2">Cotton Hijabs</Link>
-                            <Link to="/hijab/chiffon" className="block text-[#2F2F2F] mt-2">Chiffon Hijabs</Link>
+                        <div className="flex flex-col items-center gap-y-2">
+                            {
+                                hijabGroups[0].map((item) =>
+                                    <Link to={`/${item.catId}/${item.subCatId}`} className="block text-[#2F2F2F] ">{item.name}</Link>
+                                )
+                            }
                         </div>
+
+                        {/* uncomment this code when want to increase line */}
+
+                        {/* <div className={`flex flex-col items-center gap-y-2 ${hijabGroups.length === 2 ? '' : 'hidden'} `}>
+                            {
+                                hijabGroups[1]?.length !== 0 && hijabGroups[1].map((item) =>
+                            <Link to={`/${item.catId}/${item.subCatId}`} className="block text-[#2F2F2F] ">{item.name}</Link>
+                                )
+                            }
+                        </div>
+                        <div className={`flex flex-col items-center gap-y-2 ${hijabGroups.length === 3 ? '' : 'hidden'} `}>
+                            {
+                            hijabGroups[2]?.length !== 0 && hijabGroups[2].map((item) =>
+                            <Link to={`/${item.catId}/${item.subCatId}`} className="block text-[#2F2F2F] ">{item.name}</Link>
+                                )
+                            }
+                        </div> */}
                     </div>
                 </div>
                 <div
@@ -168,18 +251,27 @@ const Navigation = () => {
                         className={`absolute max-w-[530px] left-1/2 mt-2 -translate-x-1/2 w-[600px] grid grid-cols-3  rounded-[10px] bg-white/40 backdrop-blur-[10.80px] shadow-lg p-4 transition-all duration-300 ease-in-out ${showAbayasDropdown ? 'opacity-100 translate-y-0 visible' : 'opacity-0 translate-y-4 invisible'
                             }`}
                     >
-                        <div className="flex flex-col gap-y-2 brder border-black ">
-                            <Link to="/abayas-001/nida-fabric" className="block text-[#2F2F2F] ">Nida Fabric</Link>
-                            <Link to="/abayas-001/tiktok-fabric" className="block text-[#2F2F2F] ">TikTok Fabric</Link>
-                            <Link to="/abayas-001/harira-fabric" className="block text-[#2F2F2F] ">Harira Fabric</Link>
+                        <div className="flex flex-col gap-y-2 ">
+                            {
+                                abayaGroups[0].map((item) =>
+                                    <Link to={`/${item.catId}/${item.subCatId}`} className="block text-[#2F2F2F] ">{item.name}</Link>
+                                )
+                            }
+
                         </div>
-                        <div className="flex flex-col gap-y-2 items-cente">
-                            <Link to="/abayas-001/shiffon-fabric" className="block text-[#2F2F2F] ">Shiffon Fabric</Link>
-                            <Link to="/abayas-001/silk-shiny-fabric" className="block text-[#2F2F2F]">Silk Shiny Fabric</Link>
-                            <Link to="/abayas-001/zoom-fabric" className="block text-[#2F2F2F] ">Zoom Fabric</Link>
+                        <div className="flex flex-col gap-y-2 ">
+                            {
+                                abayaGroups[1].map((item) =>
+                                    <Link to={`/${item.catId}/${item.subCatId}`} className="block text-[#2F2F2F] ">{item.name}</Link>
+                                )
+                            }
                         </div>
-                        <div className="flex flex-col gap-y-2 items-ceter">
-                            <Link to="/abayas-001/korean-nida-fabric" className="block text-[#2F2F2F] ">Korean Nida Fabric</Link>
+                        <div className="flex flex-col gap-y-2 ">
+                            {
+                                abayaGroups[2].map((item) =>
+                                    <Link to={`/${item.catId}/${item.subCatId}`} className="block text-[#2F2F2F] ">{item.name}</Link>
+                                )
+                            }
                         </div>
                     </div>
                 </div>
@@ -199,29 +291,33 @@ const Navigation = () => {
                             }`}
                     >
                         <div className="flex flex-col items-center">
-                            <Link to="/accessories/bags" className="block text-[#2F2F2F] ">Accessories1</Link>
                             <div className="flex flex-col mt-2 space-y-1 text-[#2F2F2F]">
-                                <Link to="/accessories/bags/handbags" className="block">Accessories1.1</Link>
-                                <Link to="/accessories/bags/backpacks" className="block">Accessories1.2</Link>
-                                <Link to="/accessories/bags/totes" className="block">Accessories1.3</Link>
+
+                                {
+                                    accessoriesGroups[0].map((item) =>
+                                        <Link to={`/${item.catId}/${item.subCatId}`} className="block">{item.name}</Link>
+                                    )
+                                }
                             </div>
                         </div>
                         {/* Accessories Item 2 */}
                         <div className="flex flex-col items-center">
-                            <Link to="/accessories/jewelry" className="block text-[#2F2F2F] ">Accessories2</Link>
                             <div className="flex flex-col mt-2 space-y-1 text-[#2F2F2F]">
-                                <Link to="/accessories/jewelry/necklaces" className="block">Accessories2.1</Link>
-                                <Link to="/accessories/jewelry/rings" className="block">Accessories2.2</Link>
-                                <Link to="/accessories/jewelry/bracelets" className="block">Accessories2.3</Link>
+                                {
+                                    accessoriesGroups[1].map((item) =>
+                                        <Link to={`/${item.catId}/${item.subCatId}`} className="block">{item.name}</Link>
+                                    )
+                                }
                             </div>
                         </div>
                         {/* Accessories Item 3 */}
                         <div className="flex flex-col items-center">
-                            <Link to="/accessories/scarves" className="block text-[#2F2F2F] ">Accessories3</Link>
                             <div className="flex flex-col mt-2 space-y-1 text-[#2F2F2F]">
-                                <Link to="/accessories/scarves/silk" className="block">Accessories3.1</Link>
-                                <Link to="/accessories/scarves/wool" className="block">Accessories3.2</Link>
-                                <Link to="/accessories/scarves/cotton" className="block">Accessories3.3</Link>
+                                {
+                                    accessoriesGroups[2].map((item) =>
+                                        <Link to={`/${item.catId}/${item.subCatId}`} className="block">{item.name}</Link>
+                                    )
+                                }
                             </div>
                         </div>
                     </div>

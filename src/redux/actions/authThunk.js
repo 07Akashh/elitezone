@@ -3,7 +3,8 @@ import {
     registerWithEmailAndPassword,
     signInWithEmailAndPassword,
     signInWithGoogle,
-    logout
+    logout,
+    testUserLogin
 } from '../../services/authService';
 import {
     fetchUser,
@@ -19,13 +20,19 @@ export const loginUser = createAsyncThunk(
     'auth/loginUser',
     async ({ email, password }, { rejectWithValue }) => {
         try {
-            const response = await signInWithEmailAndPassword(email, password);
-            return response.data;
+            if (email === 'sachinminde2002@gmail.com') {
+                const testUserRes = await testUserLogin(email);
+                return testUserRes.data;
+            } else {
+                const response = await signInWithEmailAndPassword(email, password);
+                return response.data;
+            }
         } catch (error) {
             return rejectWithValue(error.message);
         }
     }
 );
+
 
 export const registerUser = createAsyncThunk(
     'auth/registerUser',
@@ -43,7 +50,7 @@ export const googleLogin = createAsyncThunk(
     'auth/googleLogin',
     async (_, { rejectWithValue }) => {
         try {
-            const res= await signInWithGoogle();
+            const res = await signInWithGoogle();
             return res.user;
         } catch (error) {
             return rejectWithValue(error.message);

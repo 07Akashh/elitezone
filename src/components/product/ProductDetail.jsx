@@ -17,6 +17,9 @@ import { fetchCartItems } from '../../redux/slices/cartSlice';
 import SimilarProductsPage from '../../shared/SimilarProduct';
 
 import 'react-toastify/dist/ReactToastify.css';
+import Modals from '../../shared/Modal';
+import Login from '../auth/Login';
+import Register from '../auth/Register';
 
 
 const ProductDetails = () => {
@@ -30,15 +33,33 @@ const ProductDetails = () => {
   const error = useSelector((state) => state.products.selectedProduct.error);
   const wishlistItems = useSelector((state) => state.wishlist.wishlistItems.data);
   const wishlistLoading = useSelector((state) => state.wishlist.loading);
-
-
+  const user = useSelector((state) => state.auth.user);
+  
   const [selectedColor, setSelectedColor] = useState('');
   const [selectedSize, setSelectedSize] = useState('');
+
   const [quantity, setQuantity] = useState(1);
   const [mainImage, setMainImage] = useState('');
+
   const [isInWishlist, setIsInWishlist] = useState(false);
   const [, setLocalWishlist] = useState([]);
   const [isAddingToCart, setIsAddingToCart] = useState(false);
+
+  const [open, setOpen] = useState(false);
+  const [isLogin, setIsLogin] = useState(true);
+
+
+
+  const switchToRegister = () => setIsLogin(false);
+  const switchToLogin = () => setIsLogin(true);
+
+  const handleOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
 
 
   useEffect(() => {
@@ -60,10 +81,15 @@ const ProductDetails = () => {
     }
   }, [products, wishlistItems, wishlistLoading]);
 
-  if (error || !products.product?.id) return <div className='text-center font-TenorSans'>Product not found</div>;
+  if (error || !products.product?.id) return <div className='text-center font-TenorSans'>Please wait product is loading...</div>;
 
 
   const handleAddToCart = async () => {
+    if(!user){
+      handleOpen();
+      return;
+    }
+    
     if (!products.product.inStock) {
       toast.success("Product is not available")
       console.log('Product is not available');
@@ -88,15 +114,20 @@ const ProductDetails = () => {
   };
 
 
-
   const handleWishlistToggle = async () => {
+
+    if (!user) {
+      handleOpen();
+      return;
+    }
+
     try {
       if (isInWishlist) {
         const res = await dispatch(removeFromWishlist(id));
         await dispatch(getWishlist());
         toast.success(res.payload.message)
       } else {
-        const res= await dispatch(addToWishlist(id));
+        const res = await dispatch(addToWishlist(id));
         await dispatch(getWishlist());
         toast.success(res.payload.message)
       }
@@ -207,7 +238,10 @@ const ProductDetails = () => {
                   )}
                 </p>
               )}
-              <p className="mb-5 font-TenorSans border-b pb-5 border-gray-600 ">{products.product.description}</p>
+              {/* <p className=" font-TenorSans border-gray-600 "><span className='font-extrabold'>Material:</span> Satin</p>
+              <p className=" font-TenorSans border-gray-600 "><span className='font-extrabold'>Fabric:</span> Jersey</p>
+              <p className=" font-TenorSans border-gray-600 "><span className='font-extrabold'>Additional Info:</span> Abaya comes with hijab</p> */}
+              <p className="mb-5 mt-2 font-TenorSans border-b pb-5 border-gray-600 "><span className='font-extrabold'>Description:</span> {products.product.description}</p>
               <div className="mb-4 flex gap-4">
                 <div className="block">Colours:</div>
                 <div className=" border-black flex flex-wrap gap-3">
@@ -223,8 +257,6 @@ const ProductDetails = () => {
                   ))}
                 </div>
               </div>
-
-
 
               <div className="mb-4">
                 {products.product.size && products.product.size?.length > 0 && (
@@ -278,6 +310,13 @@ const ProductDetails = () => {
                     </button>
                   )}
                 </div>
+                <Modals isOpen={open} closeModal={handleClose} handleClose={handleClose} contentLabel="Login Modal">
+                  {isLogin ? (
+                    <Login switchToRegister={switchToRegister} />
+                  ) : (
+                    <Register switchToLogin={switchToLogin} />
+                  )}
+                </Modals>
               </div>
 
               {/* Banner offer Ad Code Here  Do Not Remove This */}

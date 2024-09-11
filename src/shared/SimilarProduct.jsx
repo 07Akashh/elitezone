@@ -23,7 +23,7 @@ const SimilarProductsPage = ({ categoryId, subCategoryId }) => {
     return (
         <div className="md:px-10 py-5">
             <div className='text-start mb-5'>
-                <h2 className="text-5xl font-thin font-BerkshireSwash border-b pb-3 border-[#2F2F2F] inline-block">
+                <h2 className="text-5xl font-thin font-BerkshireSwash px-2 border-b pb-3 border-[#2F2F2F] inline-block">
                     Similar <span className='text-2xl font-BerkshireSwash'>Items</span>
                 </h2>
             </div>

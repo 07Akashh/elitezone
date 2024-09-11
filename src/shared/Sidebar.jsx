@@ -51,6 +51,14 @@ const Sidebar = () => {
                             Address Book
                         </NavLink>
                     </li>
+                    {/* <li>
+                        <NavLink
+                            to="detail"
+                            className={`block ${matchDetailsDemo ? 'text-[#754f23] font-semibold' : ''}`}
+                        >
+                            Order Details Demo
+                        </NavLink>
+                    </li> */}
                     <li>
                         <button
                             onClick={handleOpenPopup}

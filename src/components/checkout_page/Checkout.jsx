@@ -9,6 +9,7 @@ import { fetchCartForOrder, placeOrder } from '../../redux/slices/orderSlice';
 
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import serverUrl from '../../config/serverUrl';
 
 const Checkout = () => {
     const dispatch = useDispatch();
@@ -48,12 +49,14 @@ const Checkout = () => {
         setBillingInfo(billingInfo);
     };
 
+    
     const handlePlaceOrder = async () => {
         if (billingInfo) {
             const orderSummary = {
                 ...orderData,
                 addressId: billingInfo.id,
             };
+            console.log(orderSummary)
             setLoading(true);
     
             try {
@@ -73,13 +76,13 @@ const Checkout = () => {
                             email: "sachinminde9359@gmail.com",
                             contact: "9359313945",
                         },
-                        callback_url: "https://eneqd3r9zrjok.x.pipedream.net/",
-                        handler: function (response){
-                            console.log(response)
-                            alert(response.razorpay_payment_id);
-                            alert(response.razorpay_order_id);
-                            alert(response.razorpay_signature)
-                        },
+                        callback_url: `${serverUrl}/order/callback`,
+                        // handler: function (response){
+                        //     console.log(response)
+                        //     alert(response.razorpay_payment_id);
+                        //     alert(response.razorpay_order_id);
+                        //     alert(response.razorpay_signature)
+                        // },
                         // notes: {
                         //     address: "Humaira Abayas Office",
                         //     userId: "510f7de5-14de-4cd0-b6f6-2ee5528329d4",

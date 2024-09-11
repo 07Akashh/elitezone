@@ -4,20 +4,34 @@ import serverUrl from "../config/serverUrl.js";
 
 const API_URL = serverUrl;
 
+
+export const testUserLogin = async (email) => {
+    try {
+        const response = await axios.post(`${API_URL}/auth/test`, { email });
+        const jwtToken = response.data.data.token
+        if (jwtToken) {
+            localStorage.setItem('token', jwtToken);
+        }
+        return response.data;
+    } catch (error) {
+        console.log(error)
+    }
+}
+
 export const registerWithEmailAndPassword = async (formData) => {
     try {
         const userCredential = await createUserWithEmailAndPassword(auth, formData.email, formData.password);
         const user = userCredential.user;
         const fbToken = user.accessToken;
         try {
-            const response = await axios.post(`${API_URL}/auth`, { 'fbToken':fbToken });
+            const response = await axios.post(`${API_URL}/auth`, { 'fbToken': fbToken });
             const token = response.data.data.token;
-            const updatedUser= await axios.patch(`${API_URL}/user`,{
-                'firstName':formData.firstName,
-                'lastName':formData.lastName,
-                'pincode':formData.pincode,
-                'address':formData.address,
-                'phone':formData.phone
+            const updatedUser = await axios.patch(`${API_URL}/user`, {
+                'firstName': formData.firstName,
+                'lastName': formData.lastName,
+                'pincode': formData.pincode,
+                'address': formData.address,
+                'phone': formData.phone
             }, {
                 headers: { Authorization: `Bearer ${token}` }
             })
@@ -46,11 +60,12 @@ export const registerWithEmailAndPassword = async (formData) => {
 export const signInWithEmailAndPassword = async (email, password) => {
     try {
         const userCredential = await signInWithEmailAndPasswordFirebase(auth, email, password);
+
         const user = userCredential.user;
         const token = await user.getIdToken();
         try {
-            const response = await axios.post(`${API_URL}/auth`, { 'fbToken':token  });
-            console.log(response)
+            const response = await axios.post(`${API_URL}/auth`, { 'fbToken': token });
+            // console.log(response)
             const jwtToken = response.data.data.token
             if (jwtToken) {
                 localStorage.setItem('token', jwtToken);
@@ -80,7 +95,7 @@ export const signInWithGoogle = async () => {
         const user = result.user;
         const fbtoken = await user.getIdToken();
         try {
-            const response = await axios.post(`${API_URL}/auth`, { 'fbToken':fbtoken  });
+            const response = await axios.post(`${API_URL}/auth`, { 'fbToken': fbtoken });
             const jwtToken = response.data.data.token
             if (jwtToken) {
                 localStorage.setItem('token', jwtToken);

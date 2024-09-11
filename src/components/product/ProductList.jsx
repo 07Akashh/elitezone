@@ -65,7 +65,7 @@ const ProductList = ({ category }) => {
                                 </div>
                             ))
                         ) : (
-                            <div className="text-center py-10 col-span-full">No products available</div>
+                            <div className="text-center py-10 col-span-full font-TenorSans">No Products Available Please Check Your Internet Connection!</div>
                         )}
                     </div>
                         </>
@@ -78,7 +78,7 @@ const ProductList = ({ category }) => {
                                 </div>
                             ))
                         ) : (
-                            <div className="text-center py-10 col-span-full">No products available</div>
+                            <div className="text-center py-10 col-span-full font-TenorSans">No Products Available Please Check Your Internet Connection!</div>
                         )}
                     </div>
                     

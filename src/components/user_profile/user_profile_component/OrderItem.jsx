@@ -1,7 +1,14 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const OrderItem = ({ productName, finalPrice, status, date, photo, id,  categoryId, subCategoryId }) => {
+const OrderItem = ({ productName, finalPrice, status, date, photo, id, categoryId, subCategoryId }) => {
+    function capitalizeStatus(status) {
+        return status
+            .split(' ')
+            .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+            .join(' ');
+    }
+
     return (
         <div className="flex flex-col md:flex-row items-center bg-[#754F23] p-4 mb-4">
             <img
@@ -11,11 +18,11 @@ const OrderItem = ({ productName, finalPrice, status, date, photo, id,  category
             />
             <div className="flex-1 text-center md:text-left mb-4 md:mb-0">
                 <Link to={`/${categoryId}/${subCategoryId}/${id}`}>
-                <h3 className="text-lg sm:text-xl text-white font-semibold">{productName}</h3></Link>
-                <p className="text-white">${finalPrice}</p>
+                    <h3 className="text-lg sm:text-xl text-white font-semibold">{productName}</h3></Link>
+                <p className="text-white">&#8377;{finalPrice}</p>
             </div>
             <div className="text-center md:text-right">
-                <p className="text-sm text-white">{status}</p>
+                <p className="text-sm text-white">{capitalizeStatus(status)}</p>
                 <p className="text-sm text-white">{date}</p>
             </div>
         </div>
