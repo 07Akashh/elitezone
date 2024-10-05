@@ -20,12 +20,12 @@ const About = () => {
                     <div className="md:w-1/2 my-auto">
                         <h2 className="text-[54px] font-Inter tracking-[3.24px] font-bold text-black mb-[40px]">Our Story</h2>
                         <p className="text-gray-600 text-base font-Poppins leading-relaxed">
-                            Launced in 2024, Exclusive is South Asia’s premier online shopping makterplace with an active presense in India. Supported by wide range of tailored marketing, data and service solutions, Exclusive has 10,500 sallers and 300 brands and serves 3 millioons customers across the region.
+                            Launched in 2024, EliteZone is South Asia’s premier online shopping marketplace with an active presence in India. Supported by wide range of tailored marketing, data and service solutions, EliteZone has 100+ sellers and 300 brands and serves 3 millions customers across the region.
                         </p>
                         <br />
                         <p className="text-gray-600 font-Poppins text-base leading-relaxed">
-                            Exclusive has more than 1 Million products to offer, growing at a very fast. Exclusive offers a diverse assotment in categories ranging  from consumer.
-                            </p>
+                            EliteZone has more than 1 Million products to offer, growing at a very fast. EliteZone offers a diverse assortment in categories ranging  from consumer.
+                        </p>
                     </div>
                     <div className="md:w-1/2 h-[609px]">
                         <img
@@ -76,52 +76,52 @@ const About = () => {
                 <div className="flex flex-col md:flex-row items-center justify-around gap-8 xl:px-[135px] lg:px-[100px] md:px-[60px] px-[20px]">
                     <div className="tr">
                         <img
-                            src="https://img.freepik.com/premium-photo/young-man-with-laptop_1281456-5848.jpg?ga=GA1.1.1665155854.1721153222&semt=ais_hybrid"
+                            src="https://res.cloudinary.com/dmao0koo4/image/upload/v1728128463/uploads/tmp-3-1728128460503_rlmmux.jpg"
                             alt="Founder"
                             className="w-[370px] h-[430px] object-cover rounded mx-auto"
                         />
-                        <h3 className="text-[32px] font-Inter font-normal leading-[30px] tracking-wider mt-[32px]">John Doe</h3>
-                        <p className=" text-black text-base font-normal font-Poppins leading-normal">Founder</p>
+                        <h3 className="text-[32px] font-Inter font-normal leading-[30px] tracking-wider mt-[32px]">Rahul</h3>
+                        <p className=" text-black text-base font-normal font-Poppins leading-normal">Co-Founder</p>
                         <div className="flex justify-start gap-4 mt-[5px]">
                             <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="text-blue-500 text-xl cursor-pointer">
                                 <RiTwitterLine />
                             </a>
-                            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="text-pink-500 text-xl cursor-pointer">
+                            <a href="https://www.instagram.com/rahulk.softdev" target="_blank" rel="noopener noreferrer" className="text-pink-500 text-xl cursor-pointer">
                                 <RiInstagramLine />
                             </a>
-                            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="text-blue-700 text-xl cursor-pointer" >
+                            <a href="https://www.linkedin.com/in/rahul-kumar-2bb72b29b/" target="_blank" rel="noopener noreferrer" className="text-blue-700 text-xl cursor-pointer" >
                                 <RiLinkedinLine />
                             </a>
                         </div>
                     </div>
                     <div className="t">
                         <img
-                            src="https://img.freepik.com/premium-photo/young-man-business-photo-office_1281985-7987.jpg?ga=GA1.1.1665155854.1721153222&semt=ais_hybrid"
+                            src="https://res.cloudinary.com/dmao0koo4/image/upload/v1728128005/uploads/tmp-1-1728128004401_il6oxm.jpg"
                             alt="Co-Founder"
                             className="w-[370px] h-[430px] object-cover rounded mx-auto"
                         />
-                        <h3 className="text-[32px] font-Inter font-normal leading-[30px] tracking-wider mt-[32px]">Jane Smith</h3>
+                        <h3 className="text-[32px] font-Inter font-normal leading-[30px] tracking-wider mt-[32px]">Aditya Pandey</h3>
                         <p className="text-black text-base font-normal font-Poppins leading-normal">Co-Founder</p>
                         <div className="flex justify-start gap-4 mt-[5px]">
                             <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="text-blue-500 text-xl cursor-pointer">
                                 <RiTwitterLine />
                             </a>
-                            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="text-pink-500 text-xl cursor-pointer">
+                            <a href=" https://www.instagram.com/aditya_p____0_9/" target="_blank" rel="noopener noreferrer" className="text-pink-500 text-xl cursor-pointer">
                                 <RiInstagramLine />
                             </a>
-                            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="text-blue-700 text-xl cursor-pointer">
+                            <a href="https://www.linkedin.com/in/rahul-kumar-2bb72b29b/" target="_blank" rel="noopener noreferrer" className="text-blue-700 text-xl cursor-pointer">
                                 <RiLinkedinLine />
                             </a>
                         </div>
                     </div>
                     <div className="t">
                         <img
-                            src="https://media.istockphoto.com/id/1314304150/photo/head-shot-portrait-smiling-confident-businessman-wearing-glasses-in-office.jpg?s=612x612&w=0&k=20&c=xLDbbSWTHntDb7RFwC9C29BHbTxrgRBfKasIuERoLlA="
+                            src="https://cdn.pixabay.com/photo/2019/10/10/18/51/smartphone-4540273_1280.jpg"
                             alt="Co-Founder"
-                            className="w-[370px] h-[430px] object-cover rounded mx-auto"
+                            className="w-[370px] h-[430px] object-cover blur-[1px]  rounded mx-auto"
                         />
-                        <h3 className="text-[32px] font-Inter font-normal leading-[30px] tracking-wider mt-[32px]">Jane Smith</h3>
-                        <p className="text-black text-base font-normal font-Poppins leading-normal">Co-Founder</p>
+                        <h3 className="text-[32px] font-Inter font-normal leading-[30px] tracking-wider mt-[32px]">Vacant</h3>
+                        <p className="text-black text-base font-normal font-Poppins leading-normal">Media & Marketing</p>
                         <div className="flex justify-start gap-4 mt-[5px]">
                             <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="text-blue-500 text-xl cursor-pointer">
                                 <RiTwitterLine />
