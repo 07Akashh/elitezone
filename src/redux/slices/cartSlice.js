@@ -53,12 +53,14 @@ const cartSlice = createSlice({
                 state.error = null;
             })
             .addCase(fetchCartItems.fulfilled, (state, action) => {
-                state.items = action.payload.items;
-                state.coupons = action.payload.coupons;
-                state.itemCount = action.payload.items.length;
-                state.subtotal = action.payload.subtotal;
-                state.shippingCharges = action.payload.shipingCharges;
-                state.total = action.payload.total;
+                const { items = [], coupons = [], subtotal = 0, shippingCharges = 0, total = 0 } = action.payload || {};
+
+                state.items = items;
+                state.coupons = coupons;
+                state.itemCount = items.length;
+                state.subtotal = subtotal;
+                state.shippingCharges = shippingCharges;
+                state.total = total;
                 state.loading = false;
             })
             .addCase(fetchCartItems.rejected, (state, action) => {

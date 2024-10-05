@@ -11,7 +11,7 @@ export const fetchCartForOrder = createAsyncThunk('order/fetchCart', async () =>
 
 export const placeOrder = createAsyncThunk('order/placeOrder', async (orderData) => {
     const response = await createOrder(orderData);
-    return response.data;
+    return response;
 });
 
 export const getOrders = createAsyncThunk('order/getOrders', async () => {
@@ -21,9 +21,10 @@ export const getOrders = createAsyncThunk('order/getOrders', async () => {
 const orderSlice = createSlice({
     name: 'order',
     initialState: {
-        orderItems: [],
-        cartSubtotal: 0,
-        shipingCharge: 0,
+        items: [],
+        subtotalAmount: 0,
+        totalAmount: 0,
+        shippingCharge: 0,
     },
     reducers: {},
     extraReducers: (builder) => {
@@ -32,24 +33,26 @@ const orderSlice = createSlice({
                 return state
             })
             .addCase(fetchCartForOrder.fulfilled, (state, action) => {
-                const { items, subtotal, shipingCharges } = action.payload;
+                const { items, total, subtotal, shippingCharges } = action.payload;
 
                 const formattedItems = items.map(item => {
                     const product = item.product;
-                    const offer = item.offer[0];
+                    const offer = item?.offerId;
 
                     return {
                         productId: product.id,
                         originalPrice: product.price,
-                        finalPrice: offer ? offer.discountPrice : product.price,
+                        finalPrice: item.discountPrice,
                         quantity: item.quantity,
-                        offerId: offer ? offer.id : null,
+                        offerId: offer,
+                        size: item.size
                     };
                 });
 
-                state.orderItems = formattedItems;
-                state.cartSubtotal = subtotal;
-                state.shippingCharge = shipingCharges;
+                state.items = formattedItems;
+                state.subtotalAmount = subtotal;
+                state.totalAmount = total;
+                state.shippingCharge = shippingCharges;
             })
             .addCase(fetchCartForOrder.rejected, (state, action) => {
                 state.status = 'failed';

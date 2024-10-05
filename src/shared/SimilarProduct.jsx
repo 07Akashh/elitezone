@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
+import ProductCard from '../components/user/product/component/ProductCard';
 import { fetchAllProducts } from '../redux/slices/productSlice';
-import ProductCard from '../components/product/ProductCard';
 
 const SimilarProductsPage = ({ categoryId, subCategoryId }) => {
     const dispatch = useDispatch();
@@ -21,23 +21,26 @@ const SimilarProductsPage = ({ categoryId, subCategoryId }) => {
     }, [categoryId, subCategoryId, dispatch]);
 
     return (
-        <div className="md:px-10 py-5">
+        <div className=" py-5">
             <div className='text-start mb-5'>
-                <h2 className="text-5xl font-thin font-BerkshireSwash px-2 border-b pb-3 border-[#2F2F2F] inline-block">
-                    Similar <span className='text-2xl font-BerkshireSwash'>Items</span>
-                </h2>
+                <div className="h-10 justify-start items-center gap-x-4 inline-flex ">
+                    <div className="w-5 h-10 relative">
+                        <div className="w-5 h-10 left-0 top-0 absolute bg-[#db4444] rounded" />
+                    </div>
+                    <div className="text-[#db4444] text-base font-semibold font-Poppins leading-tight">Related Item</div>
+                </div>
             </div>
-            <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-5 gap-5 border-black mx-auto py-4">
-    {products.length > 0 ? (
-        products.map(product => (
-            <div key={product.id} className="mb-10 sm:mb-5  w-auto mx-auto">
-                <ProductCard product={product} />
+            <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-5 border-black mx-auto py-4">
+                {products.length > 0 ? (
+                    products.map(product => (
+                        <div key={product._id} className="mb-10 sm:mb-5  w-auto mx-auto">
+                            <ProductCard product={product} />
+                        </div>
+                    ))
+                ) : (
+                    <p>No similar products found.</p>
+                )}
             </div>
-        ))
-    ) : (
-        <p>No similar products found.</p>
-    )}
-</div>
 
         </div>
     );

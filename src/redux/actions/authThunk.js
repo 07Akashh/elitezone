@@ -37,7 +37,6 @@ export const loginUser = createAsyncThunk(
 export const registerUser = createAsyncThunk(
     'auth/registerUser',
     async (formData, { rejectWithValue }) => {
-        console.log(formData);
         try {
             await registerWithEmailAndPassword(formData);
         } catch (error) {

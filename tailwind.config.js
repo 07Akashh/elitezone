@@ -10,6 +10,7 @@ module.exports = {
         PlayfairDisplay: ["Playfair Display", "serif"],
         BerkshireSwash: ["Berkshire Swash", "serif"],
         Poppins: ["Poppins", "sans-serif"],
+        Inter: [ "Inter", "sans-serif" ]
       },
     },
   },

@@ -11,7 +11,7 @@ export const fetchCategoryData = async (category) => {
             headers: { Authorization: `Bearer ${token}` }
         });
         return response.data;
-        
+
     } catch (error) {
         return error
     }
@@ -25,7 +25,7 @@ export const fetchProductById = async (id) => {
     return response.data
 };
 
-export const fetchProductsByColor = async (color, productName ) => {
+export const fetchProductsByColor = async (color, productName) => {
 
     const params = new URLSearchParams();
     if (color) params.append('color', color);
@@ -39,7 +39,7 @@ export const fetchProductsByColor = async (color, productName ) => {
         return response.data;
     } catch (error) {
         console.error('Error fetching product by color:', error);
-        throw error; // Optionally, rethrow the error or handle it differently
+        throw error;
     }
 };
 
@@ -69,9 +69,13 @@ export const fetchProducts = async ({ categoryId, subCategoryId, color, size, pr
             params.append('highPrice', highPrice);
         }
     }
+
     const cleanedCategoryId = categoryId.trim().replace(/\s+/g, '');
 
-    if (cleanedCategoryId) params.append('categoryId', categoryId);
+    if (cleanedCategoryId && cleanedCategoryId.toLowerCase() !== 'product') {
+        params.append('categoryId', categoryId);
+    }
+
     if (subCategoryId) params.append('subCategoryId', subCategoryId);
     if (color) params.append('color', color);
     if (sorting) params.append('sorting', sorting);
@@ -83,7 +87,7 @@ export const fetchProducts = async ({ categoryId, subCategoryId, color, size, pr
             params,
             headers: { Authorization: `Bearer ${token}` }
         });
-        
+
         return response.data;
     } catch (error) {
         console.error('Error fetching products:', error);

@@ -6,6 +6,9 @@ import authReducer from './slices/authSlice';
 import wishListReducer from './slices/wishListSlice'
 import addressReducer from './slices/addressSlice';
 import orderReducer from './slices/orderSlice'
+import adminAuthReducer from './slices/adminAuthSlice'
+import categoryReducer from './slices/categorySlice'
+import reviewReducer from './slices/reviewSlice'
 
 export const store = configureStore({
   reducer: {
@@ -14,7 +17,10 @@ export const store = configureStore({
     auth: authReducer,
     wishlist: wishListReducer,
     addresses: addressReducer,
-    orders: orderReducer
+    orders: orderReducer,
+    adminAuth: adminAuthReducer,
+    category: categoryReducer,
+    productReviews: reviewReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

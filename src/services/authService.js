@@ -23,6 +23,7 @@ export const registerWithEmailAndPassword = async (formData) => {
         const userCredential = await createUserWithEmailAndPassword(auth, formData.email, formData.password);
         const user = userCredential.user;
         const fbToken = user.accessToken;
+        // localStorage.setItem('fftoken', fbToken);
         try {
             const response = await axios.post(`${API_URL}/auth`, { 'fbToken': fbToken });
             const token = response.data.data.token;
@@ -69,6 +70,7 @@ export const signInWithEmailAndPassword = async (email, password) => {
             const jwtToken = response.data.data.token
             if (jwtToken) {
                 localStorage.setItem('token', jwtToken);
+                // localStorage.setItem('btoken', token);
             }
             return response.data;
         } catch (error) {
@@ -94,6 +96,7 @@ export const signInWithGoogle = async () => {
         const result = await signInWithPopup(auth, googleProvider);
         const user = result.user;
         const fbtoken = await user.getIdToken();
+        // localStorage.setItem('tokenssss', fbtoken);
         try {
             const response = await axios.post(`${API_URL}/auth`, { 'fbToken': fbtoken });
             const jwtToken = response.data.data.token

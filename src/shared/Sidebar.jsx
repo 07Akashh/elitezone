@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { NavLink, useMatch, useResolvedPath } from "react-router-dom";
-import Logout from '../components/user_profile/user_profile_component/Logout'
+import Logout from '../components/user/profile/component/Logout'
 
 const Sidebar = () => {
     const [isLogoutPopupOpen, setIsLogoutPopupOpen] = useState(false);
@@ -25,40 +25,49 @@ const Sidebar = () => {
 
     return (
         <>
-            <nav className="w-full md:w-1/4 lg:w-1/5 p-5 font-TenorSans text-[#78756e]">
-                <ul className="space-y-4">
+            <nav className="w-full md:w-1/4 lg:w-1/5 text-black/50 text-sm font-light font-['Poppins'] ">
+                <p className="text-black text-base font-medium font-['Poppins'] leading-normal mb-[16px]">Manage My Account</p>
+                <ul className="space-y-4 px-[35px]">
                     <li>
                         <NavLink
                             to="profile"
-                            className={`block ${matchProfile ? 'text-[#754f23] font-semibold' : ''}`}
+                            className={`block ${matchProfile ? 'text-[#db4444] font-normal' : ''}`}
                         >
                             My Profile
                         </NavLink>
                     </li>
                     <li>
                         <NavLink
-                            to="orders"
-                            className={`block ${matchOrders ? 'text-[#754f23] font-semibold' : ''}`}
-                        >
-                            My Orders
-                        </NavLink>
-                    </li>
-                    <li>
-                        <NavLink
                             to="address-book"
-                            className={`block ${matchAddressBook ? 'text-[#754f23] font-semibold' : ''}`}
+                            className={`block ${matchAddressBook ? 'text-[#db4444]  font-normal' : ''}`}
                         >
                             Address Book
+                        </NavLink>
+                    </li>
+                </ul>
+                <p className="text-black text-base mt-[24px] font-medium font-['Poppins'] leading-normal mb-[16px]">My Orders</p>
+                <ul className="space-y-4 px-[35px]">
+
+                    <li>
+                        <NavLink
+                            to="orders"
+                            className={`block ${matchOrders ? 'text-[#db4444] opacity-100 font-normal' : ''}`}
+                        >
+                            My Orders
                         </NavLink>
                     </li>
                     {/* <li>
                         <NavLink
                             to="detail"
-                            className={`block ${matchDetailsDemo ? 'text-[#754f23] font-semibold' : ''}`}
+                            className={`block ${matchDetailsDemo ? 'text-[#db4444] font-semibold' : ''}`}
                         >
                             Order Details Demo
                         </NavLink>
                     </li> */}
+
+                </ul>
+                <p className="text-black text-base mt-[24px] font-medium font-['Poppins'] leading-normal mb-[16px]">My Wishlist</p>
+                <ul className="space-y-4 px-[35px]">
                     <li>
                         <button
                             onClick={handleOpenPopup}

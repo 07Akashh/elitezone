@@ -2,15 +2,20 @@ import React, { useEffect, useState } from 'react';
 import FilterAccordion from './FilterAccordion';
 import ColorCircle from './ColorCircle';
 import { useSelector, useDispatch } from 'react-redux';
-import ProductCard from '../components/product/ProductCard';
+import ProductCard from '../components/user/product/component/ProductCard';
 import { fetchAllProducts } from '../redux/slices/productSlice';
 import Breadcrumbs from './Breadcrumbs';
 import { useParams } from 'react-router-dom';
 
+import { Tooltip as ReactTooltip } from 'react-tooltip'
+
+
+// import Error404 from './Error404';
+
 const ProductFilterPage = () => {
     const { categoryId, subCategoryId } = useParams();
     const dispatch = useDispatch();
-    const {  colors } = useSelector((state) => state.products.allProducts);
+    const { colors } = useSelector((state) => state.products.allProducts);
     const isLoading = useSelector((state) => state.products.allProducts.isLoading);
     const error = useSelector((state) => state.products.allProducts.error);
     const [selectedSizes, setSelectedSizes] = useState([]);
@@ -21,24 +26,24 @@ const ProductFilterPage = () => {
     const [product, setProduct] = useState([]);
     const [sortOption, setSortOption] = useState('');
     const [showFilter, setShowFilter] = useState(false);
-    const [isError, setIsError] = useState('')
+    const [, setIsError] = useState('')
 
-    const getTitleAndSubtitle = (id) => {
-        if (!id) return { title: '', subtitle: '' };
-    
-        const capitalize = (str) => str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
-        
-        const parts = id.split('-').map(capitalize);
-        const subtitle = parts.pop();
-        const title = parts.join(' ');
-    
-        return { title, subtitle };
-    };
-    
+    // const getTitleAndSubtitle = (id) => {
+    //     if (!id) return { title: '', subtitle: '' };
 
-    const { title, subtitle } = subCategoryId
-    ? getTitleAndSubtitle(subCategoryId)
-    : getTitleAndSubtitle(categoryId);
+    //     const capitalize = (str) => str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
+
+    //     const parts = id.split('-').map(capitalize);
+    //     const subtitle = parts.pop();
+    //     const title = parts.join(' ');
+
+    //     return { title, subtitle };
+    // };
+
+
+    // const { title, subtitle } = subCategoryId
+    // ? getTitleAndSubtitle(subCategoryId)
+    // : getTitleAndSubtitle(categoryId);
 
 
     useEffect(() => {
@@ -67,9 +72,11 @@ const ProductFilterPage = () => {
                     setIsError(error)
                     console.error('Error fetching products:', error);
                 });
-        } else {
-            console.error("Category ID is undefined. Please pass a valid category ID.");
         }
+        if (!categoryId) {
+            dispatch(fetchAllProducts())
+        }
+
     }, [categoryId, subCategoryId, selectedColor, selectedSizes, selectedPriceRange, dispatch, sortOption]);
 
     useEffect(() => {
@@ -153,22 +160,25 @@ const ProductFilterPage = () => {
         setShowFilter(!showFilter);
     };
 
-    
-    if(product.length === 0) return <p className="text-center font-TenorSans">{isError.message}</p>
+
     if (isLoading && page === 0) return <p className="text-center font-TenorSans">Loading...</p>;
-    if (error) return <p className='text-center font-TenorSans'>Error: {error}</p>;
+    if (error) return <div className='text-center font-TenorSans'>Error: {error}</div>;
+    if (product.length === 0) return <div className="text-center font-TenorSans">
+        {/* <Error404 /> */}
+        Product Not Found...
+    </div>
 
     return (
-        <>
-            <div className='text-center mb-3'>
-                <h2 className="sm:text-5xl text-xl font-thin font-BerkshireSwash border-b pb-3 border-[#2F2F2F] inline-block">
+        <div className='xl:px-[135px] lg:px-[100px] md:px-[60px]'>
+            <div className='text-center sm:mb-3 '>
+                {/* <h2 className="sm:text-5xl text-xl font-thin font-BerkshireSwash border-b pb-3 border-[#2F2F2F] inline-block">
                     {title} <span className='text-sm sm:text-2xl font-BerkshireSwash'>{subtitle}</span>
-                </h2>
+                </h2> */}
             </div>
-            <div className='mx-5 mt-3'><Breadcrumbs /></div>
-            <div className="sticky mt-5 bg-transparent lg:hidden py-2 shadow-sm flex justify-around mb-4">
+            <div className='sm:mt-[40px] sm:mb-[40px] px-[20px] sm:px-0'><Breadcrumbs /></div>
+            <div className="sticky sm:mt-5 bg-transparent lg:hidden py-2 shadow-sm flex justify-around mb-4">
                 <button
-                    className="py-1 px-3 text-[13px] bg-[#754F23] text-white rounded-lg lg:hidden"
+                    className="py-1 px-3 text-[13px] bg-[#DB4444] text-white rounded-lg lg:hidden"
                     onClick={toggleFilter}
                 >
                     {showFilter ? 'Filters' : 'Filters'}
@@ -185,7 +195,7 @@ const ProductFilterPage = () => {
             </div>
 
             <div className="flex  flex-col  border-black lg:flex-row">
-                <aside className={`fixed inset-0 z-50 bg-white p-4 lg:w-[300px]  border-black xl:w-[400px] lg:h-full lg:bg-transparent overflow-y-auto lg:sticky lg:top-28 ${showFilter ? 'block' : 'hidden'} lg:block`}>
+                <aside className={`fixed inset-0 z-50 bg-white py-4 lg:w-[300px]  border-black xl:w-[400px] lg:h-full lg:bg-transparent overflow-y-auto lg:sticky lg:top-28 ${showFilter ? 'block' : 'hidden'} lg:block`}>
                     <p className='text-black text-base font-medium font-PlayfairDisplay tracking-widest'>Filters</p>
                     <FilterAccordion title="Sizes">
                         <div className="flex flex-wrap gap-2">
@@ -201,21 +211,27 @@ const ProductFilterPage = () => {
                         </div>
                     </FilterAccordion>
 
+
                     <FilterAccordion title="Colors">
                         <div className="flex flex-wrap gap-2">
                             {colors && colors.map(color => (
-                                <ColorCircle
-                                    key={color}
-                                    color={color}
-                                    selected={color === selectedColor}
-                                    onSelect={() => handleColorSelect(color)}
-                                />
+                                <div key={color._id}>
+                                    <div data-tip={color.name} data-for={`tooltip-${color.name}`}>
+                                        <ColorCircle
+                                            color={color}
+                                            selected={color.name === selectedColor}
+                                            onSelect={() => handleColorSelect(color.name)}
+                                        />
+                                    </div>
+                                    <ReactTooltip id={`tooltip-${color.name}`} effect="solid" place="top" />
+                                </div>
                             ))}
                         </div>
                     </FilterAccordion>
 
+
                     <FilterAccordion title="Price Range">
-                    {[
+                        {[
                             { range: 'Under 1000', lowPrice: 0, highPrice: 1000 },
                             { range: '1000 - 2000', lowPrice: 1000, highPrice: 2000 },
                             { range: '2000 - 3000', lowPrice: 2000, highPrice: 3000 },
@@ -254,14 +270,14 @@ const ProductFilterPage = () => {
                             onChange={handleSortChange}
                         >
                             <option value="">Sort by</option>
-                            <option value="lowtohigh">Low to High</option>
-                            <option value="hightolow">High to Low</option>
+                            <option value="lowToHigh">Low to High</option>
+                            <option value="highToLow">High to Low</option>
                         </select>
                     </div>
                     <div className=''>
                         <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-5 gap-5 border-black mx-auto py-4">
                             {product.map(product => (
-                                <div key={product.id} className="mb-10 sm:mb-5  w-auto mx-auto">
+                                <div key={product._id} className="mb-10 sm:mb-5  w-auto mx-auto">
                                     <ProductCard product={product} />
                                 </div>
                             ))}
@@ -270,7 +286,7 @@ const ProductFilterPage = () => {
                     {hasMore && !isLoading && (
                         <div className="flex justify-end p-10">
                             <button
-                                className="px-4 py-2 bg-[#754F23] text-white rounded-lg"
+                                className="px-4 py-2 bg-[#DB4444] text-white rounded-lg"
                                 onClick={handleLoadMore}
                             >
                                 Load More
@@ -284,7 +300,7 @@ const ProductFilterPage = () => {
 
             {/* Background Overlay */}
             {showFilter && <div className="fixed inset-0 bg-black opacity-50 z-40 lg:hidden" onClick={toggleFilter}></div>}
-        </>
+        </div>
     );
 }
 

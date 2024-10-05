@@ -100,7 +100,6 @@ export const fetchProductByColor = createAsyncThunk(
       if (!response) {
         throw new Error('Product not found');
       }
-
       return response.data;
     } catch (error) {
       return rejectWithValue(error.message);
@@ -188,10 +187,10 @@ const productSlice = createSlice({
         state.selectedProduct.error = null;
       })
       .addCase(fetchProduct.fulfilled, (state, action) => {
-        const { product, colors, images } = action.payload.data;
+        const { product, colors } = action.payload.data;
         state.selectedProduct = {
           product: product,
-          images: images.length > 0 ? images : [],
+          images: product.images.length > 0 ? product.images : [],
           colors: colors.length > 0 ? colors : [],
           reviews: [],
           isLoading: false,
@@ -223,10 +222,10 @@ const productSlice = createSlice({
         };
       })
       .addCase(fetchProductByColor.fulfilled, (state, action) => {
-        const { product, colors, images } = action.payload;
+        const { product, colors } = action.payload;
         state.colorProduct = {
           product: product,
-          images: images.length > 0 ? images : [],
+          images: product.images.length > 0 ? product.images : [],
           colors: colors.length > 0 ? colors : [],
           reviews: [],
         };
