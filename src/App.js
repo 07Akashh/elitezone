@@ -17,7 +17,8 @@ import { fetchAllProducts, fetchCategory, setProducts } from './redux/slices/pro
 import Error404 from './shared/Error404'
 import User from './components/user/User'
 import Admin from './components/admin/Admin';
-import { getCategories, getSubCategories,  } from './redux/slices/categorySlice';
+import { getCategories, getSubCategories, } from './redux/slices/categorySlice';
+import Success from './components/user/checkout/pages/Success';
 
 function App() {
 
@@ -79,9 +80,10 @@ function App() {
         <Route
           path="/admin/*"
           element={
-              <Admin />
+            <Admin />
           }
         />
+        <Route path="/success" element={<Success />} />
         <Route path="*" element={<Error404 />} />
       </Routes>
     </Router>

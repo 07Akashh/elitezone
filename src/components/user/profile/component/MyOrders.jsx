@@ -13,14 +13,16 @@ const formatDate = (dateString) => {
 const MyOrders = () => {
     const dispatch = useDispatch()
     const [loading, setLoading] = useState(false)
-    const orders = useSelector((state) => state.orders.getOrders.data);
+
+    const orders = useSelector((state) => state.orders.getOrders);
 
     console.log(orders)
+
     useEffect(() => {
         setLoading(true)
         dispatch(getOrders());
         setLoading(false)
-    }, [dispatch]);
+    }, [dispatch, orders]);
 
     return (
         <>
@@ -32,10 +34,10 @@ const MyOrders = () => {
             <div className={`${loading ? 'opacity-50' : ''}`}>
                 <div className='bg-white w-full h-[480px] no-scrollbar overflow-scroll py-[40px] font-Poppins'>
                     <div>
-                        {orders.length === 0 && (
+                        {orders?.data?.length === 0 && (
                             <p className='text-center'>No Orders Found...</p>
                         )}
-                        {orders.map(order =>
+                        {orders?.data.map(order =>
                             order.items.map(item => (
                                 <OrderItem
                                     id={item.productId._id}

@@ -65,7 +65,6 @@ const User = () => {
                             </LoginRoute>
                         }
                     />
-
                     <Route path="*" element={<Error404 />} />
                     <Route path="/contact" element={<ContactUs />} />
                     <Route path="/about" element={<About />} />
