@@ -30,7 +30,7 @@ const Footer = () => {
             <div className='mt-[24px]'>
               <h2 className=" text-left text-[#f9f9f9] text-base font-normal font-Poppins leading-normal ">71A, Rattan Bagh, Veena Enclave, Nangloi, Delhi 110041</h2>
               <p className='text-lg mt-[16px] sm:mt-[16px]'><Link to='tel:+91 9026478761'>+91 9026478761</Link></p>
-              <p className='text-base mt-[16px] sm:mt-[16px]'><Link to='mailto:official.humairaabayas@gmail.com'>rahulk.softdeav@gmail.com</Link></p>
+              <p className='text-base mt-[16px] sm:mt-[16px]'><Link to='mailto:rahulk.softdev@gmail.com'>rahulk.softdeav@gmail.com</Link></p>
             </div>
           </div>
 
@@ -45,7 +45,7 @@ const Footer = () => {
                 )}
                 <li><Link to='cart'>Cart</Link></li>
                 <li><Link to='wishlist'>Wishlist</Link></li>
-                <li><Link to='/'>Shop</Link></li>
+                <li><Link to='/product'>Shop</Link></li>
               </ul>
             </div>
             <div>
@@ -64,10 +64,10 @@ const Footer = () => {
               <h2 className=" opacity-70 text-[#f9f9f9] text-xs font-medium font-['Poppins'] leading-[18px]">Save $3 with App New User Only Launching Soon !</h2>
             </div>
             <div className="flex space-x-[24px] justify-center sm:justify-start mt-[26px]">
-              <Link to="https://www.facebook.com/profile.php?id=61564472715844"><RiFacebookLine className=" w-6 h-6 " /></Link>
-              <Link to="https://www.instagram.com/humaira_abayas?igsh=anZ5YTJzcmZnajJh&utm_source=qr"><RiInstagramLine className="w-6 h-6" /></Link>
+              <Link to="/"><RiFacebookLine className=" w-6 h-6 " /></Link>
+              <Link to="https://www.instagram.com/rahulk.softdev"><RiInstagramLine className="w-6 h-6" /></Link>
               <Link to='/'><RiTwitterLine className="w-6 h-6" /></Link>
-              <Link to='/'><RiLinkedinLine className="w-6 h-6" /></Link>
+              <Link to='https://www.linkedin.com/in/rahul-kumar-2bb72b29b/'><RiLinkedinLine className="w-6 h-6" /></Link>
             </div>
           </div>
         </div>
