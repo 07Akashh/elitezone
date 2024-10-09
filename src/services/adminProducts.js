@@ -23,6 +23,7 @@ export const addProduct = async(data) =>{
 }
 
 export const createOffer = async(data) =>{
+    const token = localStorage.getItem('adminToken');
     const config = {
         headers: {
             Authorization: `Bearer ${token}`
