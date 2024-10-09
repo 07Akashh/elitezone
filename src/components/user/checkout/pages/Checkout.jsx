@@ -4,6 +4,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import BillingDetails from '../component/BillingDetails';
 import OrderSummary from '../component/OrderSummary';
 import Breadcrumbs from '../../../../shared/Breadcrumbs'
+import Modals from '../../../../shared/Modal';
+
 
 import { fetchCartForOrder, placeOrder } from '../../../../redux/slices/orderSlice';
 
@@ -12,7 +14,6 @@ import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 import { fetchCartItems } from '../../../../redux/slices/cartSlice';
 import { getOrderById, initiatePayUPayment } from '../../../../services/orderService';
-import Modals from '../../../../shared/Modal';
 
 const Checkout = () => {
     const dispatch = useDispatch();
@@ -138,8 +139,8 @@ const Checkout = () => {
             </div>
 
             {payuData && (
-                <Modals isOpen={open} closeModal={handleClose} handleClose={handleClose} contentLabel="Pay Now">
-                    <h1 className='text-center'>Click to Pay Now</h1>
+                <Modals isOpen={open} closeModal={handleClose} handleClose={handleClose}  contentLabel="Pay Now">
+                    <h1 className='text-center text-2xl mb-20  font-bold'>Click to Pay Now</h1>
                     <form method="POST" action={payuData.url} className='text-center'>
                         <input type="hidden" name="key" value={payuData.paymentData.key} />
                         <input type="hidden" name="txnid" value={payuData.paymentData.txnId} />

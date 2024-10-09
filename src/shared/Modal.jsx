@@ -5,8 +5,14 @@ Modal.setAppElement('#root');
 
 const Modals = ({ isOpen, handleClose, contentLabel, children }) => {
 
+    const customStyles = {
+        overlay: {
+            backgroundColor: 'rgba(0, 0, 0, 0.2)',
+        },
+    };
     return (
         <Modal
+            style={customStyles}
             isOpen={isOpen}
             contentLabel={contentLabel}
             className="modal z-50"
