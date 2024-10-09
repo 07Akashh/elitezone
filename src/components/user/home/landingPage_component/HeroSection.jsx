@@ -17,7 +17,7 @@ const Sidebar = () => {
     return (
         <div className="w-full sm:w-1/4 sm:h-[250px] lg:h-[400px] font-Poppins px-5 sm:px-0 lg:w-1/4 pt-[10px] sm:pt-[40px] no-scrollbar h-full overflow-x-scroll sm:border-r">
             <ul>
-                {categories.map((category, index) => (
+                {categories?.map((category, index) => (
                     <li key={category._id} className="mb-1">
                         <button
                             onClick={() => handleCategoryClick(index)}

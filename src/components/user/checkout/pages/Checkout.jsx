@@ -8,9 +8,11 @@ import Breadcrumbs from '../../../../shared/Breadcrumbs'
 import { fetchCartForOrder, placeOrder } from '../../../../redux/slices/orderSlice';
 
 import toast from 'react-hot-toast';
-import serverUrl from '../../../../config/serverUrl';
+// import serverUrl from '../../../../config/serverUrl';
 import { useNavigate } from 'react-router-dom';
 import { fetchCartItems } from '../../../../redux/slices/cartSlice';
+import { getOrderById, initiatePayUPayment } from '../../../../services/orderService';
+import Modals from '../../../../shared/Modal';
 
 const Checkout = () => {
     const dispatch = useDispatch();
@@ -19,11 +21,27 @@ const Checkout = () => {
     const orderData = useSelector((state) => state.orders);
 
     const [billingInfo, setBillingInfo] = useState(null);
-    // const [orderId, setOrderId] = useState(null);
+    const [payuData, setPayuData] = useState(null);
+    const [orderId, setOrderId] = useState(null);
+    const [userId, setUserId] = useState(null)
     const [loading, setLoading] = useState(false);
 
-    const createOrder = async (orderSummary) => {
+    const [open, setOpen] = useState(false);
 
+
+    useEffect(() => {
+        if (payuData) {
+            setOpen(true);
+        }
+    }, [payuData]);
+
+
+    const handleClose = () => {
+        setOpen(false);
+    };
+
+
+    const createOrder = async (orderSummary) => {
         try {
             setLoading(true);
             const response = await dispatch(placeOrder(orderSummary)).unwrap();
@@ -56,44 +74,16 @@ const Checkout = () => {
             setLoading(true);
             try {
                 const response = await createOrder(orderSummary);
-                console.log(response)
-                    if (response.data && response.data.id) {
-                        if (method === 'Prepaid') {
-                        // setOrderId(response.id);
-                        const options = {
-                            key: "rzp_test_5ureH41rm3YjF3",
-                            amount: response.amount,
-                            currency: 'INR',
-                            name: "Exclusive",
-                            description: "Your destination for elegant and modest fashion.",
-                            order_id: response.id,
-                            image: "https://www.svgrepo.com/show/530597/hat.svg",
-                            prefill: {
-                                name: "Rahul k",
-                                email: "rahulk.softdev@gmail.com",
-                                contact: "9026478761",
-                            },
-                            callback_url: `${serverUrl}/order/callback`,
-                            // handler: function (response){
-                            //     console.log(response)
-                            //     alert(response.razorpay_payment_id);
-                            //     alert(response.razorpay_order_id);
-                            //     alert(response.razorpay_signature)
-                            // },
-                            // notes: {
-                            //     address: "Humaira Abayas Office",
-                            //     userId: "510f7de5-14de-4cd0-b6f6-2ee5528329d4",
-                            //     planId: "17977236-dd0b-4ea0-b3ef-524a2e850b26",
-                            // },
-                            theme: {
-                                color: "#DB4444",
-                            },
-                        };
-                        const rzp1 = new window.Razorpay(options);
-                        rzp1.open();
+                const data = await getOrderById(response.data.id);
+                if (data && data._id) {
+                    setOrderId(data._id)
+                    setUserId(data.userId)
+                    if (method === 'Prepaid') {
+                        const payData = await initiatePayUPayment(data);
+                        setPayuData(payData);
                     } else {
                         dispatch(fetchCartItems())
-                        navigate('/my-account/orders');
+                        // navigate('/my-account/orders');
                         toast.success(response.message)
                     }
                 } else {
@@ -105,7 +95,7 @@ const Checkout = () => {
                 toast.error("An error occurred while placing the order.");
             } finally {
                 dispatch(fetchCartItems())
-                navigate('/my-account/orders');
+                // navigate('/my-account/orders');
                 setLoading(false);
             }
         } else {
@@ -147,6 +137,33 @@ const Checkout = () => {
                 </div>
             </div>
 
+            {payuData && (
+                <Modals isOpen={open} closeModal={handleClose} handleClose={handleClose} contentLabel="Pay Now">
+                    <h1 className='text-center'>Click to Pay Now</h1>
+                    <form method="POST" action={payuData.url} className='text-center'>
+                        <input type="hidden" name="key" value={payuData.paymentData.key} />
+                        <input type="hidden" name="txnid" value={payuData.paymentData.txnId} />
+                        <input type="hidden" name="amount" value={payuData.paymentData.totalAmount} />
+                        <input type="hidden" name="productinfo" value={payuData.paymentData.productinfo} />
+                        <input type="hidden" name="firstname" value={payuData.paymentData.firstname} />
+                        <input type="hidden" name="lastname" value={payuData.paymentData.lastname} />
+                        <input type="hidden" name="address1" value={payuData.paymentData.address1} />
+                        <input type="hidden" name="address2" value={payuData.paymentData.address2} />
+                        <input type="hidden" name="city" value={payuData.paymentData.city} />
+                        <input type="hidden" name="state" value={payuData.paymentData.state} />
+                        <input type="hidden" name="country" value={payuData.paymentData.country} />
+                        <input type="hidden" name="zipcode" value={payuData.paymentData.zipcode} />
+                        <input type="hidden" name="email" value={payuData.paymentData.email} />
+                        <input type="hidden" name="phone" value={payuData.paymentData.phone} />
+                        <input type="hidden" name="surl" value={payuData.paymentData.surl} />
+                        <input type="hidden" name="furl" value={payuData.paymentData.furl} />
+                        <input type="hidden" name="hash" value={payuData.paymentData.hash} />
+                        <input type="hidden" name="udf1" value={orderId} />
+                        <input type="hidden" name="udf2" value={userId} />
+                        <button type="submit" className='bg-[#DB4444] text-white py-[16px] px-[48px] text-base font-normal rounded mb-4 w-full sm:w-auto'>Pay Now</button>
+                    </form>
+                </Modals>
+            )}
         </>
     );
 };

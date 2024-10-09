@@ -83,7 +83,7 @@ function App() {
             <Admin />
           }
         />
-        <Route path="/success" element={<Success />} />
+        <Route path="/result" element={<Success />} />
         <Route path="*" element={<Error404 />} />
       </Routes>
     </Router>

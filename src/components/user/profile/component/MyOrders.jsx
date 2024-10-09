@@ -16,13 +16,11 @@ const MyOrders = () => {
 
     const orders = useSelector((state) => state.orders.getOrders);
 
-    console.log(orders)
-
     useEffect(() => {
         setLoading(true)
         dispatch(getOrders());
         setLoading(false)
-    }, [dispatch, orders]);
+    }, [dispatch]);
 
     return (
         <>
@@ -31,7 +29,7 @@ const MyOrders = () => {
                     <div className="text-white font-Inter text-xl">Loading...</div>
                 </div>
             )}
-            <div className={`${loading ? 'opacity-50' : ''}`}>
+            <div className={`${loading ? 'opacity-50' : ''} p-2 sm:p-5`}>
                 <div className='bg-white w-full h-[480px] no-scrollbar overflow-scroll py-[40px] font-Poppins'>
                     <div>
                         {orders?.data?.length === 0 && (
@@ -40,13 +38,13 @@ const MyOrders = () => {
                         {orders?.data.map(order =>
                             order.items.map(item => (
                                 <OrderItem
+                                    orderId={order._id}
                                     id={item.productId._id}
                                     categoryId={item.productId.categoryId}
                                     subCategoryId={item.productId.subCategoryId}
-                                    key={item._id}
                                     productName={item.productId.productName}
                                     finalPrice={item.finalPrice}
-                                    status={order.status}
+                                    status={item.status}
                                     date={formatDate(order.createdAt)}
                                     photo={item.productId.images[0]?.url}
                                 />

@@ -58,7 +58,7 @@ const AddressBook = () => {
 
     return (
         <>
-            <div className=' w-full py-[40px] font-TenorSans'>
+            <div className='p-2 sm:p-5 w-full py-[40px] font-TenorSans'>
                 <div className="flex justify-between">
                     <h2 className="text-xl sm:text-2xl mb-5 text-[#db4444] font-medium font-Poppins leading-7 ">My Address</h2>
                     <button onClick={handleClick} className='text-xl sm:text-2xl mb-5 text-[#db4444] font-medium font-Poppins leading-7'>Add</button>

@@ -51,14 +51,14 @@ const OrderSummary = ({ cartItems, subtotal, shipping, total, onPlaceOrder, load
                             <input
                                 type="radio"
                                 name="paymentMethod"
-                                disabled
+                                
                                 value="Prepaid"
                                 checked={selectedOption === 'Prepaid'}
                                 onChange={handleOptionChange}
                                 className="form-radio h-4 w-4 accent-[#DB4444] text-red-600 "
                             />
-                            <div className='w-full text-gray-400 flex h-full justify-between'>
-                                <span>Bank (Unavailable)</span>
+                            <div className='w-full flex h-full justify-between'>
+                                <span>Bank</span>
                                 <div className='flex gap-2 h-full'>
                                     <PhonePe className=" sm:h-6 h-5" alt="PhonePe" />
                                     <GooglePay className=" sm:h-6 h-5" alt="Google Pay" />
@@ -69,16 +69,17 @@ const OrderSummary = ({ cartItems, subtotal, shipping, total, onPlaceOrder, load
                         </label>
 
                         {/* Cash On Delivery Radio Button */}
-                        <label className="flex items-center space-x-2">
+                        <label className="flex  text-gray-500 items-center space-x-2">
                             <input
                                 type="radio"
                                 name="paymentMethod"
                                 value="COD"
+                                disabled
                                 checked={selectedOption === 'COD'}
                                 onChange={handleOptionChange}
                                 className="form-radio h-4 w-4 accent-[#DB4444] text-red-600"
                             />
-                            <span>Cash On Delivery</span>
+                            <span>Cash On Delivery (Unavailable)</span>
                         </label>
                     </div>
                 </div>

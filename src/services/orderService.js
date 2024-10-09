@@ -7,7 +7,7 @@ const API_URL = serverUrl;
 export const createOrder = async (orderData) => {
     // console.log(orderData)
     const token = localStorage.getItem('token');
-    
+
     const response = await axios.post(`${API_URL}/order`, orderData, {
         headers: { Authorization: `Bearer ${token}` }
     });
@@ -22,4 +22,42 @@ export const getOrder = async () => {
         headers: { Authorization: `Bearer ${token}` }
     });
     return response.data;
+};
+
+
+export const getOrderById = async (id) => {
+    const token = localStorage.getItem('token');
+
+    const response = await axios.get(`${API_URL}/order/${id}`, {
+        headers: { Authorization: `Bearer ${token}` }
+    });
+    return response.data.data;
+};
+
+export const initiatePayUPayment = async (order) => {
+    console.log(order)
+    try {
+        const token = localStorage.getItem('token');
+        const names = order.items.map((item) => item.productId.productName).join(', ')
+        const response = await axios.post(
+            `${API_URL}/payment`,
+            {
+                totalAmount: order.totalAmount,
+                productInfo: names,
+                userId: order.userId,
+                orderId: order._id,
+                address: order.shippingAddress
+            },
+            {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            }
+        );
+
+        return response.data;
+    } catch (error) {
+        console.error('Payment initiation failed:', error);
+        throw error;
+    }
 };

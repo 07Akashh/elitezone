@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { createOrder, getOrder } from '../../services/orderService';
+import { createOrder, getOrder, getOrderById } from '../../services/orderService';
 import { getCartItems } from '../../services/cartService';
 
 
@@ -16,6 +16,11 @@ export const placeOrder = createAsyncThunk('order/placeOrder', async (orderData)
 
 export const getOrders = createAsyncThunk('order/getOrders', async () => {
     const response = await getOrder();
+    return response;
+})
+
+export const getOrdersById = createAsyncThunk('order/getOrdersById', async (id) => {
+    const response = await getOrderById(id);
     return response;
 })
 const orderSlice = createSlice({
@@ -78,6 +83,17 @@ const orderSlice = createSlice({
             })
             .addCase(getOrders.rejected, (state, action) => {
                 state.getOrderStatus = 'failed';
+                state.error = action.error.message;
+            })
+            .addCase(getOrdersById.pending, (state) => {
+                state.getOrdersByIdStatus = 'loading';
+            })
+            .addCase(getOrdersById.fulfilled, (state, action) => {
+                state.getOrdersByIdStatus = 'succeeded';
+                state.getOrdersById = action.payload;
+            })
+            .addCase(getOrdersById.rejected, (state, action) => {
+                state.getOrdersByIdStatus = 'failed';
                 state.error = action.error.message;
             });
     },

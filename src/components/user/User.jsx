@@ -79,6 +79,7 @@ const User = () => {
                     <Route path="/embroidered-abaya" element={<ProductList category="embroidered-abaya" />} />
                     <Route path="/:categoryId/:subCategoryId/:id" element={<ProductDetails />} />
                     <Route path="/cart/checkout" element={<Checkout />} />
+                    
                     <Route path="detail" element={<OrderDetailsPage />} />
                 </Routes>
             </main>
