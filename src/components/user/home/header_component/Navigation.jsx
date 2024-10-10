@@ -86,17 +86,19 @@ const Navigation = () => {
                                 About Us
                             </NavLink>
                         </li>
-                        <li>
-                            <NavLink
-                                to="/register"
-                                className={`block ${matchSignUp ? 'text-[#db4444] font-normal' : ''}`}
-                                onClick={toggleSidebar}
-                            >
-                                Sign Up
-                            </NavLink>
-                        </li>
+                        {!user && (
+                            <li>
+                                <NavLink
+                                    to="/register"
+                                    className={`block ${matchSignUp ? 'text-[#db4444] font-normal' : ''}`}
+                                    onClick={toggleSidebar}
+                                >
+                                    Sign Up
+                                </NavLink>
+                            </li>
+                        )}
                     </ul>
-
+                    
                     {user && (
                         <>
                             <p className="text-black text-base font-medium leading-normal mt-4 mb-4 px-6">
