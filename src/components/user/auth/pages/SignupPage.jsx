@@ -106,7 +106,7 @@ const Register = () => {
 
             {/* Right Side Form */}
             <div className='md:flex-1 max-w-md bg-white rounded-lg p-6 '>
-                <h2 className='text-black text-4xl font-medium pb-[16px]'>Create an account</h2>
+                <h2 className='text-black text-3xl sm:text-4xl font-medium pb-[16px]'>Create an account</h2>
                 <p className="font-Poppins pb-4">Enter your details below</p>
                 <form onSubmit={handleRegister} className='text-lg text-center space-y-3'>
                     <input

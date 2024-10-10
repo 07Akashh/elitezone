@@ -219,7 +219,7 @@ const MyProfile = () => {
                     </div> */}
                             <div className='mt-[24px] justify-end flex gap-5'>
                                 <button type="button" onClick={handleReset} className=' text-sm font-normal leading-normal'>Cancel</button>
-                                <button type="submit" className=' py-[16px] px-[48px] bg-[#DB4444] text-white text-sm font-normal leading-normal rounded'>Save Changes</button>
+                                <button type="submit" className=' py-[16px] px-[30px] sm:px-[48px] bg-[#DB4444] text-xs text-white sm:text-sm font-normal leading-normal rounded'>Save Changes</button>
                             </div>
                         </form>
                     </div>

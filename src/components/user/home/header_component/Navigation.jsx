@@ -1,138 +1,155 @@
 import React, { useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, NavLink, useLocation, useResolvedPath, useMatch } from 'react-router-dom';
 import { FiMenu } from "react-icons/fi";
 import { AiOutlineClose } from "react-icons/ai";
 import { useSelector } from 'react-redux';
-
-// const Accordion = ({ title, isOpen, onToggle, children }) => (
-//     <div className="relative">
-//         <button
-//             onClick={onToggle}
-//             className="flex items-center w-full gap-1 text-left py-1 hover:text-gray-700"
-//         >
-//             {title}
-//         </button>
-//         {isOpen && (
-//             <div className="ml-4 mt-2">
-//                 {children}
-//             </div>
-//         )}
-//     </div>
-// );
-
-// const abayaData = [
-//     { name: 'Nida Fabric', catId: 'abayas-001', subCatId: 'nida-fabric' },
-//     { name: 'TikTok Fabric', catId: 'abayas-001', subCatId: 'tiktok-fabric' },
-//     { name: 'Harira Fabric', catId: 'abayas-001', subCatId: 'harira-fabric' },
-//     { name: 'Shiffon Fabric', catId: 'abayas-001', subCatId: 'shiffon-fabric' },
-//     { name: 'Silk Shiny Fabric', catId: 'abayas-001', subCatId: 'silk-shiny-fabric' },
-//     { name: 'Zoom Fabric', catId: 'abayas-001', subCatId: 'zoom-fabric' },
-//     { name: 'Korean Nida Fabric', catId: 'abayas-001', subCatId: 'korean-nida-fabric' },
-
-// ];
-
-// const abayaGroups = [
-//     abayaData.slice(0, 3),
-//     abayaData.slice(3, 6),
-//     abayaData.slice(6),
-// ];
-
-// const hijabData = [
-//     { name: 'Nida Fabric', catId: 'abayas-001', subCatId: 'nida-fabric' },
-//     { name: 'TikTok Fabric', catId: 'abayas-001', subCatId: 'tiktok-fabric' },
-//     { name: 'Harira Fabric', catId: 'abayas-001', subCatId: 'harira-fabric' },
-
-// ];
-
-
-// const hijabGroups = [
-//     hijabData.slice(0, 3),
-//     hijabData.slice(3, 6),
-//     hijabData.slice(6)
-// ];
-
-
-// const accessoriesData = [
-//     { name: 'Accessories1', catId: 'abayas-001', subCatId: 'nida-fabric' },
-//     { name: 'Accessories1.1', catId: 'abayas-001', subCatId: 'tiktok-fabric' },
-//     { name: 'Accessories1.2', catId: 'abayas-001', subCatId: 'harira-fabric' },
-//     { name: 'Accessories1.3', catId: 'abayas-001', subCatId: 'shiffon-fabric' },
-//     { name: 'Accessories2', catId: 'abayas-001', subCatId: 'silk-shiny-fabric' },
-//     { name: 'Accessories2.1', catId: 'abayas-001', subCatId: 'zoom-fabric' },
-//     { name: 'Accessories2.2', catId: 'abayas-001', subCatId: 'korean-nida-fabric' },
-//     { name: 'Accessories2.3', catId: 'abayas-001', subCatId: 'korean-nida-fabric2' },
-//     { name: 'Accessories3', catId: 'abayas-001', subCatId: 'korean-nida-fabric3' },
-//     { name: 'Accessories3.1', catId: 'abayas-001', subCatId: 'korean-nida-fabric4' },
-//     { name: 'Accessories3.2', catId: 'abayas-001', subCatId: 'korean-nida-fabric5' },
-//     { name: 'Accessories3.3', catId: 'abayas-001', subCatId: 'korean-nida-fabric6' },
-
-
-
-// ];
-
-
-// const accessoriesGroups = [
-//     accessoriesData.slice(0, 4),
-//     accessoriesData.slice(4, 8),
-//     accessoriesData.slice(8, 12)
-// ];
-
+import Logout from '../../profile/component/Logout';
 
 const Navigation = () => {
     const location = useLocation();
-    const [isMenuOpen, setIsMenuOpen] = useState(false);
-    // const [openAccordion, setOpenAccordion] = useState(null);
+    const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+    const [isLogoutPopupOpen, setIsLogoutPopupOpen] = useState(false);
     const user = useSelector((state) => state.auth.user);
 
-    const toggleMenu = () => {
-        setIsMenuOpen(prev => !prev);
+    const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen);
+    const handleOpenPopup = () => setIsLogoutPopupOpen(true);
+    const handleClosePopup = () => setIsLogoutPopupOpen(false);
+
+
+    const handleLogout = () => {
+        localStorage.removeItem('token');
+        window.location.reload();
     };
 
-
-    // const handleAccordionToggle = (section) => {
-    //     setOpenAccordion(prev => prev === section ? null : section);
-    // };
-
-    // const handleMouseEnter = (setDropdown) => {
-    //     setDropdown(true);
-    // };
-
-    // const handleMouseLeave = (setDropdown) => {
-    //     setDropdown(false);
-    // };
-
+    // Active link logic
     const isActive = (path) => location.pathname === path ? 'nav-link-active' : '';
 
+    // For matching paths
+    const { pathname } = useResolvedPath('');
+    const matchProfile = useMatch(`${pathname}/my-account/profile`);
+    const matchOrders = useMatch(`${pathname}/my-account/orders`);
+    const matchAddressBook = useMatch(`${pathname}/my-account/address-book`);
+
+    const matchHome = useMatch(`${pathname}/`);
+    const matchAbout = useMatch(`${pathname}/about`);
+    const matchContact = useMatch(`${pathname}/contact`);
+    const matchSignUp = useMatch(`${pathname}/register`);
+
+
     return (
-        <nav className='font-Inter text-lg flex space-x-6'>
-            {/* Hamburger menu for screens below md */}
-            <div className="lg:hidden relative">
-                <button onClick={toggleMenu} className="sm:text-2xl focus:outline-none">
-                    <FiMenu />
-                </button>
+        <>
+            {/* Hamburger Button for small screens */}
+            <button
+                className="lg:hidden text-2xl z-50  text-black rounded-lg"
+                onClick={toggleSidebar}
+            >
+                <FiMenu />
+            </button>
 
-                {/* Left-Side Navigation */}
-                <div className={`fixed top-0 left-0 h-full w-44 bg-white shadow-lg transition-transform duration-100 ease-in-out z-50 ${isMenuOpen ? 'translate-x-0' : '-translate-x-full'}`}>
-                    <div className="p-5">
-                        <button onClick={toggleMenu} className="sm:text-2xl float-end mb-4 focus:outline-none">
-                            <AiOutlineClose />
-                        </button>
-                        <div className="flex mt-10 flex-col space-y-2">
-                            <Link to="/" className="hover:text-gray-700 shadow-sm text-center rounded-md">Home</Link>
-                            <Link to="/contact" className="hover:text-gray-700 shadow-sm text-center rounded-md">Contact</Link>
-                            <Link to="/about" className="hover:text-gray-700 shadow-sm text-center rounded-md">About</Link>
-                            {!user && (
-                                <Link to="/register" className="hover:text-gray-700 shadow-sm text-center rounded-md">
-                                    Sign Up
-                                </Link>
-                            )}
-                        </div>
-                    </div>
+            {/* Sidebar for small screens */}
+            <nav
+                className={`fixed top-0 left-0 w-64 h-full z-40 transition-transform transform ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full'
+                    } lg:hidden bg-white text-black/50 text-sm font-light font-['Poppins']`}
+            >
+                <div className="p-5">
+                    <button onClick={toggleSidebar} className="text-2xl mb-4 focus:outline-none">
+                        <AiOutlineClose />
+                    </button>
+                    <p className="text-black text-base font-medium leading-normal mb-4 px-6">
+
+                    </p>
+                    <ul className="space-y-4 px-6">
+                        <li>
+                            <NavLink
+                                to="/"
+                                className={`block ${matchHome ? 'text-[#db4444] font-normal' : ''}`}
+                                onClick={toggleSidebar}
+                            >
+                                Home
+                            </NavLink>
+                        </li>
+                        <li>
+                            <NavLink
+                                to="/contact"
+                                className={`block ${matchContact ? 'text-[#db4444] font-normal' : ''}`}
+                                onClick={toggleSidebar}
+                            >
+                                Contact Us
+                            </NavLink>
+                        </li>
+                        <li>
+                            <NavLink
+                                to="/about"
+                                className={`block ${matchAbout ? 'text-[#db4444] font-normal' : ''}`}
+                                onClick={toggleSidebar}
+                            >
+                                About Us
+                            </NavLink>
+                        </li>
+                        <li>
+                            <NavLink
+                                to="/register"
+                                className={`block ${matchSignUp ? 'text-[#db4444] font-normal' : ''}`}
+                                onClick={toggleSidebar}
+                            >
+                                Sign Up
+                            </NavLink>
+                        </li>
+                    </ul>
+
+                    {user && (
+                        <>
+                            <p className="text-black text-base font-medium leading-normal mt-4 mb-4 px-6">
+                                Manage My Account
+                            </p>
+                            <ul className="space-y-4 px-6">
+                                <li>
+                                    <NavLink
+                                        to="/my-account/profile"
+                                        className={`block ${matchProfile ? 'text-[#db4444] font-normal' : ''}`}
+                                        onClick={toggleSidebar}
+                                    >
+                                        My Profile
+                                    </NavLink>
+                                </li>
+                                <li>
+                                    <NavLink
+                                        to="/my-account/address-book"
+                                        className={`block ${matchAddressBook ? 'text-[#db4444] font-normal' : ''}`}
+                                        onClick={toggleSidebar}
+                                    >
+                                        Address Book
+                                    </NavLink>
+                                </li>
+                                <li>
+                                    <NavLink
+                                        to="/my-account/orders"
+                                        className={`block ${matchOrders ? 'text-[#db4444] font-normal' : ''}`}
+                                        onClick={toggleSidebar}
+                                    >
+                                        My Orders
+                                    </NavLink>
+                                </li>
+                                <li>
+                                    <button
+                                        onClick={() => {
+                                            toggleSidebar();
+                                            handleOpenPopup();
+                                        }}
+                                        className="w-full text-left"
+                                    >
+                                        Logout
+                                    </button>
+                                </li>
+                            </ul>
+                        </>
+                    )}
+
                 </div>
-            </div>
+            </nav>
 
-            {/* Main navigation for larger screens */}
-            <div className='hidden lg:flex space-x-6'>
+            {/* Normal navigation links for larger screens */}
+            <div className='hidden lg:flex space-x-6 mr-5 xl:mr-auto'>
                 <Link to="/" className={`nav-link ${isActive('/')}`}>Home</Link>
                 <Link to="/contact" className={`nav-link ${isActive('/contact')}`}>Contact</Link>
                 <Link to="/about" className={`nav-link ${isActive('/about')}`}>About</Link>
@@ -142,8 +159,21 @@ const Navigation = () => {
                     </Link>
                 )}
             </div>
-        </nav>
 
+            {/* Background overlay when the sidebar is open (mobile view) */}
+            {isSidebarOpen && (
+                <div
+                    className="fixed inset-0 bg-black opacity-50 z-30 lg:hidden"
+                    onClick={toggleSidebar}
+                ></div>
+            )}
+
+            <Logout
+                isOpen={isLogoutPopupOpen}
+                onClose={handleClosePopup}
+                onConfirm={handleLogout}
+            />
+        </>
     );
 };
 

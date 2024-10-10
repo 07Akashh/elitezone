@@ -13,7 +13,7 @@ const ContactUs = () => {
             </div>
             <div className="flex flex-col md:flex-row gap-y-[40px] sm:gap-y-0 border-black gap-x-[30px] justify-between ">
                 {/* Contact Information Section */}
-                <div className="md:w-[340px] w-full h-auto sm:h-[457px]  text-black font-normal shadow-md drop-shadow-sm py-[40px] px-[35px] bg-[#FFFFFF] flex flex-col">
+                <div className="md:w-[340px] w-full h-auto xl:h-[457px]  text-black font-normal shadow-md drop-shadow-sm py-[40px] px-[35px] bg-[#FFFFFF] flex flex-col">
                     <div className='flex items-center gap-x-3 mb-5'>
                         <IoCallOutline className='text-2xl h-[40px] w-[40px] p-2 bg-[#DB4444] text-white rounded-full' />
                         <div>
@@ -43,9 +43,10 @@ const ContactUs = () => {
                         {/* <p className="font-light leading-[21px] text-sm">Emails: support@exclusive.com</p> */}
                     </div>
                 </div>
-                <div className="sm:w-3/5 md:w-[800px] w-full sm:h-[457px] shadow-md drop-shadow-sm p-4  sm:py-[40px]  lg:px-[32px]">
+
+                <div className="sm:w-3/5 md:w-[800px] w-full xl:h-[457px] shadow-md drop-shadow-sm p-4  sm:py-[40px]  lg:px-[32px]">
                     <form className="space-y-[32px] ">
-                        <div className='w-full grid sm:grid-cols-3 grid-cols-1 mb-6 space-y-3 sm:space-y-0 sm:space-x-3'>
+                        <div className='w-full grid sm:grid-cols-2 xl:grid-cols-3 grid-cols-1 mb-6 gap-x-3 gap-y-6'>
                             <input
                                 className="py-[13px] bg-[#F5F5F5] outline-none px-[16px]"
                                 type="text"
@@ -63,7 +64,7 @@ const ContactUs = () => {
                                 placeholder='Your Email *'
                             />
                             <input
-                                className="py-[13px] bg-[#F5F5F5] outline-none px-[16px]"
+                                className="py-[13px] bg-[#F5F5F5] outline-none px-[16px] sm:col-span-2 xl:col-span-1"
                                 type="tel"
                                 id="phone"
                                 name="phone"
@@ -71,6 +72,7 @@ const ContactUs = () => {
                                 placeholder='Your Phone *'
                             />
                         </div>
+
                         <div>
                             <textarea
                                 className="w-full bg-[#F5F5F5] outline-none py-[13px] px-[16px]"

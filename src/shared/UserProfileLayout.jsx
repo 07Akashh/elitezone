@@ -15,7 +15,7 @@ const UserProfileLayout = () => {
             </div>
             <div className="my-5 flex flex-col md:flex-row justify-between h-full">
                 <Sidebar className="md:w-1/4  lg:w-1/5" />
-                <div className="w-full md:w-3/4 shadow-md drop-shadow-sm rounded lg:w-4/5">
+                <div className="w-full shadow-md drop-shadow-sm rounded lg:w-4/5">
                     <Outlet />
                 </div>
             </div>

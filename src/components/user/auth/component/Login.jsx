@@ -99,7 +99,7 @@ const Login = ({ switchToRegister }) => {
             </h2>
             <button onClick={handleGoogleLogin} disabled={loading} className='mt-3 text-[#928f8f] border-2 flex m-auto gap-1 px-2 py-1 rounded-lg'>
                 <img src="https://img.icons8.com/?size=100&id=17949&format=png&color=000000" alt="google logo" className='h-8 w-8' />
-                <p className='m-auto'> Continue with Google</p>
+                <p className='m-auto text-sm sm:text-base'> Continue with Google</p>
             </button>
             {showModal && <UserDetailsModal onSubmit={handleModalSubmit} onClose={() => setShowModal(false)} />}
         </div>

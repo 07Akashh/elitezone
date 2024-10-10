@@ -73,7 +73,7 @@ const Footer = () => {
         </div>
       </footer>
       <div className=" text-white/70 text-xs pb-[24px] pt-[16px] sm:text-sm bg-black text-center font-light font-Poppins leading-normal">
-        Copyright&copy; Brand All Rights Reserved.
+        Copyright&copy; EliteZone All Rights Reserved.
       </div>
     </>
   );

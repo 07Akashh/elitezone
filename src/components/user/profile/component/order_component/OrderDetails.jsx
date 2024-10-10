@@ -110,12 +110,12 @@ const OrderDetailsPage = () => {
 
     if (status === 'succeeded') {
         return (
-            <div className="w-full sm:py-5 py-2 px-2 sm:px-5 bg-white shadow-xl rounded-lg font-TenorSans">
-                <h1 className="text-xl sm:text-3xl font-semibold text-[#DB4444] mb-1 border-[#DB4444]">Order ID: <span className="text-[#130f26]">{id.toUpperCase()}</span></h1>
-                <div className='flex border-b border-gray-300 pb-3 sm:gap-4 gap-2 text-[8px] sm:text-sm'>
-                    <p className='text-[#78756e] font-extralight'>Order Date: <span className='text-black '>{formatDate(order.createdAt)}</span></p>
+            <div className="w-full sm:py-5 py-2 px-2 sm:px-5 bg-white shadow-xl rounded-lg font-Inter">
+                <h1 className="text-xl sm:text-2xl lg:text-3xl font-me text-[#DB4444] mb-1 border-[#DB4444]">Order ID: <span className="text-[#130f26]/80">{id.toUpperCase()}</span></h1>
+                <div className='flex border-b border-gray-300 pb-3 lg:gap-4 gap-2 text-[8px] sm:text-[10px] lg:text-sm'>
+                    <p className='text-[#78756e] '>Order Date: <span className='text-black '>{formatDate(order.createdAt)}</span></p>
                     <p className='text-[#78756e]'>|</p>
-                    <p className='text-green-500 font-semibold'>Estimated Delivery: 12 Aug, 2024</p>
+                    <p className='text-green-500 '>Estimated Delivery: 12 Aug, 2024</p>
                     <p className='text-[#78756e]'>|</p>
                     <p className="text-[#78756e]">{order.status}</p>
                 </div>
@@ -126,7 +126,7 @@ const OrderDetailsPage = () => {
                             <img src={item.productId.images[0].url} alt={item.productId.productName} className="w-16 h-16 object-cover rounded-lg shadow-sm" />
                             <div className='flex justify-between w-full my-auto'>
                                 <div className='text-[#78756e]'>
-                                    <p className="text-md sm:text-xl font-medium text-[#130f26] mb-0.5">{item.productId.productName}</p>
+                                    <p className="text-md sm:text-xl line-clamp-1 text-[#130f26]/90 font-normal mb-0.5">{item.productId.productName}</p>
                                     <p className='text-sm'>{capitalize(item.productId.color.name)} | {item.size}</p>
                                 </div>
                                 <div>
@@ -142,18 +142,18 @@ const OrderDetailsPage = () => {
                     <div className='flex w-full'>
                         <div className='text-start w-1/2'>
                             <h1>Payment</h1>
-                            <p className='mt-2 text-gray-500'>
-                                {order.paymentMethod === 'COD' ? 'Cash On Delivery' : 'Bank'}
+                            <p className='mt-2 text-xs sm:text-sm text-gray-500'>
+                                Mode : {order.paymentMethod === 'COD' ? 'Cash On Delivery' : 'Bank'}
                             </p>
                             <p className='text-xs sm:text-sm text-gray-500'>
-                                Transaction ID : {order?.transactionId}
+                                Txn ID : {order?.transactionId}
                             </p>
-                            </div>
+                        </div>
                         <div className='text-left w-1/2'>
                             <h1>Delivery</h1>
                             <div>
                                 <h3 className='text-sm text-gray-400 mt-2'>Address</h3>
-                                <p className='text-gray-600 font-bold'>{order.shippingAddress.firstName} {order.shippingAddress.lastName},</p>
+                                <p className='text-gray-600 font-semibold'>{order.shippingAddress.firstName} {order.shippingAddress.lastName},</p>
                                 <div className='text-gray-500'>
                                     <p>{order.shippingAddress.addressLine1}, {order.shippingAddress.addressLine2}</p>
                                     <p>{order.shippingAddress.city}, {order.shippingAddress.state}, {order.shippingAddress.country}</p>
@@ -181,7 +181,7 @@ const OrderDetailsPage = () => {
                             <h1>Order Summary</h1>
                             <div className='flex justify-between border-b pb-2 border-dashed border-gray-300'>
                                 <div>
-                                    <p className='mt-2 text-gray-600 font-bold'>Subtotal</p>
+                                    <p className='mt-2 text-gray-600 font-semibold'>Subtotal</p>
                                     <div className='text-xs text-gray-400 space-y-1'>
                                         <p>Discount</p>
                                         <p>Delivery</p>

@@ -74,7 +74,7 @@ const LoginPage = () => {
 
             {/* Right Side Form */}
             <div className='md:flex-1 max-w-md bg-white rounded-lg p-6 '>
-                <h2 className='text-black text-4xl font-medium pb-[16px]'>Log in to Exclusive</h2>
+                <h2 className='text-black text-3xl sm:text-4xl font-medium pb-[16px]'>Log in to EliteZone</h2>
                 <p className="font-Poppins pb-4">Enter your details below</p>
                 <form onSubmit={handleLogin} className='text-lg text-center space-y-4'>
                 <input
