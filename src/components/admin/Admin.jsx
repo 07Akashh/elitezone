@@ -12,6 +12,7 @@ import { fetchAdminUserData } from '../../redux/slices/adminAuthSlice';
 import AdminLoginRoute from '../routes/AdminLoginRoute'
 import CampaignPage from './pages/CampaignPage';
 import { getOffers } from '../../redux/slices/categorySlice';
+import { fetchAdminStats, fetchOrders, fetchProducts, fetchUsers } from '../../redux/slices/adminSlice';
 
 const Admin = () => {
     const dispatch = useDispatch();
@@ -19,8 +20,12 @@ const Admin = () => {
 
     useEffect(() => {
         if (adminToken) {
+            dispatch(fetchAdminStats())
             dispatch(getOffers())
+            dispatch(fetchOrders())
+            dispatch(fetchProducts())
             dispatch(fetchAdminUserData());
+            dispatch(fetchUsers())
         }
     }, [dispatch, adminToken]);
 

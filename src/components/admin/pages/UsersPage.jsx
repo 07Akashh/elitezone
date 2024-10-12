@@ -7,6 +7,7 @@ import UsersTable from "../components/users/UsersTable";
 import UserGrowthChart from "../components/users/UserGrowthChart";
 import UserActivityHeatmap from "../components/users/UserActivityHeatmap";
 import UserDemographicsChart from "../components/users/UserDemographicsChart";
+import { useSelector } from "react-redux";
 
 const userStats = {
 	totalUsers: 152845,
@@ -15,7 +16,17 @@ const userStats = {
 	churnRate: "2.4%",
 };
 
+
+
 const UsersPage = () => {
+
+	const stats = useSelector((state) => state.adminData.stats.data);
+	const loading = useSelector((state) => state.adminData.stats.loading);
+
+	if (loading) {
+		return <p>Loading...</p>
+	}
+
 	return (
 		<div className='flex-1 overflow-auto relative z-0'>
 			<Header title='Customers' />
@@ -31,14 +42,14 @@ const UsersPage = () => {
 					<StatCard
 						name='Total Users'
 						icon={UsersIcon}
-						value={userStats.totalUsers.toLocaleString()}
+						value={stats.totalUsers.toLocaleString()}
 						color='#6366F1'
 					/>
-					<StatCard name='New Users Today' icon={UserPlus} value={userStats.newUsersToday} color='#10B981' />
+					<StatCard name='New Users Today' icon={UserPlus} value={stats.newUsersToday} color='#10B981' />
 					<StatCard
 						name='Active Users'
 						icon={UserCheck}
-						value={userStats.activeUsers.toLocaleString()}
+						value={stats.totalUsers.toLocaleString()}
 						color='#F59E0B'
 					/>
 					<StatCard name='Churn Rate' icon={UserX} value={userStats.churnRate} color='#EF4444' />

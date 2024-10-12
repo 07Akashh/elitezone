@@ -9,6 +9,7 @@ import orderReducer from './slices/orderSlice'
 import adminAuthReducer from './slices/adminAuthSlice'
 import categoryReducer from './slices/categorySlice'
 import reviewReducer from './slices/reviewSlice'
+import adminReducer from './slices/adminSlice'
 
 export const store = configureStore({
   reducer: {
@@ -21,6 +22,7 @@ export const store = configureStore({
     adminAuth: adminAuthReducer,
     category: categoryReducer,
     productReviews: reviewReducer,
+    adminData: adminReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

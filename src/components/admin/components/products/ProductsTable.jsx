@@ -1,24 +1,25 @@
 import { motion } from "framer-motion";
 import { Edit, Search, Trash2 } from "lucide-react";
 import { useState } from "react";
+import { useSelector } from "react-redux";
 
-const PRODUCT_DATA = [
-	{ id: 1, name: "Wireless Earbuds", category: "Electronics", price: 59.99, stock: 143, sales: 1200 },
-	{ id: 2, name: "Leather Wallet", category: "Accessories", price: 39.99, stock: 89, sales: 800 },
-	{ id: 3, name: "Smart Watch", category: "Electronics", price: 199.99, stock: 56, sales: 650 },
-	{ id: 4, name: "Yoga Mat", category: "Fitness", price: 29.99, stock: 210, sales: 950 },
-	{ id: 5, name: "Coffee Maker", category: "Home", price: 79.99, stock: 78, sales: 720 },
-];
 
 const ProductsTable = () => {
+	const products = useSelector((state) => state.adminData.products.data);
+	const loading = useSelector((state) => state.adminData.products.loading);
 	const [searchTerm, setSearchTerm] = useState("");
-	const [filteredProducts, setFilteredProducts] = useState(PRODUCT_DATA);
+	const [filteredProducts, setFilteredProducts] = useState(products);
+
+
+	if (loading) {
+		return <p>Loading...</p>
+	}
 
 	const handleSearch = (e) => {
 		const term = e.target.value.toLowerCase();
 		setSearchTerm(term);
-		const filtered = PRODUCT_DATA.filter(
-			(product) => product.name.toLowerCase().includes(term) || product.category.toLowerCase().includes(term)
+		const filtered = products.filter(
+			(product) => product.productName.toLowerCase().includes(term) || product.categoryId.name.toLowerCase().includes(term)
 		);
 
 		setFilteredProducts(filtered);
@@ -34,18 +35,18 @@ const ProductsTable = () => {
 			<div className='flex justify-between items-center mb-6'>
 				<h2 className='text-xl font-normal text-black'>Products</h2>
 				<div className='relative'>
-				<input
-					type='text'
-					placeholder='Search Products...'
-					className='bg-gray-100 border text-black placeholder-gray-400 rounded-lg pl-10 pr-4 py-2 focus:outline-none focus:ring-2 focus:ring-[#DB4444]'
-					value={searchTerm}
-					onChange={handleSearch}
-				/>
-				<Search className='absolute left-3 top-2.5 text-gray-400' size={18} />
-			</div>
+					<input
+						type='text'
+						placeholder='Search Products...'
+						className='bg-gray-100 border text-black placeholder-gray-400 rounded-lg pl-10 pr-4 py-2 focus:outline-none focus:ring-2 focus:ring-[#DB4444]'
+						value={searchTerm}
+						onChange={handleSearch}
+					/>
+					<Search className='absolute left-3 top-2.5 text-gray-400' size={18} />
+				</div>
 			</div>
 
-			<div className='overflow-x-auto'>
+			<div className='overflow-x-auto h-[500px] overflow-auto no-scrollbar'>
 				<table className='min-w-full divide-y divide-gray-700'>
 					<thead>
 						<tr>
@@ -73,26 +74,28 @@ const ProductsTable = () => {
 					<tbody className='divide-y divide-gray-300'>
 						{filteredProducts.map((product) => (
 							<motion.tr
-								key={product.id}
+								key={product._id}
 								initial={{ opacity: 0 }}
 								animate={{ opacity: 1 }}
 								transition={{ duration: 0.3 }}
 							>
-								<td className='px-6 py-4 whitespace-nowrap text-sm font-normal text-[#555F7E] flex gap-2 items-center'>
+								<td className='px-6 py-4 whitespace-nowrap text-sm font-normal line-clamp-1 text-[#555F7E] flex gap-2 items-center'>
 									<img
-										src='https://images.unsplash.com/photo-1627989580309-bfaf3e58af6f?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8d2lyZWxlc3MlMjBlYXJidWRzfGVufDB8fDB8fHww'
+										src={product?.images[0]?.url}
 										alt='Product img'
 										className='size-10 rounded-full'
 									/>
-									{product.name}
+									<span className="max-w-[200px]">
+									{product.productName}
+									</span>
 								</td>
 
 								<td className='px-6 py-4 whitespace-nowrap text-sm text-[#555F7E]'>
-									{product.category}
+									{product.categoryId.name}
 								</td>
 
 								<td className='px-6 py-4 whitespace-nowrap text-sm text-[#555F7E]'>
-									${product.price.toFixed(2)}
+									₹{product.price.toFixed(2)}
 								</td>
 								<td className='px-6 py-4 whitespace-nowrap text-sm text-[#555F7E]'>{product.stock}</td>
 								<td className='px-6 py-4 whitespace-nowrap text-sm text-[#555F7E]'>{product.sales}</td>
