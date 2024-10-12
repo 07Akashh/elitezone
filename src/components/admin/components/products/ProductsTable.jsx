@@ -19,7 +19,7 @@ const ProductsTable = () => {
 		const term = e.target.value.toLowerCase();
 		setSearchTerm(term);
 		const filtered = products.filter(
-			(product) => product.productName.toLowerCase().includes(term) || product.categoryId.name.toLowerCase().includes(term)
+			(product) => product?.productName?.toLowerCase()?.includes(term) || product?.categoryId?.name?.toLowerCase().includes(term)
 		);
 
 		setFilteredProducts(filtered);
@@ -86,19 +86,19 @@ const ProductsTable = () => {
 										className='size-10 rounded-full'
 									/>
 									<span className="max-w-[200px]">
-									{product.productName}
+									{product?.productName}
 									</span>
 								</td>
 
 								<td className='px-6 py-4 whitespace-nowrap text-sm text-[#555F7E]'>
-									{product.categoryId.name}
+									{product?.categoryId?.name}
 								</td>
 
 								<td className='px-6 py-4 whitespace-nowrap text-sm text-[#555F7E]'>
-									₹{product.price.toFixed(2)}
+									₹{product?.price?.toFixed(2)}
 								</td>
-								<td className='px-6 py-4 whitespace-nowrap text-sm text-[#555F7E]'>{product.stock}</td>
-								<td className='px-6 py-4 whitespace-nowrap text-sm text-[#555F7E]'>{product.sales}</td>
+								<td className='px-6 py-4 whitespace-nowrap text-sm text-[#555F7E]'>{product?.stock}</td>
+								<td className='px-6 py-4 whitespace-nowrap text-sm text-[#555F7E]'>{product?.sales || 0}</td>
 								<td className='px-6 py-4 whitespace-nowrap text-sm text-[#555F7E]'>
 									<button className='text-indigo-400 hover:text-indigo-300 mr-2'>
 										<Edit size={18} />

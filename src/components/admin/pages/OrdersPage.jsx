@@ -36,7 +36,7 @@ const OrdersPage = () => {
 						value={stats?.completedOrders}
 						color='#10B981'
 					/>
-					<StatCard name='Total Revenue' icon={IndianRupee} value={`₹${stats?.overallTotalSales.toFixed(2)}`} color='#EF4444' />
+					<StatCard name='Total Revenue' icon={IndianRupee} value={`₹${stats?.overallTotalSales?.toFixed(2)}`} color='#EF4444' />
 				</motion.div>
 
 				<div className='grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8'>

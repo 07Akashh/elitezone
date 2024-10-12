@@ -28,7 +28,7 @@ const OrdersTable = () => {
 		const term = e.target.value.toLowerCase();
 		setSearchTerm(term);
 		const filtered = orders.filter(
-			(order) => order._id.toLowerCase().includes(term) || order.shippingAddress.firstName.toLowerCase().includes(term)
+			(order) => order?._id.toLowerCase().includes(term) || order?.shippingAddress.firstName.toLowerCase().includes(term)
 		);
 		setFilteredOrders(filtered);
 	};
@@ -89,31 +89,31 @@ const OrdersTable = () => {
 
 								>
 									<td className='px-6 py-4 whitespace-nowrap text-sm font-normal text-[#555F7E]'>
-										{order._id.toUpperCase()}
+										{order?._id.toUpperCase()}
 									</td>
 									<td className='px-6 py-4 whitespace-nowrap text-sm font-normal text-[#555F7E]'>
-										{order.shippingAddress.firstName} {order.shippingAddress.lastName}
+										{order?.shippingAddress?.firstName} {order?.shippingAddress?.lastName}
 									</td>
 									<td className='px-6 py-4 whitespace-nowrap text-sm font-normal text-[#555F7E]'>
-										₹{order.totalAmount.toFixed(2)}
+										₹{order?.totalAmount?.toFixed(2)}
 									</td>
 									<td className='px-6 py-4 whitespace-nowrap text-sm text-[#555F7E]'>
 										<span
-											className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${order.status === "Delivered"
+											className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${order?.status === "Delivered"
 												? "bg-green-100 text-green-800"
-												: order.status === "Processing"
+												: order?.status === "Processing"
 													? "bg-yellow-100 text-yellow-800"
-													: order.status === "Shipped"
+													: order?.status === "Shipped"
 														? "bg-blue-100 text-blue-800"
-														: order.status === "Received"
+														: order?.status === "Received"
 															? "bg-black/50 text-white"
 															: "bg-red-100 text-red-800"
 												}`}
 										>
-											{order.status}
+											{order?.status}
 										</span>
 									</td>
-									<td className='px-6 py-4 whitespace-nowrap text-sm text-[#555F7E]'>{formatDate(order.createdAt)}</td>
+									<td className='px-6 py-4 whitespace-nowrap text-sm text-[#555F7E]'>{formatDate(order?.createdAt)}</td>
 									<td className='px-6 py-4 whitespace-nowrap text-sm text-[#555F7E]'>
 										<button className='text-indigo-400 hover:text-indigo-300 mr-2'>
 											<Eye size={18} />

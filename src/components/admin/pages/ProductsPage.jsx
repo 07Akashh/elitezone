@@ -29,10 +29,10 @@ const ProductsPage = () => {
 					animate={{ opacity: 1, y: 0 }}
 					transition={{ duration: 1 }}
 				>
-					<StatCard name='Total Products' icon={Package} value={stats.totalProducts} color='#6366F1' />
-					<StatCard name='Top Selling' icon={TrendingUp} value={stats.topSellingProducts?.length} color='#10B981' />
-					<StatCard name='Low Stock' icon={AlertTriangle} value={stats.lowStockProducts?.length} color='#F59E0B' />
-					<StatCard name='Total Revenue' icon={IndianRupee} value={`₹${stats?.overallTotalSales.toFixed(2)}`} color='#EF4444' />
+					<StatCard name='Total Products' icon={Package} value={stats?.totalProducts} color='#6366F1' />
+					<StatCard name='Top Selling' icon={TrendingUp} value={stats?.topSellingProducts?.length} color='#10B981' />
+					<StatCard name='Low Stock' icon={AlertTriangle} value={stats?.lowStockProducts?.length} color='#F59E0B' />
+					<StatCard name='Total Revenue' icon={IndianRupee} value={`₹${stats?.overallTotalSales?.toFixed(2)}`} color='#EF4444' />
 				</motion.div>
 
 				<ProductsTable />

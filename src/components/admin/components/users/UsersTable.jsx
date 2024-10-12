@@ -20,7 +20,7 @@ const UsersTable = () => {
 		const term = e.target.value.toLowerCase();
 		setSearchTerm(term);
 		const filtered = users.filter(
-			(user) => user.firstName.toLowerCase().includes(term) || user.email.toLowerCase().includes(term)
+			(user) => user?.firstName?.toLowerCase()?.includes(term) || user?.email?.toLowerCase()?.includes(term)
 		);
 		setFilteredUsers(filtered);
 	};
@@ -71,7 +71,7 @@ const UsersTable = () => {
 					<tbody className='divide-y divide-gray-300'>
 						{filteredUsers.map((user) => (
 							<motion.tr
-								key={user.id}
+								key={user?.id}
 								initial={{ opacity: 0 }}
 								animate={{ opacity: 1 }}
 								transition={{ duration: 0.3 }}
@@ -80,17 +80,17 @@ const UsersTable = () => {
 									<div className='flex items-center'>
 										<div className='flex-shrink-0 h-10 w-10'>
 											<div className='h-10 w-10 rounded-full bg-gradient-to-r from-purple-400 to-blue-500 flex items-center justify-center text-white font-semibold'>
-												{user.firstName.charAt(0).toUpperCase()}
+												{user?.firstName?.charAt(0).toUpperCase()}
 											</div>
 										</div>
 										<div className='ml-4'>
-											<div className='text-sm font-normal text-[#555f7e]'>{user.firstName} {user.lastName}</div>
+											<div className='text-sm font-normal text-[#555f7e]'>{user?.firstName} {user?.lastName}</div>
 										</div>
 									</div>
 								</td>
 
 								<td className='px-6 py-4 whitespace-nowrap'>
-									<div className='text-sm text-[#555f7e]'>{user.email}</div>
+									<div className='text-sm text-[#555f7e]'>{user?.email}</div>
 								</td>
 								<td className='px-6 py-4 whitespace-nowrap'>
 									<span className='px-2 inline-flex text-xs leading-5 font-normal rounded-full bg-blue-800 text-blue-100'>
@@ -102,7 +102,7 @@ const UsersTable = () => {
 									<span
 										className={`px-2 inline-flex text-xs leading-5 font-normal rounded-full`}
 									>
-										{user.phone}
+										{user?.phone || 'N/A'}
 									</span>
 								</td>
 

@@ -9,14 +9,6 @@ import UserActivityHeatmap from "../components/users/UserActivityHeatmap";
 import UserDemographicsChart from "../components/users/UserDemographicsChart";
 import { useSelector } from "react-redux";
 
-const userStats = {
-	totalUsers: 152845,
-	newUsersToday: 243,
-	activeUsers: 98520,
-	churnRate: "2.4%",
-};
-
-
 
 const UsersPage = () => {
 
@@ -42,17 +34,17 @@ const UsersPage = () => {
 					<StatCard
 						name='Total Users'
 						icon={UsersIcon}
-						value={stats.totalUsers.toLocaleString()}
+						value={stats?.totalUsers?.toLocaleString()}
 						color='#6366F1'
 					/>
-					<StatCard name='New Users Today' icon={UserPlus} value={stats.newUsersToday} color='#10B981' />
+					<StatCard name='New Users Today' icon={UserPlus} value={stats?.newUsersToday} color='#10B981' />
 					<StatCard
 						name='Active Users'
 						icon={UserCheck}
-						value={stats.totalUsers.toLocaleString()}
+						value={stats?.totalUsers?.toLocaleString()}
 						color='#F59E0B'
 					/>
-					<StatCard name='Churn Rate' icon={UserX} value={userStats.churnRate} color='#EF4444' />
+					<StatCard name='Churn Rate' icon={UserX} value='0.1%' color='#EF4444' />
 				</motion.div>
 
 				<UsersTable />
