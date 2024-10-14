@@ -15,6 +15,7 @@ const ProductsTable = () => {
 		return <p>Loading...</p>
 	}
 
+	console.log(products)
 	const handleSearch = (e) => {
 		const term = e.target.value.toLowerCase();
 		setSearchTerm(term);
@@ -98,7 +99,7 @@ const ProductsTable = () => {
 									₹{product?.price?.toFixed(2)}
 								</td>
 								<td className='px-6 py-4 whitespace-nowrap text-sm text-[#555F7E]'>{product?.stock}</td>
-								<td className='px-6 py-4 whitespace-nowrap text-sm text-[#555F7E]'>{product?.sales || 0}</td>
+								<td className='px-6 py-4 whitespace-nowrap text-sm text-[#555F7E]'>{product?.saleValue || 0}</td>
 								<td className='px-6 py-4 whitespace-nowrap text-sm text-[#555F7E]'>
 									<button className='text-indigo-400 hover:text-indigo-300 mr-2'>
 										<Edit size={18} />

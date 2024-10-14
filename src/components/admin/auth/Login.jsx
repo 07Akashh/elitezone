@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { loginUser, googleLogin,  fetchAdminUserData } from '../../../redux/slices/adminAuthSlice';
+import { loginUser, googleLogin, fetchAdminUserData } from '../../../redux/slices/adminAuthSlice';
 import UserDetailsModal from '../../../shared/UserDetailsModal';
 import { Navigate, useNavigate } from 'react-router-dom';
 
@@ -38,7 +38,7 @@ const Login = () => {
 
     const handleModalSubmit = (details) => {
         try {
-        
+
         } catch (error) {
             console.error('Caught error in try/catch:', error.message);
             setShowModal(true);
@@ -61,34 +61,34 @@ const Login = () => {
                 <h2 className='text-black text-3xl font-medium pb-[16px]'>Login to Admin Dashboard</h2>
                 <p className="font-Poppins pb-4">Enter your email and password below.</p>
                 <form onSubmit={handleLogin} className='text-lg text-center'>
-                <input
-                    className='w-full border-b outline-none'
-                    type="email"
-                    placeholder="Email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    required
-                />
-                <input
-                    className='w-full border-b mt-[15px] outline-none'
-                    type="password"
-                    placeholder="Password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    required
-                />
-                <div>
-                <button type="submit" disabled={loading} className='mt-[20px] text-lg font-semibold bg-[#DB4444] text-white rounded px-10 py-1'>
-                    {loading ? 'Loading...' : 'Login'}
+                    <input
+                        className='w-full border-b outline-none'
+                        type="email"
+                        placeholder="Email"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        required
+                    />
+                    <input
+                        className='w-full border-b mt-[15px] outline-none'
+                        type="password"
+                        placeholder="Password"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        required
+                    />
+                    <div>
+                        <button type="submit" disabled={loading} className='mt-[20px] text-lg font-semibold bg-[#DB4444] text-white rounded px-10 py-1'>
+                            {loading ? 'Loading...' : 'Login'}
+                        </button>
+                        {error && <p className='text-red-600'>{error}</p>}
+                    </div>
+                </form>
+                <button onClick={handleGoogleLogin} disabled={loading} className='mt-3 text-[#928f8f] border-2 flex m-auto gap-1 px-2 py-1 rounded-lg'>
+                    <img src="https://img.icons8.com/?size=100&id=17949&format=png&color=000000" alt="google logo" className='h-8 w-8' />
+                    <p className='m-auto'> Continue with Google</p>
                 </button>
-                {error && <p className='text-red-600'>{error}</p>}
-                </div>
-            </form>
-            <button onClick={handleGoogleLogin} disabled={loading} className='mt-3 text-[#928f8f] border-2 flex m-auto gap-1 px-2 py-1 rounded-lg'>
-                <img src="https://img.icons8.com/?size=100&id=17949&format=png&color=000000" alt="google logo" className='h-8 w-8' />
-                <p className='m-auto'> Continue with Google</p>
-            </button>
-            {showModal && <UserDetailsModal onSubmit={handleModalSubmit} onClose={() => setShowModal(false)} />}
+                {showModal && <UserDetailsModal onSubmit={handleModalSubmit} onClose={() => setShowModal(false)} />}
             </div>
         </div>
     );

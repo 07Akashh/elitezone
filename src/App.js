@@ -17,8 +17,9 @@ import { fetchAllProducts, fetchCategory, setProducts } from './redux/slices/pro
 import Error404 from './shared/Error404'
 import User from './components/user/User'
 import Admin from './components/admin/Admin';
-import { getCategories, getSubCategories, } from './redux/slices/categorySlice';
+import { getCategories, getOffers, getSubCategories, } from './redux/slices/categorySlice';
 import Success from './components/user/checkout/pages/Success';
+import { fetchAdminStats, fetchOrders, fetchProducts, fetchUsers } from './redux/slices/adminSlice';
 
 function App() {
 
@@ -26,6 +27,14 @@ function App() {
   const adminToken = localStorage.getItem('adminToken');
   const dispatch = useDispatch();
   const user = useSelector((state) => state.auth.user);
+
+
+
+  useEffect(() => {
+      if (adminToken) {
+      }
+  }, [dispatch, adminToken]);
+
 
   useEffect(() => {
     dispatch(setProducts(demoProducts));
@@ -42,6 +51,12 @@ function App() {
   useEffect(() => {
     if (adminToken) {
       dispatch(fetchAdminUserData());
+      dispatch(fetchAdminStats())
+      dispatch(getOffers())
+      dispatch(fetchOrders())
+      dispatch(fetchProducts())
+      dispatch(fetchAdminUserData());
+      dispatch(fetchUsers())
     }
   }, [dispatch, adminToken]);
 

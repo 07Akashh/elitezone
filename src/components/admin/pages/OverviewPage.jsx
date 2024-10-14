@@ -10,10 +10,10 @@ import OrdersTable from "../components/overview/OrdersTable";
 import { useSelector } from "react-redux";
 
 const OverviewPage = () => {
-
 	const stats = useSelector((state) => state.adminData.stats.data);
 	const loading = useSelector((state) => state.adminData.stats.loading);
 
+console.log(stats)
 	if (loading) {
 		return <p>Loading...</p>
 	}

@@ -325,7 +325,7 @@ const ProductDetails = () => {
                 <div className='space-x-2 flex'>
                   <button
                     onClick={handleAddToCart}
-                    className={`py-2 px-4 rounded h-[44px] w-full sm:w-[125px] ${products.product.inStock ? 'bg-[#DB4444] text-white' : 'bg-red-500 text-white cursor-not-allowed opacity-50'}`}
+                    className={`py-2 px-4 rounded h-[44px] text-sm w-full sm:w-[125px] ${products.product.inStock ? 'bg-[#DB4444] text-white' : 'bg-red-500 text-white cursor-not-allowed opacity-50'}`}
                     disabled={!products.product.inStock || isAddingToCart}
                   >
                     {products.product.inStock ? (isAddingToCart ? 'Adding...' : 'Add to Cart') : 'Out of Stock'}
