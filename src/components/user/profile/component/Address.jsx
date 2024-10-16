@@ -125,7 +125,6 @@ const Address = ({setOpen}) => {
                     placeholder="Apartment, floor, etc. (optional)"
                     value={formData.address}
                     onChange={handleChange}
-                    required
                 />
                 <input
                     className='w-full border-b mt-[15px] outline-none'
