@@ -41,14 +41,13 @@ const AddressBook = () => {
                 {
                     loading: 'Deleting Address...',
                     success: (response) => `${response.message}`,
-                    error: (err) => `Failed to delete address. Please try again. ${err}`,
+                    error: (error) => `${error.message}`,
                 }
             );
             dispatch(fetchAddresses());
         } catch (error) {
             console.log(error);
             dispatch(fetchAddresses());
-            toast.error("Failed to delete address. Please try again.");
         }
     };
 

@@ -75,7 +75,7 @@ export const updateUserData = createAsyncThunk(
             const updatedUser = await updateUser(userData);
             return updatedUser;
         } catch (error) {
-            return rejectWithValue(error.message);
+            return rejectWithValue(error.response.data.error);
         }
     }
 );

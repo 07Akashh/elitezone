@@ -38,6 +38,7 @@ export const removeAddress = async (id) => {
         return response.data;
     } catch (error) {
         console.log(error);
+        throw(error.response.data)
     }
 }
 

@@ -1,24 +1,20 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { loginUser, googleLogin, fetchAdminUserData } from '../../../redux/slices/adminAuthSlice';
-import UserDetailsModal from '../../../shared/UserDetailsModal';
-import { Navigate, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
     const navigate = useNavigate()
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [showModal, setShowModal] = useState(false);
-
     const dispatch = useDispatch();
     const { loading, error, user } = useSelector((state) => state.adminAuth);
 
     useEffect(() => {
         if (user) {
-            <Navigate to="/admin" />
+            navigate('/admin')
         }
     }, [user, navigate]);
-
 
     const handleLogin = (e) => {
         e.preventDefault();
@@ -36,15 +32,6 @@ const Login = () => {
         }
     };
 
-    const handleModalSubmit = (details) => {
-        try {
-
-        } catch (error) {
-            console.error('Caught error in try/catch:', error.message);
-            setShowModal(true);
-            throw error;
-        }
-    };
     return (
         <div className='font-Inter h-screen flex flex-col md:flex-row justify-center items-center'>
             {/* Left Side Image */}
@@ -88,7 +75,6 @@ const Login = () => {
                     <img src="https://img.icons8.com/?size=100&id=17949&format=png&color=000000" alt="google logo" className='h-8 w-8' />
                     <p className='m-auto'> Continue with Google</p>
                 </button>
-                {showModal && <UserDetailsModal onSubmit={handleModalSubmit} onClose={() => setShowModal(false)} />}
             </div>
         </div>
     );

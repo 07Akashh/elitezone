@@ -105,9 +105,11 @@ const ProductCard = ({ product, data }) => {
 
   return (
     <div className=" max-w-[140px]  sm:max-w-[270px] sm:w-[270px] font-Poppins relative">
-      <Link to={generateLink()}>
-        <div>
-          <div className='group font-Poppins relative sm:h-[280px] border-black overflow-hidden'>
+
+      <div>
+
+        <div className='group font-Poppins relative sm:h-[280px] border-black overflow-hidden'>
+          <Link to={generateLink()}>
             {percentageOffer && !offerPrice && (
               <div className='absolute ml-2 mt-2 sm:mt-3 sm:ml-3 font-Poppins bg-[#DB4444] text-[#f9f9f9] text-xs sm:text-xs font-light rounded leading-[18px] px-3 py-1 flex items-center justify-center'>
                 {percentageOffer.percentOff}%
@@ -119,57 +121,57 @@ const ProductCard = ({ product, data }) => {
                 <CiHeart className='text-lg sm:text-2xl' />
               </div>
             )}
-
             <img
               src={value?.images[0]?.url}
               alt={value?.productName}
               className="sm:w-[270px] rounded bg-[#F5F5F5] w-[165px] max-h-[200px] h-[180px] sm:max-h-[300px] sm:h-[280px] object-cover object-top mb-1"
             />
+          </Link>
 
-            {/* Add to Cart button that slides up */}
-            <div className='absolute bottom-0 rounded-b left-0 right-0 font-Poppins bg-black text-white text-center py-2 opacity-0 translate-y-full group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300 ease-in-out'>
-              <button onClick={handleAddToCart} disabled={!products.product.inStock || isAddingToCart}  className='text-sm sm:text-base'>{product.inStock ? (isAddingToCart ? 'Adding...' : 'Add to Cart') : 'Out of Stock'}</button>
-            </div>
-            <Modals isOpen={open} closeModal={handleClose} handleClose={handleClose} contentLabel="Login Modal">
-                  {isLogin ? (
-                    <Login switchToRegister={switchToRegister} />
-                  ) : (
-                    <Register switchToLogin={switchToLogin} />
-                  )}
-                </Modals>
+
+          {/* Add to Cart button that slides up */}
+          <div className='absolute bottom-0 rounded-b left-0 right-0 font-Poppins bg-black text-white text-center  opacity-0 translate-y-full group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300 ease-in-out'>
+            <button onClick={handleAddToCart} disabled={!value.inStock || isAddingToCart}  className={`text-sm py-2 w-full h-full sm:text-base ${value.inStock || isAddingToCart ? '': 'cursor-not-allowed'}`}>{product.inStock ? (isAddingToCart ? 'Adding...' : 'Add to Cart') : 'Out of Stock'}</button>
           </div>
 
+
+          <Modals isOpen={open} closeModal={handleClose} handleClose={handleClose} contentLabel="Login Modal">
+            {isLogin ? (
+              <Login switchToRegister={switchToRegister} />
+            ) : (
+              <Register switchToLogin={switchToLogin} />
+            )}
+          </Modals>
         </div>
-      </Link>
+
+      </div>
+
       <h2 className="text-base font-Poppins text-start sm:mt-[10px] font-normal leading-normal line-clamp-1 ">{value.productName}</h2>
-      {offerPrice ? (
-        <div>
-          <p className="mb-0 text-start text-base font-Poppins text-[#DB4444]">
-            &#8377;{offerPrice.offerPrice.toFixed(2)}
-            <span className='opacity-50 text-black text-base line-through ml-2'>&#8377;{value.price.toFixed(2)}</span>
+      {
+        offerPrice ? (
+          <div>
+            <p className="mb-0 text-start text-base font-Poppins text-[#DB4444]">
+              &#8377;{offerPrice.offerPrice.toFixed(2)}
+              <span className='opacity-50 text-black text-base line-through ml-2'>&#8377;{value.price.toFixed(2)}</span>
+            </p>
+          </div>
+        ) : (
+          <p className=" text-start text-base leading-normal font-Poppins text-[#DB4444] line-clamp-1">
+            &#8377;{finalPrice?.toFixed(2)}
+            {value.price !== finalPrice && (
+              <span className='opacity-50 text-black text-base line-through ml-2'>
+                &#8377;{value.price.toFixed(2)}
+              </span>
+            )}
+            {value.inStock ? (
+              <span className="text-start leading-normal text-green-500 text-xs font-Poppins ml-2">In Stock</span>
+            ) : (
+              <span className="text-start leading-normal text-red-500 text-xs font-Poppins ml-2">Out of Stock</span>
+            )}
           </p>
-        </div>
-      ) : (
-        <p className=" text-start text-base leading-normal font-Poppins text-[#DB4444] line-clamp-1">
-          &#8377;{finalPrice?.toFixed(2)}
-          {value.price !== finalPrice && (
-            <span className='opacity-50 text-black text-base line-through ml-2'>
-              &#8377;{value.price.toFixed(2)}
-            </span>
-          )}
-          {value.inStock ? (
-            <span className="text-start leading-normal text-green-500 text-xs font-Poppins ml-2">In Stock</span>
-          ) : (
-            <span className="text-start leading-normal text-red-500 text-xs font-Poppins ml-2">Out of Stock</span>
-          )}
-        </p>
-      )}
-      {/* {value.inStock ? (
-        <p className="text-start leading-normal text-green-500 text-xs font-TenorSans">In Stock</p>
-      ) : (
-        <p className="text-start leading-normal text-red-500 text-xs font-TenorSans">Out of Stock</p>
-      )} */}
-    </div>
+        )
+      }
+    </div >
   );
 };
 

@@ -20,7 +20,8 @@ try {
         'lastName': formData.lastName,
         'pincode': formData.pincode,
         'address': formData.address,
-        'phone': formData.phone
+        'phone': formData.phone,
+        'email': formData.email
     }, {
         headers: { Authorization: `Bearer ${token}` }
     })

@@ -50,25 +50,22 @@ const MyProfile = () => {
         setLoading(true)
         e.preventDefault();
         try {
-
             await toast.promise(
                 dispatch(updateUserData(formData)).unwrap(),
                 {
                     loading: 'Updating User Data...',
                     success: (response) => `${response.data.message}`,
-                    error: (err) => `Error adding item to cart: ${err}`,
+                    error: (err) => `${err}`,
                 }
             );
             await dispatch(fetchUserData()).unwrap();
 
             setLoading(false)
         } catch (error) {
-            toast.error(error)
             setLoading(false)
             console.error('Error during user data update or fetch:', error);
         }
     };
-
 
     const handleReset = () => {
         setFormData({
