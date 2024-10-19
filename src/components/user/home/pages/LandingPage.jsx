@@ -49,9 +49,9 @@ const LandingPage = () => {
                         View All Products
                     </button>
                 </div>
-                <CategoryPage
+                {/* <CategoryPage
                     title="Browse By Category"
-                    subtitle="Categories" />
+                    subtitle="Categories" /> */}
                 <hr className='my-[70px] border-black/30 xl:mx-[135px] lg:mx-[100px] md:mx-[60px] mx-[20px]' />
                 <CategorySection
                     title="Best Selling Products"
