@@ -17,7 +17,7 @@ const TermsAndConditions = () => {
             </p>
 
             <p className="mb-4">
-                2. The Platform is owned by Rahul, a company incorporated under the Companies Act, 1956, with its registered
+                2. The Platform is owned by <strong>EliteZone</strong>, a company incorporated under the Companies Act, 1956, with its registered
                 office at 71 Ratan Bagh, Veena Enclave, Nangloi Railway Station, New Delhi, India (hereinafter referred to as
                 ‘Platform Owner’, 'we', 'us', 'our').
             </p>
