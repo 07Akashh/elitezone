@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useCallback, useRef, useState } from 'react';
 import HeroSection from '../landingPage_component/HeroSection';
 import CategorySection from '../landingPage_component/CategorySection';
 import Banner from '../../../../shared/Banner';
@@ -23,9 +23,9 @@ const LandingPage = () => {
         }, 300);
     };
 
-    useEffect(() => {
-        dispatch(fetchCategory('newarrivals'))
-    }, [dispatch])
+    useCallback(() => {
+        dispatch(fetchCategory('newarrivals'));
+    }, [dispatch]);
 
     return (
         <>
