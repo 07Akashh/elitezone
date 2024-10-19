@@ -51,8 +51,8 @@ const Footer = () => {
             <div>
               <ul className="space-y-[16px]">
                 <h1 className="text-[#f9f9f9] text-xl font-medium font-Poppins leading-7">Quick Link</h1>
-                <li><Link to='/'>Privacy Policy</Link></li>
-                <li><Link to='/'>Terms of Use</Link></li>
+                <li><Link to='/privacy-policy'>Privacy Policy</Link></li>
+                <li><Link to='/terms-of-use'>Terms of Use</Link></li>
                 <li><Link to='/'>FAQ</Link></li>
                 <li><Link to='contact'>Contact</Link></li>
               </ul>

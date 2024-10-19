@@ -28,6 +28,8 @@ import Wishlist from './profile/pages/WishList'
 import Error404 from '../../shared/Error404'
 import ProductDetails from './product/pages/ProductDetail'
 import OrderDetailsPage from './profile/component/order_component/OrderDetails'
+import Policy from './home/pages/Policy'
+import TermsAndConditions from './home/pages/TermsAndConditions'
 
 
 
@@ -67,6 +69,8 @@ const User = () => {
                     />
                     <Route path="*" element={<Error404 />} />
                     <Route path="/contact" element={<ContactUs />} />
+                    <Route path="/privacy-policy" element={<Policy />} />
+                    <Route path="/terms-of-use" element={<TermsAndConditions />} />
                     <Route path="/about" element={<About />} />
                     <Route path="/:categoryId" element={<ProductFilterPage />} />
                     <Route path="/:categoryId/:subCategoryId" element={<ProductFilterPage />} />

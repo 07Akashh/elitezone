@@ -10,11 +10,10 @@ import { BiStoreAlt } from "react-icons/bi";
 
 const About = () => {
     return (
-        <div className="  lg:mt-[80px] mb-[100px]">
+        <div className="lg:mt-[80px] mb-[100px]">
             <div className="xl:px-[135px] lg:px-[100px] md:px-[60px] px-[20px]">
                 <Breadcrumbs />
             </div>
-
             <div className="space-y-[140px]">
                 <div className="flex flex-col md:flex-row items-center gap-8 xl:pl-[135px] lg:pl-[100px] md:pl-[60px] pl-[20px] sm:pr-0 pr-[20px]">
                     <div className="md:w-1/2 my-auto">
