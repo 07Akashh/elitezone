@@ -7,11 +7,7 @@ const API_URL = serverUrl;
 
 export const testUserLogin = async (email) => {
     try {
-        const response = await axios.post(`${API_URL}/auth/test`, { email });
-        const jwtToken = response.data.data.token
-        if (jwtToken) {
-            localStorage.setItem('token', jwtToken);
-        }
+        const response = await axios.post(`${API_URL}/auth/test`, { email }, { withCredentials: true });
         return response.data;
     } catch (error) {
         console.log(error)
@@ -23,9 +19,8 @@ export const registerWithEmailAndPassword = async (formData) => {
         const userCredential = await createUserWithEmailAndPassword(auth, formData.email, formData.password);
         const user = userCredential.user;
         const fbToken = user.accessToken;
-        // localStorage.setItem('fftoken', fbToken);
         try {
-            const response = await axios.post(`${API_URL}/auth`, { 'fbToken': fbToken });
+            const response = await axios.post(`${API_URL}/auth`, { 'fbToken': fbToken }, { withCredentials: true });
             const token = response.data.data.token;
             const updatedUser = await axios.patch(`${API_URL}/user`, {
                 'firstName': formData.firstName,
@@ -34,7 +29,7 @@ export const registerWithEmailAndPassword = async (formData) => {
                 'address': formData.address,
                 'phone': formData.phone
             }, {
-                headers: { Authorization: `Bearer ${token}` }
+                withCredentials: true
             })
             if (token) {
                 localStorage.setItem('token', token);
@@ -61,16 +56,14 @@ export const registerWithEmailAndPassword = async (formData) => {
 export const signInWithEmailAndPassword = async (email, password) => {
     try {
         const userCredential = await signInWithEmailAndPasswordFirebase(auth, email, password);
-
         const user = userCredential.user;
         const token = await user.getIdToken();
         try {
-            const response = await axios.post(`${API_URL}/auth`, { 'fbToken': token });
+            const response = await axios.post(`${API_URL}/auth`, { 'fbToken': token }, { withCredentials: true });
             // console.log(response)
             const jwtToken = response.data.data.token
             if (jwtToken) {
                 localStorage.setItem('token', jwtToken);
-                // localStorage.setItem('btoken', token);
             }
             return response.data;
         } catch (error) {
@@ -98,7 +91,7 @@ export const signInWithGoogle = async () => {
         const fbtoken = await user.getIdToken();
         // localStorage.setItem('tokenssss', fbtoken);
         try {
-            const response = await axios.post(`${API_URL}/auth`, { 'fbToken': fbtoken });
+            const response = await axios.post(`${API_URL}/auth`, { 'fbToken': fbtoken }, { withCredentials: true });
             const jwtToken = response.data.data.token
             if (jwtToken) {
                 localStorage.setItem('token', jwtToken);

@@ -7,7 +7,7 @@ const API_URL = serverUrl;
 
 export const testUserLogin = async (email) => {
     try {
-        const response = await axios.post(`${API_URL}/admin/auth/test`, { email });
+        const response = await axios.post(`${API_URL}/admin/auth/test`, { email }, { withCredentials: true });
         const jwtToken = response.data.data.token
         if (jwtToken) {
             localStorage.setItem('adminToken', jwtToken);
@@ -19,15 +19,14 @@ export const testUserLogin = async (email) => {
 }
 
 export const fetchUser = async () => {
-    const token = localStorage.getItem('adminToken');
-try {
-    const response = await axios.get(`${API_URL}/admin/user`, {
-        headers: { Authorization: `Bearer ${token}` }
-    });
-    return response.data.data;
-} catch (error) {
-    console.log(error)
-}
+    try {
+        const response = await axios.get(`${API_URL}/admin/user`, {
+            withCredentials: true
+        });
+        return response.data.data;
+    } catch (error) {
+        console.log(error)
+    }
 };
 
 export const registerWithEmailAndPassword = async (formData) => {
@@ -37,7 +36,7 @@ export const registerWithEmailAndPassword = async (formData) => {
         const fbToken = user.accessToken;
         // localStorage.setItem('fftoken', fbToken);
         try {
-            const response = await axios.post(`${API_URL}/admin/auth`, { 'fbToken': fbToken });
+            const response = await axios.post(`${API_URL}/admin/auth`, { 'fbToken': fbToken }, { withCredentials: true });
             const token = response.data.data.token;
             const updatedUser = await axios.patch(`${API_URL}/admin/user`, {
                 'firstName': formData.firstName,
@@ -46,7 +45,7 @@ export const registerWithEmailAndPassword = async (formData) => {
                 'address': formData.address,
                 'phone': formData.phone
             }, {
-                headers: { Authorization: `Bearer ${token}` }
+                withCredentials: true
             })
             if (token) {
                 localStorage.setItem('adminToken', token);
@@ -73,11 +72,10 @@ export const registerWithEmailAndPassword = async (formData) => {
 export const signInWithEmailAndPassword = async (email, password) => {
     try {
         const userCredential = await signInWithEmailAndPasswordFirebase(auth, email, password);
-
         const user = userCredential.user;
         const token = await user.getIdToken();
         try {
-            const response = await axios.post(`${API_URL}/admin/auth`, { 'fbToken': token });
+            const response = await axios.post(`${API_URL}/admin/auth`, { 'fbToken': token }, { withCredentials: true });
             // console.log(response)
             const jwtToken = response.data.data.token
             if (jwtToken) {
@@ -110,7 +108,7 @@ export const signInWithGoogle = async () => {
         const fbtoken = await user.getIdToken();
         // localStorage.setItem('tokenssss', fbtoken);
         try {
-            const response = await axios.post(`${API_URL}/admin/auth`, { 'fbToken': fbtoken });
+            const response = await axios.post(`${API_URL}/admin/auth`, { 'fbToken': fbtoken }, { withCredentials: true });
             const jwtToken = response.data.data.token
             if (jwtToken) {
                 localStorage.setItem('adminToken', jwtToken);

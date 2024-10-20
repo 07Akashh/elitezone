@@ -5,11 +5,9 @@ const API_URL = `${serverUrl}/user`;
 
 
 export const getCartItems = async () => {
-    const token = localStorage.getItem('token');
-    // console.log(token)
     try {
         const response = await axios.get(`${API_URL}/cart`, {
-            headers: { Authorization: `Bearer ${token}` },
+            withCredentials: true,
         });
         return response.data;
     } catch (error) {
@@ -28,10 +26,9 @@ export const getCartItems = async () => {
 
 export const updateCartQuantity = async (productId, quantity ) => {
     
-    const token = localStorage.getItem('token');
     try {
         const response = await axios.patch(`${API_URL}/cart/${productId}`, { quantity },{
-            headers: { Authorization: `Bearer ${token}` }
+            withCredentials: true
         });
         return response.data;
     } catch (error) {
@@ -41,10 +38,9 @@ export const updateCartQuantity = async (productId, quantity ) => {
 };
 
 export const removeCartItem = async (productId) => {
-    const token = localStorage.getItem('token');
     try {
         const response = await axios.delete(`${API_URL}/cart/${productId}`, {
-            headers: { Authorization: `Bearer ${token}` }
+            withCredentials: true
         });
         return response.data;
     } catch (error) {
@@ -54,10 +50,9 @@ export const removeCartItem = async (productId) => {
 };
 
 export const addItemToCart = async (productId, quantity, size) => {
-    const token = localStorage.getItem('token');
     try {
         const response = await axios.post(`${API_URL}/cart`, { productId, quantity, size }, {
-            headers: { Authorization: `Bearer ${token}` }
+            withCredentials: true
         });
         return response.data;
     } catch (error) {

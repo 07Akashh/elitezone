@@ -3,17 +3,13 @@ import serverUrl from '../config/serverUrl';
 
 
 const API_URL = `${serverUrl}/categories`;
-const token = localStorage.getItem('adminToken');
 
 const createCategory = async (name) => {
-    const config = {
-        headers: {
-            Authorization: `Bearer ${token}`,
-            'Content-Type': 'application/json'
-        }
-    };
+    
     try {
-        const response = await axios.post(API_URL, name, config);
+        const response = await axios.post(API_URL, name, {
+            withCredentials: true
+        });
         return response.data;
     } catch (error) {
         throw error.response.data
@@ -22,14 +18,10 @@ const createCategory = async (name) => {
 
 
 const addSubCategory = async (categoryId, subCategoryName) => {
-    const token = localStorage.getItem('adminToken')
-    const config = {
-        headers: {
-            Authorization: `Bearer ${token}`
-        }
-    };
     try {
-        const response = await axios.post(`${API_URL}/${categoryId}/subcategories`, { subCategoryName }, config);
+        const response = await axios.post(`${API_URL}/${categoryId}/subcategories`, { subCategoryName }, {
+            withCredentials: true
+        });
         return response.data;
     } catch (error) {
         console.log(error)

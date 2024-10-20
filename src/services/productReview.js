@@ -3,12 +3,11 @@ import serverUrl from "../config/serverUrl.js";
 
 
 const API_URL = serverUrl;
-const token = localStorage.getItem('token');
 
 export const fetchProductReview = async (productId) => {
     try {
         const response = await axios.get(`${API_URL}/products/${productId}/reviews`, {
-            headers: { Authorization: `Bearer ${token}` }
+            withCredentials: true
         });
         return response.data;
     } catch (error) {
@@ -33,7 +32,7 @@ export const postProductReview = async (productId, data, imageFiles) => {
 
     const response = await axios.post(`${API_URL}/products/${productId}/reviews`, formData, {
         headers: {
-            'Authorization': `Bearer ${token}`,
+            withCredentials: true,
             'Content-Type': 'multipart/form-data'
         }
     });

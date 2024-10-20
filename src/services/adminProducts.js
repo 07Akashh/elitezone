@@ -3,18 +3,13 @@ import serverUrl from '../config/serverUrl';
 
 
 const API_URL = `${serverUrl}/admin`;
-const token = localStorage.getItem('adminToken');
-
 
 export const addProduct = async(data) =>{
 
-    const config = {
-        headers: {
-            Authorization: `Bearer ${token}`
-        }
-    };
     try {
-        const response = await axios.post(`${API_URL}/products`,data, config);
+        const response = await axios.post(`${API_URL}/products`,data, {
+            withCredentials: true
+        });
         return response.data;
     } catch (error) {
         console.log(error)
@@ -23,14 +18,10 @@ export const addProduct = async(data) =>{
 }
 
 export const createOffer = async(data) =>{
-    const token = localStorage.getItem('adminToken');
-    const config = {
-        headers: {
-            Authorization: `Bearer ${token}`
-        }
-    };
     try {
-        const response = await axios.post(`${API_URL}/offer`,data, config);
+        const response = await axios.post(`${API_URL}/offer`,data, {
+            withCredentials: true
+        });
         return response.data;
     } catch (error) {
         console.log(error)
@@ -39,13 +30,11 @@ export const createOffer = async(data) =>{
 }
 
 export const getOffer = async() =>{
-    const config = {
-        headers: {
-            Authorization: `Bearer ${token}`
-        }
-    };
+
     try {
-        const response = await axios.get(`${API_URL}/offer`, config);
+        const response = await axios.get(`${API_URL}/offer`, {
+            withCredentials: true
+        });
         return response.data;
     } catch (error) {
         console.log(error)

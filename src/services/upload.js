@@ -4,7 +4,6 @@ import serverUrl from "../config/serverUrl";
 
 
 const API_URL = `${serverUrl}`;
-const token = localStorage.getItem('adminToken');
 
 
 export const upload = async (imageFiles) => {
@@ -15,8 +14,8 @@ export const upload = async (imageFiles) => {
     });
 
     const config = {
+        withCredentials: true,
         headers: {
-            Authorization: `Bearer ${token}`,
             'Content-Type': 'multipart/form-data',
         },
     };
@@ -31,7 +30,6 @@ export const upload = async (imageFiles) => {
 
 
 export const uploadPost = async (imageFiles) => {
-    const userToken = localStorage.getItem('token');
 
     const formData = new FormData();
 
@@ -40,8 +38,8 @@ export const uploadPost = async (imageFiles) => {
     });
 
     const config = {
+        withCredentials: true,
         headers: {
-            Authorization: `Bearer ${userToken}`,
             'Content-Type': 'multipart/form-data',
         },
     };

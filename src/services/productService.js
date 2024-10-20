@@ -3,12 +3,11 @@ import serverUrl from "../config/serverUrl.js";
 
 
 const API_URL = serverUrl;
-const token = localStorage.getItem('token');
 
 export const fetchCategoryData = async (category) => {
     try {
         const response = await axios.get(`${API_URL}/products/${category}`, {
-            headers: { Authorization: `Bearer ${token}` }
+            withCredentials: true
         });
         return response.data;
 
@@ -20,7 +19,7 @@ export const fetchCategoryData = async (category) => {
 
 export const fetchProductById = async (id) => {
     const response = await axios.get(`${API_URL}/products/${id}`, {
-        headers: { Authorization: `Bearer ${token}` }
+        withCredentials: true
     });
     return response.data
 };
@@ -34,7 +33,7 @@ export const fetchProductsByColor = async (color, productName) => {
     try {
         const response = await axios.get(`${API_URL}/products/name`, {
             params,
-            headers: { Authorization: `Bearer ${token}` }
+            withCredentials: true
         });
         return response.data;
     } catch (error) {
@@ -47,7 +46,7 @@ export const fetchProductsByColor = async (color, productName) => {
 
 export const fetchProductRating = async (productId) => {
     const response = await axios.get(`${API_URL}/products/${productId}/reviews`, {
-        headers: { Authorization: `Bearer ${token}` }
+        withCredentials: true
     });
     return response.data;
 };
@@ -55,7 +54,6 @@ export const fetchProductRating = async (productId) => {
 
 
 export const fetchProducts = async ({ categoryId, subCategoryId, color, size, priceRange, page, sorting }) => {
-    const token = localStorage.getItem('token');
     const params = new URLSearchParams();
 
     if (priceRange && priceRange.length > 0) {
@@ -85,9 +83,8 @@ export const fetchProducts = async ({ categoryId, subCategoryId, color, size, pr
     try {
         const response = await axios.get(`${API_URL}/products`, {
             params,
-            headers: { Authorization: `Bearer ${token}` }
+            withCredentials: true
         });
-
         return response.data;
     } catch (error) {
         console.error('Error fetching products:', error);

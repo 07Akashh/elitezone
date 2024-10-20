@@ -3,17 +3,12 @@ import serverUrl from '../config/serverUrl';
 
 
 const API_URL = `${serverUrl}/admin`;
-const token = localStorage.getItem('adminToken');
-
-const config = {
-    headers: {
-        Authorization: `Bearer ${token}`
-    }
-};
 
 export const getStats = async() =>{
     try {
-        const response = await axios.get(`${API_URL}/stats`,config);
+        const response = await axios.get(`${API_URL}/stats`,{
+            withCredentials: true
+        });
         return response.data;
     } catch (error) {
         console.log(error)
@@ -23,7 +18,9 @@ export const getStats = async() =>{
 
 export const getOrders = async() =>{
     try {
-        const response = await axios.get(`${API_URL}/orders`,config);
+        const response = await axios.get(`${API_URL}/orders`,{
+            withCredentials: true
+        });
         return response.data;
     } catch (error) {
         console.log(error)
@@ -33,7 +30,9 @@ export const getOrders = async() =>{
 
 export const getProducts = async() =>{
     try {
-        const response = await axios.get(`${API_URL}/products`,config);
+        const response = await axios.get(`${API_URL}/products`,{
+            withCredentials: true
+        });
         return response.data;
     } catch (error) {
         console.log(error)
@@ -43,7 +42,9 @@ export const getProducts = async() =>{
 
 export const getUsers = async() =>{
     try {
-        const response = await axios.get(`${API_URL}/users`,config);
+        const response = await axios.get(`${API_URL}/users`,{
+            withCredentials: true
+        });
         return response.data;
     } catch (error) {
         console.log(error)

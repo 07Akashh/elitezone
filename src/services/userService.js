@@ -2,18 +2,15 @@ import axios from "axios";
 import serverUrl from "../config/serverUrl.js";
 
 const API_URL = serverUrl;
-const token = localStorage.getItem('token');
 
 export const fetchUser = async () => {
-    const token = localStorage.getItem('token');
     const response = await axios.get(`${API_URL}/user`, {
-        headers: { Authorization: `Bearer ${token}` }
+        withCredentials: true
     });
     return response.data.data;
 };
 
 export const updateUser = (formData) => {
-    const token = localStorage.getItem('token');
 try {
     const response = axios.patch(`${API_URL}/user`, {
         'firstName': formData.firstName,
@@ -23,7 +20,7 @@ try {
         'phone': formData.phone,
         'email': formData.email
     }, {
-        headers: { Authorization: `Bearer ${token}` }
+        withCredentials: true
     })
     return response;
 } catch (error) {
@@ -32,10 +29,9 @@ try {
 }
 
 export const fetchWishlists = async () => {
-    const token = localStorage.getItem('token');
     try {
         const response = await axios.get(`${API_URL}/user/wishlist`, {
-            headers: { Authorization: `Bearer ${token}` }
+            withCredentials: true
         });
         return response.data;
     } catch (error) {
@@ -55,7 +51,7 @@ export const fetchWishlists = async () => {
 export const addWishlistItem = async (id) => {
     try {
         const response = await axios.put(`${API_URL}/user/wishlist/${id}`, {}, {
-            headers: { Authorization: `Bearer ${token}` }
+            withCredentials: true
         });
         return response.data;
     } catch (error) {
@@ -66,7 +62,7 @@ export const addWishlistItem = async (id) => {
 export const deleteWishlistItem = async (id) => {
     try {
         const response = await axios.delete(`${API_URL}/user/wishlist/${id}`, {
-            headers: { Authorization: `Bearer ${token}` }
+            withCredentials: true
         });
         return response.data;
     } catch (error) {

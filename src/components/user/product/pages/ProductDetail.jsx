@@ -75,6 +75,8 @@ const ProductDetails = () => {
     loadData();
   }, [id, dispatch]);
 
+
+  console.log(products.product)
   useEffect(() => {
     if (products.product?._id) {
       setSelectedColor(products.product.color.name || '');
