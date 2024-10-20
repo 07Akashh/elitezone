@@ -40,6 +40,19 @@ export const getProducts = async() =>{
     }
 }
 
+export const getProductById = async(id) =>{
+    try {
+        const response = await axios.get(`${API_URL}/products/${id}`,{
+            withCredentials: true
+        });
+        return response.data;
+    } catch (error) {
+        console.log(error)
+        throw error.response.data
+    }
+}
+
+
 export const getUsers = async() =>{
     try {
         const response = await axios.get(`${API_URL}/users`,{

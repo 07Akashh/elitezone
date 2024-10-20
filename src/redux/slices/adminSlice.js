@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
-import { getOrders, getProducts, getStats, getUsers } from '../../services/adminServices';
+import { getOrders, getProductById, getProducts, getStats, getUsers } from '../../services/adminServices';
 
 const API_BASE_URL = 'https://your-api-url.com/admin';
 
@@ -43,7 +43,7 @@ export const fetchProducts = createAsyncThunk('admin/fetchProducts', async (_, {
 
 export const fetchProductDetails = createAsyncThunk('admin/fetchProductDetails', async (id, { rejectWithValue }) => {
     try {
-        const response = await axios.get(`${API_BASE_URL}/product/${id}`);
+        const response = await getProductById(id);
         return response.data;
     } catch (error) {
         return rejectWithValue(error.response.data);

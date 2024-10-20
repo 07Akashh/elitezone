@@ -25,43 +25,25 @@ const CategoryAccordion = () => {
             <div className='overflow-scroll h-72 no-scrollbar px-4'>
                 {categories.length > 0 && categories.map((category) => (
                     <div key={category?._id}>
-                        {/* <div
-                            onClick={() => toggleCategory(category?._id)}
-                            className="cursor-pointer mb-1"
-                        >
-                            <h3 className="w-full text-sm lg:text-base text-left py-1 flex justify-between transition sm:pr-[16px]">
-                                {category?.name}
-                            </h3>
-                        </div> */}
-                        <button
-                            onClick={() => toggleCategory(category?._id)}
-                            className="w-full text-sm lg:text-base text-left py-1 flex justify-between transition sm:pr-[16px]"
-                        >
-                            {category.name}
-                            <span
-                                className={` text-black transition-transform duration-100 ${expandedCategory === category?._id ? '-rotate-90' : 'rotate-0'}`}
-                            >
+
+                        <button onClick={() => toggleCategory(category?._id)} className="w-full text-sm lg:text-base text-left py-1 flex justify-between transition sm:pr-[16px]">
+                            {category.name} ({category?.productCount})
+                            <span className={` text-black transition-transform duration-100 ${expandedCategory === category?._id ? '-rotate-90' : 'rotate-0'}`}>
                                 <MdOutlineArrowForwardIos />
                             </span>
                         </button>
 
-                        {/* Subcategories Accordion Panel */}
                         {expandedCategory === category?._id && (
                             <motion.div
                                 initial={{ height: 0, opacity: 0 }}
                                 animate={{ height: 'auto', opacity: 1 }}
                                 exit={{ height: 0, opacity: 0 }}
                                 transition={{ duration: 0.3 }}
-                                className="ml-4 pl-4 border-l border-gray-300"
-                            >
+                                className="ml-4 pl-4 border-l border-gray-300">
                                 {category.subCategories.length > 0 ? (
                                     category?.subCategories?.map((subcategory) => (
-                                        <div
-                                            key={subcategory?._id}
-                                            // onClick={() => fetchProductsByCategoryAndSubCategory(category?._id, subcategory?._id)}
-                                            className="cursor-pointer py-2 text-gray-600 hover:text-black"
-                                        >
-                                            {subcategory?.name}
+                                        <div key={subcategory?._id} className="cursor-pointer py-2 text-gray-600 hover:text-black">
+                                            {subcategory?.name} ({subcategory?.productCount})
                                         </div>
                                     ))
                                 ) : (

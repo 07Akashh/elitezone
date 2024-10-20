@@ -69,9 +69,7 @@ const CampaignPage = () => {
                         >
                             Add / Create Campaign
                         </button>
-                        <OfferModal
-                            isOpen={isOfferModalOpen}
-                            onClose={() => setIsOfferModalOpen(false)} />
+                        <OfferModal isOpen={isOfferModalOpen} onClose={() => setIsOfferModalOpen(false)} />
                         <CampaignModal isOpen={isModalOpen} onClose={closeModal} />
                     </div>
 
