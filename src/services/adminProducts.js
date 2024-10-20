@@ -17,6 +17,18 @@ export const addProduct = async(data) =>{
     }
 }
 
+export const deleteProduct = async(id) =>{
+    try {
+        const response = await axios.delete(`${API_URL}/products/${id}`, {
+            withCredentials: true
+        });
+        return response.data;
+    } catch (error) {
+        console.log(error)
+        throw error.response.data
+    }
+}
+
 export const createOffer = async(data) =>{
     try {
         const response = await axios.post(`${API_URL}/offer`,data, {

@@ -8,7 +8,6 @@ import toast from "react-hot-toast";
 
 
 const Sidebar = () => {
-
     const handleLogout = () => {
         localStorage.removeItem('adminToken')
         window.location.reload();

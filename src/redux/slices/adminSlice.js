@@ -162,7 +162,6 @@ const adminSlice = createSlice({
                 state.products.error = action.payload;
             });
 
-        // Fetch Product Details
         builder
             .addCase(fetchProductDetails.pending, (state) => {
                 state.productDetails.loading = true;

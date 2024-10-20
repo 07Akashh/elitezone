@@ -25,7 +25,6 @@ const LogoutPage = () => {
     return (
         <div>
             <Logout
-
                 isOpen={true}
                 onClose={handleClosePopup}
                 onConfirm={handleLogout}

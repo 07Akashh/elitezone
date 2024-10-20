@@ -1,30 +1,84 @@
+
 import { motion } from "framer-motion";
 import { Edit, Search, Trash2 } from "lucide-react";
-import { useState } from "react";
-import { useSelector } from "react-redux";
+import { useEffect, useState } from "react";
+import toast from "react-hot-toast";
+import { useDispatch, useSelector } from "react-redux";
+import { deleteProduct } from "../../../../services/adminProducts";
+import { fetchProducts } from "../../../../redux/slices/adminSlice";
 
 
 const ProductsTable = () => {
+	const dispatch = useDispatch();
 	const products = useSelector((state) => state.adminData.products.data);
 	const loading = useSelector((state) => state.adminData.products.loading);
 	const [searchTerm, setSearchTerm] = useState("");
-	const [filteredProducts, setFilteredProducts] = useState(products);
 
+
+	const filteredProducts = products.filter(
+        (product) =>
+            product?.productName?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+            product?.categoryId?.name?.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+	const handleDelete = async (productId) => {
+		try {
+			await toast.promise(
+				deleteProduct(productId),
+				{
+					loading: 'Deleting Product...',
+					success: (response) => `${response.message}`,
+					error: (err) => `${err.message}`,
+				}
+			)
+			const result = await dispatch(fetchProducts()).unwrap();
+        if (result) {
+            console.log('Products refetched successfully');
+        }
+		} catch (error) {
+			console.error('Delete Error:', error);
+		}
+	};
+
+	useEffect(() => {
+		dispatch(fetchProducts())
+}, [dispatch]);
 
 	if (loading) {
 		return <p>Loading...</p>
 	}
-
-	console.log(products)
 	const handleSearch = (e) => {
-		const term = e.target.value.toLowerCase();
-		setSearchTerm(term);
-		const filtered = products.filter(
-			(product) => product?.productName?.toLowerCase()?.includes(term) || product?.categoryId?.name?.toLowerCase().includes(term)
-		);
+        const term = e.target.value.toLowerCase();
+        setSearchTerm(term);
+    };
 
-		setFilteredProducts(filtered);
-	};
+	const showDeleteToast = (id) => {
+        toast((t) => (
+            <div className="flex flex-col items-center p-3 space-y-4">
+                <p className="text-md">Are you sure you want to Delete the Product?</p>
+                <div className="flex space-x-4">
+                    <button
+                        className="px-5 py-2 bg-red-500 text-white rounded"
+                        onClick={() => {
+                            handleDelete(id);
+                            toast.dismiss(t.id);
+                        }}
+                    >
+                        Delete
+                    </button>
+                    <button
+                        className="px-5 py-2 bg-gray-300 rounded"
+                        onClick={() => toast.dismiss(t.id)}
+                    >
+                        Cancel
+                    </button>
+                </div>
+            </div>
+        ), {
+            duration: 5000,
+            position: 'top-center',
+        });
+    };
+
 
 	return (
 		<motion.div
@@ -87,7 +141,7 @@ const ProductsTable = () => {
 										className='size-10 rounded-full'
 									/>
 									<span className="max-w-[200px]">
-									{product?.productName}
+										{product?.productName}
 									</span>
 								</td>
 
@@ -104,7 +158,7 @@ const ProductsTable = () => {
 									<button className='text-indigo-400 hover:text-indigo-300 mr-2'>
 										<Edit size={18} />
 									</button>
-									<button className='text-red-400 hover:text-red-300'>
+									<button onClick={() => showDeleteToast(product._id)} className='text-red-400 hover:text-red-300'>
 										<Trash2 size={18} />
 									</button>
 								</td>

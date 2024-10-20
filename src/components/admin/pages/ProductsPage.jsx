@@ -9,7 +9,7 @@ import SalesTrendChart from "../components/products/SalesTrendChart";
 import ProductsTable from "../components/products/ProductsTable";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import { fetchAdminStats } from "../../../redux/slices/adminSlice";
+import { fetchAdminStats, fetchProducts } from "../../../redux/slices/adminSlice";
 
 const ProductsPage = () => {
 	const stats = useSelector((state) => state.adminData.stats.data);
@@ -18,12 +18,13 @@ const ProductsPage = () => {
 
 	useEffect(() => {
             dispatch(fetchAdminStats())
+			dispatch(fetchProducts())
     }, [dispatch]);
 
 	if (loading) {
 		return <p>Loading...</p>
 	}
-
+	
 	return (
 		<div className='flex-1 overflow-auto relative z-0'>
 			<Header title='Products' />

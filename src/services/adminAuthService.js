@@ -80,7 +80,7 @@ export const signInWithEmailAndPassword = async (email, password) => {
             const jwtToken = response.data.data.token
             if (jwtToken) {
                 localStorage.setItem('adminToken', jwtToken);
-                // localStorage.setItem('btoken', token);
+                localStorage.setItem('adminFbToken', token);
             }
             return response.data;
         } catch (error) {
