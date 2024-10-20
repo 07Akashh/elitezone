@@ -234,7 +234,7 @@ const ProductDetails = () => {
                   key={index}
                   src={image.url}
                   alt={products.product.name}
-                  className={`lg:h-[138px] h-[100px]  sm:h-[150px] bg-[#F5F5F5] w-full object-cover lg:mb-2 cursor-pointer ${mainImage === image.url ? 'border-2 border-[#DB4444]' : ''}`}
+                  className={`lg:h-[138px] h-[100px]  sm:h-[150px] bg-[#F5F5F5] w-[95px] md:w-[140px] lg:w-full object-fill lg:mb-2 cursor-pointer ${mainImage === image.url ? 'border-2 border-[#DB4444]' : ''}`}
                   onClick={() => setMainImage(image.url)}
                 />
               ))}
