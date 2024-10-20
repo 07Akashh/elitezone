@@ -6,13 +6,20 @@ import StatCard from "../components/common/StatCard";
 import DailyOrders from "../components/orders/DailyOrders";
 import OrderDistribution from "../components/orders/OrderDistribution";
 import OrdersTable from "../components/orders/OrdersTable";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { fetchAdminStats, fetchOrders } from "../../../redux/slices/adminSlice";
 
 
 const OrdersPage = () => {
 	const stats = useSelector((state) => state.adminData.stats.data);
 	const loading = useSelector((state) => state.adminData.stats.loading);
 
+	const dispatch = useDispatch()
+	useEffect(() => {
+            dispatch(fetchAdminStats())
+            dispatch(fetchOrders())
+    }, [dispatch]);
 
 	if (loading) {
 		return <p>Loading...</p>

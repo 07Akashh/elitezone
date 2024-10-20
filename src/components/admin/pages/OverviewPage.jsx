@@ -7,13 +7,20 @@ import SalesOverviewChart from "../components/overview/SalesOverviewChart";
 import CategoryDistributionChart from "../components/overview/CategoryDistributionChart";
 import SalesChannelChart from "../components/overview/SalesChannelChart";
 import OrdersTable from "../components/overview/OrdersTable";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { fetchAdminStats, fetchOrders } from "../../../redux/slices/adminSlice";
 
 const OverviewPage = () => {
 	const stats = useSelector((state) => state.adminData.stats.data);
 	const loading = useSelector((state) => state.adminData.stats.loading);
+	
+	const dispatch = useDispatch()
+	useEffect(() => {
+            dispatch(fetchAdminStats())
+            dispatch(fetchOrders())
+    }, [dispatch]);
 
-console.log(stats)
 	if (loading) {
 		return <p>Loading...</p>
 	}

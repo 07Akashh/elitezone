@@ -89,7 +89,6 @@ export const signInWithGoogle = async () => {
         const result = await signInWithPopup(auth, googleProvider);
         const user = result.user;
         const fbtoken = await user.getIdToken();
-        // localStorage.setItem('tokenssss', fbtoken);
         try {
             const response = await axios.post(`${API_URL}/auth`, { 'fbToken': fbtoken }, { withCredentials: true });
             const jwtToken = response.data.data.token

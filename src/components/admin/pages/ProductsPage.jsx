@@ -7,11 +7,18 @@ import { AlertTriangle, IndianRupee, Package, TrendingUp } from "lucide-react";
 import CategoryDistributionChart from "../components/overview/CategoryDistributionChart";
 import SalesTrendChart from "../components/products/SalesTrendChart";
 import ProductsTable from "../components/products/ProductsTable";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { fetchAdminStats } from "../../../redux/slices/adminSlice";
 
 const ProductsPage = () => {
 	const stats = useSelector((state) => state.adminData.stats.data);
 	const loading = useSelector((state) => state.adminData.stats.loading);
+	const dispatch = useDispatch()
+
+	useEffect(() => {
+            dispatch(fetchAdminStats())
+    }, [dispatch]);
 
 	if (loading) {
 		return <p>Loading...</p>

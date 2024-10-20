@@ -13,6 +13,7 @@ const Login = () => {
     useEffect(() => {
         if (user) {
             navigate('/admin')
+            window.location.reload()
         }
     }, [user, navigate]);
 

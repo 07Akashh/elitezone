@@ -1,10 +1,12 @@
 import React, { useRef, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { upload } from '../../../../services/upload';
 import { addProduct } from '../../../../services/adminProducts';
 import toast from 'react-hot-toast';
+import { fetchProduct } from '../../../../redux/slices/productSlice';
 
 const AddProductModal = ({ isOpen, onClose }) => {
+    const dispatch = useDispatch()
     const [selectedCategoryId, setSelectedCategoryId] = useState("");
     const [selectedOfferId, setSelectedOfferId] = useState("");
     const [selectedSubCategoryId, setSubSelectedCategoryId] = useState("");
@@ -113,6 +115,7 @@ const AddProductModal = ({ isOpen, onClose }) => {
                 error: (err) => `${err.message}`,
             }
         )
+        await dispatch(fetchProduct())
         // console.log('Submitting product data:', formattedData);
     };
     const handleReset = () => {

@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
 import { createOffer } from '../../../../services/adminProducts';
 import toast from 'react-hot-toast';
+import { useDispatch } from 'react-redux';
+import { getOffers } from '../../../../redux/slices/categorySlice';
 
 const OfferModal = ({ isOpen, onClose }) => {
+    const dispatch = useDispatch()
     const [offerData, setOfferData] = useState({
         offerName: '',
         offerDescription: '',
@@ -19,16 +22,16 @@ const OfferModal = ({ isOpen, onClose }) => {
         }));
     };
 
-    const handleSubmitOffer = async() => {
+    const handleSubmitOffer = async () => {
         try {
             await toast.promise(createOffer(offerData),
-            {
-                loading: 'Creating Offer...',
-                success: (response) => `${response.message}`,
-                error: (err) => `${err.message}`,
-            }
-        );
-        onClose();
+                {
+                    loading: 'Creating Offer...',
+                    success: (response) => `${response.message}`,
+                    error: (err) => `${err.message}`,
+                });
+            dispatch(getOffers())
+            onClose();
         } catch (error) {
             console.log(error)
         }
