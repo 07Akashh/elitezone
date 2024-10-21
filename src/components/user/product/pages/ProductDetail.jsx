@@ -280,7 +280,7 @@ const ProductDetails = () => {
                   {products.colors.map((color) => (
                     <button
                       key={color.colorCode}
-                      className={`rounded-full w-5 h-5 ${selectedColor === color.name ? 'ring-2 ring-black border border-white' : ''}`}
+                      className={`rounded-full shadow-md backdrop-blur-xl shadow-black/20 w-5 h-5 ${selectedColor === color.name ? 'ring-2 ring-black border border-white' : ''}`}
                       style={{ backgroundColor: color.colorCode }}
                       onClick={() => handleColorSelect(color.name)}
                     >
