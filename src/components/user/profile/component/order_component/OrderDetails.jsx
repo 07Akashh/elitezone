@@ -82,7 +82,6 @@ const OrderDetailsPage = () => {
     const dispatch = useDispatch();
     const status = useSelector((state) => state.orders.getOrdersByIdStatus);
     const orders = useSelector((state) => state.orders?.getOrdersById);
-    console.log(orders)
     // const data = useSelector((state) => state.orders);
 
     const { id } = useParams();
