@@ -1,21 +1,23 @@
 import React, { useRef } from 'react';
 import { GoArrowRight, GoArrowLeft } from 'react-icons/go';
-import { FaShoePrints, FaTshirt, FaShoppingBag, FaUserTie, FaHandHolding } from 'react-icons/fa';
-import { PiPantsThin, PiDressThin, PiBeltThin } from "react-icons/pi";
+import { FaShoePrints, FaTshirt, FaShoppingBag, FaHandHolding } from 'react-icons/fa';
+import { PiPantsThin, PiDressThin, PiBeltThin, PiTShirtThin } from "react-icons/pi";
 import { GiSleevelessJacket, GiSkirt, GiSunglasses, GiWatch } from "react-icons/gi";
+import { Link } from 'react-router-dom';
+
 
 
 const CategoryPage = ({ title, subtitle }) => {
     const scrollContainerRef = useRef(null);
 
     const categories = [
-        { name: 'Pants', icon: <PiPantsThin />, link:'/66f05bff7540dd76b4347c26/66f05c3e7540dd76b4347c57' },
-        { name: 'Frocks', icon: <PiDressThin />,link:'/66f05c077540dd76b4347c2a/6714b71ce01f6977e2202818' },
-        { name: 'Dresses', icon: <PiDressThin />,link:'/66f05c077540dd76b4347c2a/66f728a8e6c4ed7ebcae5410' },
-        { name: 'Tops', icon: <FaUserTie />, link:'/66f05c077540dd76b4347c2a/66f71dec5121941c84230b39' },
-        { name: 'Accessories', icon: <FaShoppingBag />,link:'/671616df17fc5f1bd6b68e95' },
-        { name: 'T-shirts', icon: <FaTshirt />, link:'/66f05bff7540dd76b4347c26/6700e5f5fd42daee87d25df0' },
-        { name: 'Jeans', icon: <PiPantsThin />, link:'/66f05bff7540dd76b4347c26/66f05c257540dd76b4347c39' },
+        { name: 'Pants', icon: <PiPantsThin />, link: '/66f05bff7540dd76b4347c26/66f05c3e7540dd76b4347c57' },
+        { name: 'Frocks', icon: <PiDressThin />, link: '/66f05c077540dd76b4347c2a/6714b71ce01f6977e2202818' },
+        { name: 'Dresses', icon: <PiDressThin />, link: '/66f05c077540dd76b4347c2a/66f728a8e6c4ed7ebcae5410' },
+        { name: 'Tops', icon: <PiTShirtThin />, link: '/66f05c077540dd76b4347c2a/66f71dec5121941c84230b39' },
+        { name: 'Accessories', icon: <FaShoppingBag />, link: '/671616df17fc5f1bd6b68e95' },
+        { name: 'T-shirts', icon: <FaTshirt />, link: '/66f05bff7540dd76b4347c26/6700e5f5fd42daee87d25df0' },
+        { name: 'Jeans', icon: <PiPantsThin />, link: '/66f05bff7540dd76b4347c26/66f05c257540dd76b4347c39' },
         // { name: 'Jackets', icon: <GiSleevelessJacket /> },
         // { name: 'Shoes', icon: <FaShoePrints /> },
         // { name: 'Skirts', icon: <GiSkirt /> },
@@ -65,14 +67,16 @@ const CategoryPage = ({ title, subtitle }) => {
             <div className='mt-[30px] overflow-x-auto no-scrollbar' ref={scrollContainerRef}>
                 <div className='flex gap-x-[30px]'>
                     {categories.map((category, index) => (
-                        <div key={index} className="text-center border border-black/30 hover:bg-[#DB4444] hover:border-[#DB4444] hover:text-white rounded transition-all duration-200 ease-in-out">
-                            <div className="text-sm font-normal w-[170px] pt-6 h-[145px]">
-                                <div className="text-6xl text-center w-14 h-14 mx-auto mb-5">
-                                    {category.icon}
+                        <Link to={category.link} key={index}>
+                            <div className="text-center border border-black/30 hover:bg-[#DB4444] hover:border-[#DB4444] hover:text-white rounded transition-all duration-200 ease-in-out">
+                                <div className="text-sm font-normal w-[170px] pt-6 h-[145px]">
+                                    <div className="text-6xl text-center w-14 h-14 mx-auto mb-5">
+                                        {category.icon}
+                                    </div>
+                                    <p className="font-Poppins">{category.name}</p>
                                 </div>
-                                <p className="font-Poppins">{category.name}</p>
                             </div>
-                        </div>
+                        </Link>
                     ))}
                 </div>
             </div>
