@@ -9,20 +9,20 @@ const CategoryPage = ({ title, subtitle }) => {
     const scrollContainerRef = useRef(null);
 
     const categories = [
-        { name: 'Shoes', icon: <FaShoePrints /> },
-        { name: 'Pants', icon: <PiPantsThin /> },
-        { name: 'Frocks', icon: <PiDressThin /> },
-        { name: 'Dresses', icon: <PiDressThin /> },
-        { name: 'Tops', icon: <FaUserTie /> },
-        { name: 'Accessories', icon: <FaShoppingBag /> },
-        { name: 'T-shirts', icon: <FaTshirt /> },
-        { name: 'Jeans', icon: <PiPantsThin /> },
-        { name: 'Jackets', icon: <GiSleevelessJacket /> },
-        { name: 'Skirts', icon: <GiSkirt /> },
-        { name: 'Belts', icon: <PiBeltThin /> },
-        { name: 'Bags', icon: <FaHandHolding /> },
-        { name: 'Sunglasses', icon: <GiSunglasses /> },
-        { name: 'Watches', icon: <GiWatch /> }
+        { name: 'Pants', icon: <PiPantsThin />, link:'/66f05bff7540dd76b4347c26/66f05c3e7540dd76b4347c57' },
+        { name: 'Frocks', icon: <PiDressThin />,link:'/66f05c077540dd76b4347c2a/6714b71ce01f6977e2202818' },
+        { name: 'Dresses', icon: <PiDressThin />,link:'/66f05c077540dd76b4347c2a/66f728a8e6c4ed7ebcae5410' },
+        { name: 'Tops', icon: <FaUserTie />, link:'/66f05c077540dd76b4347c2a/66f71dec5121941c84230b39' },
+        { name: 'Accessories', icon: <FaShoppingBag />,link:'/671616df17fc5f1bd6b68e95' },
+        { name: 'T-shirts', icon: <FaTshirt />, link:'/66f05bff7540dd76b4347c26/6700e5f5fd42daee87d25df0' },
+        { name: 'Jeans', icon: <PiPantsThin />, link:'/66f05bff7540dd76b4347c26/66f05c257540dd76b4347c39' },
+        // { name: 'Jackets', icon: <GiSleevelessJacket /> },
+        // { name: 'Shoes', icon: <FaShoePrints /> },
+        // { name: 'Skirts', icon: <GiSkirt /> },
+        // { name: 'Belts', icon: <PiBeltThin /> },
+        // { name: 'Bags', icon: <FaHandHolding /> },
+        // { name: 'Sunglasses', icon: <GiSunglasses /> },
+        // { name: 'Watches', icon: <GiWatch /> }
     ];
 
     const scrollLeft = () => {
