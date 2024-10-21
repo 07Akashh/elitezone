@@ -40,7 +40,7 @@ const Register = ({ switchToLogin }) => {
     const navigate = useNavigate();
     useEffect(() => {
         if (user) {
-            if (user.firstName === null) {
+            if (user.phone === null) {
                 setShowModal(true);
             } else {
                 window.location.reload()
@@ -197,7 +197,7 @@ const Register = ({ switchToLogin }) => {
                 <img src="https://img.icons8.com/?size=100&id=17949&format=png&color=000000" alt="google logo" className='h-8 w-8' />
                 <p className='m-auto text-sm sm:text-base'> Continue with Google</p>
             </button>
-            {showModal && <UserDetailsModal onSubmit={handleModalSubmit} onClose={() => setShowModal(false)} />}
+            {showModal && <UserDetailsModal user={user} onSubmit={handleModalSubmit} onClose={() => setShowModal(false)} />}
         </div>
     );
 };

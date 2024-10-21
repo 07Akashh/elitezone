@@ -45,6 +45,18 @@ const Register = () => {
         }
     }, [user, navigate]);
 
+
+    useEffect(() => {
+        if (user) {
+            if (user.phone === null) {
+                setShowModal(true);
+            } else {
+                window.location.reload()
+            }
+        }
+    }, [user, navigate]);
+
+
     const handleRegister = (e) => {
         e.preventDefault();
         dispatch(registerUser(formData));
@@ -204,7 +216,7 @@ const Register = () => {
                     <img src="https://img.icons8.com/?size=100&id=17949&format=png&color=000000" alt="Google logo" className='h-6 w-6 mr-2' />
                     <span>Continue with Google</span>
                 </button>
-                {showModal && <UserDetailsModal onSubmit={handleModalSubmit} onClose={() => setShowModal(false)} />}
+                {showModal && <UserDetailsModal user={user} onSubmit={handleModalSubmit} onClose={() => setShowModal(false)} />}
             </div>
         </div>
     );

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const UserDetailsModal = ({ onSubmit }) => {
+const UserDetailsModal = ({ onSubmit, user }) => {
     const [isPhoneValid, setIsPhoneValid] = useState(true);
     const [isPinValid, setIsPinValid] = useState(true);
     const [formData, setFormData] = useState({
@@ -116,7 +116,7 @@ const UserDetailsModal = ({ onSubmit }) => {
                         </p>
                     )}
                     <div className="text-center">
-                        <button type="submit" className='mt-[23px] text-lg font-semibold bg-[#754F23] text-white rounded-xl px-10 py-1'>
+                        <button type="submit" className='mt-[23px] text-lg font-semibold bg-[#DB4444] text-white rounded-xl px-10 py-1'>
                             Submit
                         </button>
                     </div>

@@ -5,7 +5,7 @@ const Policy = () => {
     return (
         <div className="max-w-6xl mb-[100px] px-2 sm:px-0 mx-auto py-8">
             <div className=" sm:my-[20px]">
-                <Breadcrumbs/>
+                <Breadcrumbs />
             </div>
             <h1 className="text-4xl font-bold mb-6 ">Privacy Policy</h1>
             <p className="text-gray-700 mb-6">
@@ -63,8 +63,6 @@ const Policy = () => {
             </p>
             <ol className='list-decimal pl-6 mb-4'>
                 <li>Cancellations will only be considered if the request is made within <strong>5 days</strong> of placing the order. However, cancellation requests may not be entertained if the orders have been communicated to such sellers/merchant(s) listed on the Platform and they have initiated the process of shipping them, or the product is out for delivery. In such an event, you may choose to reject the product at the doorstep.</li>
-                <li><strong>EliteZone</strong> does not accept cancellation requests for perishable items like flowers, eatables, etc. However, a refund/replacement can be made if the user establishes that the quality of the product delivered is not good.</li>
-                <li>In case of receipt of damaged or defective items, please report to our customer service team within <strong>5 days</strong> of receipt. The request would be entertained once the seller/merchant listed on the Platform has verified the claim. If the product received is defective, we will arrange for the pick-up of the product, and upon verification, we will initiate a refund or replacement.</li>
                 <li>To ensure a smooth return process, please follow the return instructions provided in the order confirmation email.</li>
                 <li>Refunds will be processed through the original mode of payment within 14 business days after the return is received and verified.</li>
                 <li>In the case of partial cancellation of the order, the shipping fee will not be refunded, and the refund will be initiated for the product cost only.</li>
@@ -77,8 +75,8 @@ const Policy = () => {
             </p>
             <h1 className="text-3xl font-bold mb-6 mt-8 text--500">Shipping Policy</h1>
             <p className="text-gray-700 mb-4">
-                The orders for the user are shipped through registered domestic courier companies and/or speed post only. Orders are shipped within <strong>7 days</strong> from the date of the order and/or payment or as per the delivery date agreed at the time of order confirmation and delivering of the shipment, subject to courier company / post office norms. Platform Owner shall not be liable for any delay in delivery by the courier company / postal authority. Delivery of all orders will be made to the address provided by the buyer at the time of purchase. Delivery of our services will be confirmed on your email ID as specified at the time of registration. If there are any shipping cost(s) levied by the seller or the Platform Owner (as the case be), the same is not refundable.            </p>
-
+                The orders for the user are shipped through registered domestic courier companies and/or speed post only. Orders are shipped within <strong>7 days</strong> from the date of the order and/or payment or as per the delivery date agreed at the time of order confirmation and delivering of the shipment, subject to courier company / post office norms. Platform Owner shall not be liable for any delay in delivery by the courier company / postal authority. Delivery of all orders will be made to the address provided by the buyer at the time of purchase. Delivery of our services will be confirmed on your email ID as specified at the time of registration. If there are any shipping cost(s) levied by the seller or the Platform Owner (as the case be), the same is not refundable.
+            </p>
             <h2 className="text-2xl font-semibold mt-4 mb-2 text--500">Contact Information</h2>
             <p className="text-gray-700 mb-4">
                 If you have any questions or concerns regarding this Privacy Policy, please contact us at:
