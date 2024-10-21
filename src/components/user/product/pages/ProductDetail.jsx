@@ -320,7 +320,7 @@ const ProductDetails = () => {
                     value={quantity}
                     disabled
                     onChange={(e) => setQuantity(Number(e.target.value))}
-                    className="border-y spinner outline-none border-[#00000080] bg-transparent p-2 w-20 text-center"
+                    className="border-y spinner rounded-none outline-none border-[#00000080] bg-transparent p-2 w-20 text-center"
                   />
                   <button onClick={() => handleQuantityChange(1)} className="px-3 py-[9px] bg-[#DB4444] text-white text-6 border-[#00000080] font-bold rounded-r">&#43;</button>
                 </div>

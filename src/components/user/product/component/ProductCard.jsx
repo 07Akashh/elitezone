@@ -13,7 +13,6 @@ import Register from '../../auth/component/Register';
 const ProductCard = ({ product, data }) => {
 
   const dispatch = useDispatch();
-  const products = useSelector((state) => state.products.selectedProduct);
   const { categoryId, subCategoryId } = useParams();
 
   const [selectedSize] = useState(product.size[0]);
@@ -77,7 +76,7 @@ const ProductCard = ({ product, data }) => {
       return;
     }
 
-    if (!products.product.inStock) {
+    if (!value.inStock) {
       toast.success("Product is not available")
       console.log('Product is not available');
       return;
@@ -86,7 +85,7 @@ const ProductCard = ({ product, data }) => {
       setIsAddingToCart(true);
       // const res = await addItemToCart(products.product._id, quantity, selectedSize);
       await toast.promise(
-        addItemToCart(products.product._id, quantity, selectedSize),
+        addItemToCart(value._id, quantity, selectedSize),
         {
           loading: 'Adding to Cart...',
           success: (response) => `${response.message}`,
@@ -105,9 +104,7 @@ const ProductCard = ({ product, data }) => {
 
   return (
     <div className=" max-w-[140px]  sm:max-w-[270px] sm:w-[270px] font-Poppins relative">
-
       <div>
-
         <div className='group font-Poppins relative sm:h-[280px] border-black overflow-hidden'>
           <Link to={generateLink()}>
             {percentageOffer && !offerPrice && (

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 const UserDetailsModal = ({ onSubmit, user }) => {
     const [isPhoneValid, setIsPhoneValid] = useState(true);
@@ -11,7 +11,17 @@ const UserDetailsModal = ({ onSubmit, user }) => {
         address: '',
     });
 
-
+    useEffect(() => {
+        if (user) {
+            setFormData({
+                firstName: user.firstName || '',
+                lastName: user.lastName || '',
+                phone: user.phone || '',
+                pincode: user.pincode || '',
+                address: user.address || '',
+            });
+        }
+    }, [user]);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -41,14 +51,14 @@ const UserDetailsModal = ({ onSubmit, user }) => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        const response = onSubmit(formData)
-        console.log(response)
+        const response = onSubmit(formData);
+        console.log(response);
     };
 
     return (
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
             <div className="bg-white p-8 rounded-lg shadow-lg">
-                <h2 className='text-black text-4xl font-PlayfairDisplay font-extrabold text-center pb-2'>Additional Details</h2>
+                <h2 className='text-black text-3xl font-Poppins font-semibold text-center pb-2'>Additional Details</h2>
                 <form onSubmit={handleSubmit} className='text-xl text-center'>
                     <input
                         type="text"
@@ -116,7 +126,7 @@ const UserDetailsModal = ({ onSubmit, user }) => {
                         </p>
                     )}
                     <div className="text-center">
-                        <button type="submit" className='mt-[23px] text-lg font-semibold bg-[#DB4444] text-white rounded-xl px-10 py-1'>
+                        <button type="submit" className='mt-[23px] text-lg font-semibold bg-[#DB4444] hover:bg-[#DB4444]/80 text-white rounded-xl px-10 py-1'>
                             Submit
                         </button>
                     </div>
