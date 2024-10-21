@@ -30,9 +30,9 @@ export const postProductReview = async (productId, data, imageFiles) => {
         }
     }
 
-    const response = await axios.post(`${API_URL}/products/${productId}/reviews`, formData, {
+    const response = await axios.post(`${API_URL}/products/${productId}/reviews`, formData,
+        { withCredentials: true }, {
         headers: {
-            withCredentials: true,
             'Content-Type': 'multipart/form-data'
         }
     });
