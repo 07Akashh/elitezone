@@ -20,6 +20,7 @@ import Admin from './components/admin/Admin';
 import { getCategories, getOffers, getSubCategories, } from './redux/slices/categorySlice';
 import Success from './components/user/checkout/pages/Success';
 import { fetchAdminStats, fetchOrders, fetchProducts, fetchUsers } from './redux/slices/adminSlice';
+import ScrollToTop from './shared/ScrolltoTop';
 
 function App() {
 
@@ -85,6 +86,7 @@ function App() {
 
   return (
     <Router>
+    <ScrollToTop />
       <Routes>
         <Route
           path="/*"
