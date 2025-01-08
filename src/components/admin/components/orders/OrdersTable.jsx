@@ -22,7 +22,7 @@ const OrdersTable = () => {
 
 
 	if (loading) {
-		return <p>Loading...</p>
+		return <p className="h-screen text-center items-center">Loading...</p>
 	}
 
 	const handleSearch = (e) => {

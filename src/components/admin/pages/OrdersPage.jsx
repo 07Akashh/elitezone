@@ -22,7 +22,9 @@ const OrdersPage = () => {
     }, [dispatch]);
 
 	if (loading) {
-		return <p>Loading...</p>
+		return <div className="loading-overlay">
+		<div className="text-white font-TenorSans text-xl">Loading...</div>
+	  </div>
 	}
 	return (
 		<div className='flex-1 relative z-0 overflow-auto'>

@@ -293,7 +293,9 @@ const ProductFilterPage = () => {
                             </button>
                         </div>
                     )}
-                    {isLoading && <p className="text-center">Loading more products...</p>}
+                    {isLoading && <div className="loading-overlay">
+                        <div className="text-white font-TenorSans text-xl">Loading...</div>
+                    </div>}
                     {!hasMore && <p className="text-center">No more products available.</p>}
                 </main>
             </div>

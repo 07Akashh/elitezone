@@ -85,7 +85,9 @@ const ProductDetails = () => {
     }
   }, [products, wishlistItems, wishlistLoading]);
 
-  if (error || !products.product?._id) return <div className='text-center font-TenorSans'>Please wait product is loading...</div>;
+  if (error || !products.product?._id) return <div className="loading-overlay">
+  <div className="text-white font-TenorSans text-xl">Please Wait Product is Loading...</div>
+</div>;
 
 
   const handleAddToCart = async () => {

@@ -21,7 +21,9 @@ const OrdersTable = () => {
 	const [filteredOrders, setFilteredOrders] = useState(orders);
 
 	if (loading) {
-		return <p>Loading...</p>
+		return <div className="loading-overlay">
+		<div className="text-white font-TenorSans text-xl">Loading...</div>
+	  </div>
 	}
 
 	const handleSearch = (e) => {

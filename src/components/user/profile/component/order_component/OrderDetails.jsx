@@ -100,7 +100,9 @@ const OrderDetailsPage = () => {
     }
 
     if (status === 'loading') {
-        return <div className='text-center text-sm font-Poppins'>Loading...</div>;
+        return <div className="loading-overlay">
+        <div className="text-white font-TenorSans text-xl">Loading...</div>
+      </div>;
     }
 
     if (status === 'failed') {
