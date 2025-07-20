@@ -112,7 +112,7 @@ const UpdateProductModal = ({ isOpen, onClose, product }) => {
                             Cancel
                         </button>
                         <button
-                            className="px-4 py-3 bg-[#DB4444] hover:opacity-80 text-white rounded justify-start items-start gap-4 inline-flex text-sm font-semibold"
+                            className="px-4 py-3 bg-primary hover:opacity-80 text-white rounded justify-start items-start gap-4 inline-flex text-sm font-semibold"
                             onClick={handleSubmit}
                         >
                             Save Product

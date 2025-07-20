@@ -141,7 +141,7 @@ const Register = ({ switchToLogin }) => {
                     required
                 />
                 {!isPhoneValid && (
-                    <p className='text-red-500 text-[12px] text-start'>
+                    <p className='text-primary text-[12px] text-start'>
                         Number must be at least 10 digits
                     </p>
                 )}
@@ -168,7 +168,7 @@ const Register = ({ switchToLogin }) => {
                     required
                 />
                 {!isPinValid && (
-                    <p className='text-red-500 text-[12px] text-start'>
+                    <p className='text-primary text-[12px] text-start'>
                         Pincode must be at least 6 digits
                     </p>
                 )}
@@ -181,14 +181,14 @@ const Register = ({ switchToLogin }) => {
                     onChange={handleChange}
                     required
                 />
-                <button type="submit" disabled={loading} className='mt-[23px] text-lg font-semibold bg-[#DB4444] text-white rounded-xl px-10 py-1'>
+                <button type="submit" disabled={loading} className='mt-[23px] text-lg font-semibold bg-primary text-white rounded-xl px-10 py-1'>
                     {loading ? 'Loading...' : 'Register'}
                 </button>
                 {error && <p>{error}</p>}
             </form>
             <h2 className="mt-4 text-[#969ab8] text-[15px] text-center">
                 Already Have an Account?{' '}
-                <button onClick={switchToLogin} className="text-[15px] text-[#DB4444]">
+                <button onClick={switchToLogin} className="text-[15px] text-primary">
                     Log In
                 </button>
                 <p className='font-extrabold text-[#C1C1C1]'>-OR-</p>

@@ -25,7 +25,7 @@ const ReviewList = () => {
             )}
 
             {error && (
-                <div className="text-red-500 text-center">
+                <div className="text-primary text-center">
                     <p>Error: {error}</p>
                 </div>
             )}
@@ -67,7 +67,7 @@ const ReviewList = () => {
                     <div className="relative">
                         <img src={selectedImage} alt="Selected Preview" className="max-w-full p-5 max-h-full rounded-lg" />
                         <button
-                            className="absolute top-2 right-2 bg-white text-[#DB4444] rounded-full h-8 w-8 shadow-md"
+                            className="absolute top-2 right-2 bg-white text-primary rounded-full h-8 w-8 shadow-md"
                             onClick={closePreview}
                         >
                             ✕

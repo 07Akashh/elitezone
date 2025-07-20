@@ -14,7 +14,7 @@ const CartTotal = ({ subtotal, shippingCharge, total, navigate }) => (
                         className="border py-2 sm:py-1.5 sm:text-sm lg:text-lg lg:py-2 px-4 outline-none w-full lg:w-auto border-black bg-transparent"
                     />
                     <button
-                        className="py-2 lg:py-3 lg:px-6 sm:text-sm lg:text-md font-normal rounded text-white bg-[#DB4444] w-full xl:w-auto"
+                        className="py-2 lg:py-3 lg:px-6 sm:text-sm lg:text-md font-normal rounded text-white bg-primary w-full xl:w-auto"
                     >
                         Apply Coupon
                     </button>
@@ -39,7 +39,7 @@ const CartTotal = ({ subtotal, shippingCharge, total, navigate }) => (
                 <div className="text-center">
                     <button
                         onClick={() => navigate('/cart/checkout')}
-                        className="bg-[#DB4444] text-white py-3 px-4 rounded w-full md:w-auto"
+                        className="bg-primary text-white py-3 px-4 rounded w-full md:w-auto"
                     >
                         Proceed to Checkout
                     </button>

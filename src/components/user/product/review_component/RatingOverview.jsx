@@ -31,7 +31,7 @@ const RatingOverview = () => {
                             <span className="mr-2 font-medium">{rating} stars</span>
                             <div className="flex-grow h-2 bg-gray-300 rounded-lg">
                                 <div
-                                    className="h-2 bg-[#DB4444] rounded-lg"
+                                    className="h-2 bg-primary rounded-lg"
                                     style={{
                                         width: `${ratingPercentage}%`,
                                     }}

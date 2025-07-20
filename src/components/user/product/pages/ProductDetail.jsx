@@ -20,6 +20,7 @@ import Modals from '../../../../shared/Modal';
 import Login from '../../auth/component/Login';
 import Register from '../../auth/component/Register';
 import ProductDetailsAndReviews from '../review_component/ProductDetailsAndReviews';
+import ProductImageGallery from '../../../../shared/ProductImageGallery';
 
 
 const ProductDetails = () => {
@@ -221,33 +222,19 @@ const ProductDetails = () => {
         </div>
 
         <div className="lg:flex font-TenorSans md:justify-between lg:gap-x-[70px] border-black">
-          <div className='lg:flex lg:flex-row-reverse  boder lg:w-[60%]  border-black'>
-            <div className="flex-grow">
-              <img
-                src={mainImage}
-                alt={products.product.productName}
-                className="w-full h-[400px]  lg:h-[320px] xl:h-[600px] bg-[#F5F5F5] object-fill"
-              />
-            </div>
-            <div className="flex p-2  mb-2 lg:mb-0 borer w-full border-black lg:h-[320px]  xl:h-[600px] gap-x-2  lg:w-[150px] overflow-x-auto lg:overflow-y-auto no-scrollbar flex-row lg:flex-col items-center">
-              {products.images?.map((image, index) => (
-                <img
-                  key={index}
-                  src={image.url}
-                  alt={products.product.name}
-                  className={`lg:h-[138px] h-[100px]  sm:h-[150px] bg-[#F5F5F5] w-[95px] md:w-[140px] lg:w-full object-fill lg:mb-2 cursor-pointer ${mainImage === image.url ? 'border-2 border-[#DB4444]' : ''}`}
-                  onClick={() => setMainImage(image.url)}
-                />
-              ))}
-            </div>
-          </div>
+          <ProductImageGallery
+            images={products.images}
+            productName={products.product.productName}
+            mainImage={mainImage}
+            onImageChange={setMainImage}
+          />
           <div className="flex mx-auto lg:w-[40%]  borer flex-col items-end border-black">
             <div className="w-full ">
               <h1 className="text-3xl">{products.product.productName}</h1>
               <div className=' align-middle py-auto flex gap-3 mb-1'>
                 <ProductReviews reviews={products.product.rating} />
                 <span className="text-sm my-auto text-gray-500 mt-2 font-Poppins">({products.product.reviewCount} Reviews) |</span>
-                <span className={`text-sm my-auto mt-2 font-Poppins ${products.product.inStock ? 'text-green-500' : 'text-red-500'}`}>
+                <span className={`text-sm my-auto mt-2 font-Poppins ${products.product.inStock ? 'text-green-500' : 'text-primary'}`}>
                   {products.product.inStock ? 'In Stock' : 'Out of Stock'}
                 </span>
               </div>
@@ -300,7 +287,7 @@ const ProductDetails = () => {
                       {products.product.size.map((size, index) => (
                         <button
                           key={index}
-                          className={` border-black px-3 h-8 rounded font-TenorSans border ${selectedSize === size ? 'bg-[#DB4444] text-white border border-none' : 'bg-transparent text-black'}`}
+                          className={` border-black px-3 h-8 rounded font-TenorSans border ${selectedSize === size ? 'bg-primary text-white border border-none' : 'bg-transparent text-black'}`}
                           onClick={() => setSelectedSize(size)}
                         >
                           {size}
@@ -312,7 +299,7 @@ const ProductDetails = () => {
               </div>
               <div className='sm:space-x-2 space-y-4 sm:space-y-0 sm:flex'>
                 <div className="flex items-center">
-                  <button onClick={() => handleQuantityChange(-1)} className="px-3 py-2 border text-md text-black border-[#00000080] focus:bg-[#DB4444] focus:text-white focus:border-[#DB4444] font-bold rounded-l">&#8722;</button>
+                  <button onClick={() => handleQuantityChange(-1)} className="px-3 py-2 border text-md text-black border-[#00000080] focus:bg-primary focus:text-white focus:border-primary font-bold rounded-l">&#8722;</button>
                   <input
                     min="1"
                     type="number"
@@ -323,12 +310,12 @@ const ProductDetails = () => {
                     onChange={(e) => setQuantity(Number(e.target.value))}
                     className="border-y spinner rounded-none outline-none border-[#00000080] bg-transparent p-2 w-20 text-center"
                   />
-                  <button onClick={() => handleQuantityChange(1)} className="px-3 py-[9px] bg-[#DB4444] text-white text-6 border-[#00000080] font-bold rounded-r">&#43;</button>
+                  <button onClick={() => handleQuantityChange(1)} className="px-3 py-[9px] bg-primary text-white text-6 border-[#00000080] font-bold rounded-r">&#43;</button>
                 </div>
                 <div className='space-x-2 flex'>
                   <button
                     onClick={handleAddToCart}
-                    className={`py-2 px-4 rounded h-[44px] text-sm w-full sm:w-[125px] ${products.product.inStock ? 'bg-[#DB4444] text-white' : 'bg-red-500 text-white cursor-not-allowed opacity-50'}`}
+                    className={`py-2 px-4 rounded h-[44px] text-sm w-full sm:w-[125px] ${products.product.inStock ? 'bg-primary text-white' : 'bg-primary text-white cursor-not-allowed opacity-50'}`}
                     disabled={!products.product.inStock || isAddingToCart}
                   >
                     {products.product.inStock ? (isAddingToCart ? 'Adding...' : 'Add to Cart') : 'Out of Stock'}
@@ -339,7 +326,7 @@ const ProductDetails = () => {
                       <IoMdHeartEmpty className="text-3xl" />
                     </button>
                   ) : (
-                    <button onClick={handleWishlistToggle} className={`border h-[44px] text-lg border-[#00000080] rounded px-2 ${isInWishlist ? 'text-red-500 ' : 'text-black'}`}>
+                    <button onClick={handleWishlistToggle} className={`border h-[44px] text-lg border-[#00000080] rounded px-2 ${isInWishlist ? 'text-primary ' : 'text-black'}`}>
                       {isInWishlist ? <IoMdHeart className="text-3xl " /> : <IoMdHeartEmpty className="text-3xl" />}
                     </button>
                   )}

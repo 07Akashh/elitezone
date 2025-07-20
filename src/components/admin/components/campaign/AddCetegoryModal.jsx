@@ -49,14 +49,14 @@ const AddCategoryModal = () => {
                                     type="text"
                                     value={name}
                                     onChange={(e) => setCategoryName(e.target.value)}
-                                    className=" appearance-none mt-2 border rounded w-full py-2 px-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#DB4444]"
+                                    className=" appearance-none mt-2 border rounded w-full py-2 px-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-primary"
                                     placeholder="Enter category name"
                                 />
                             </div>
                             <div className="flex justify-end space-x-4">
                                 <button
                                     type="submit"
-                                    className="px-4 py-3 bg-[#DB4444] hover:opacity-80 text-white rounded justify-start items-start gap-4 inline-flex text-sm font-semibold font-Inter leading-snug"
+                                    className="px-4 py-3 bg-primary hover:opacity-80 text-white rounded justify-start items-start gap-4 inline-flex text-sm font-semibold font-Inter leading-snug"
                                 >
                                     Create Category
                                 </button>

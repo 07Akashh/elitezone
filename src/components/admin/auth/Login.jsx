@@ -66,7 +66,7 @@ const Login = () => {
                         required
                     />
                     <div>
-                        <button type="submit" disabled={loading} className='mt-[20px] text-lg font-semibold bg-[#DB4444] text-white rounded px-10 py-1'>
+                        <button type="submit" disabled={loading} className='mt-[20px] text-lg font-semibold bg-primary text-white rounded px-10 py-1'>
                             {loading ? 'Loading...' : 'Login'}
                         </button>
                         {error && <p className='text-red-600'>{error}</p>}

@@ -52,7 +52,7 @@ const AddSubCategoryModal = () => {
                                     type="text"
                                     value={subCategoryName}
                                     onChange={(e) => setSubCategoryName(e.target.value)}
-                                    className=" appearance-none border mt-2 rounded w-full py-2 px-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#DB4444]"
+                                    className=" appearance-none border mt-2 rounded w-full py-2 px-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-primary"
                                     placeholder="Enter subcategory name"
                                 />
                             </div>
@@ -61,7 +61,7 @@ const AddSubCategoryModal = () => {
                                 <select
                                     value={selectedCategoryId}
                                     onChange={(e) => setSelectedCategoryId(e.target.value)}
-                                    className=" appearance-none border rounded w-full py-2 mt-2 px-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#DB4444]"
+                                    className=" appearance-none border rounded w-full py-2 mt-2 px-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-primary"
                                 >
                                     <option value="">Select a category</option>
                                     {categories.length > 0 && categories.map((category) => (
@@ -74,7 +74,7 @@ const AddSubCategoryModal = () => {
                             <div className="flex justify-end space-x-4">
                                 <button
                                     type="submit"
-                                    className="px-4 py-3 bg-[#DB4444] hover:opacity-80 text-white rounded justify-start items-start gap-4 inline-flex text-sm font-semibold font-Inter leading-snug"
+                                    className="px-4 py-3 bg-primary hover:opacity-80 text-white rounded justify-start items-start gap-4 inline-flex text-sm font-semibold font-Inter leading-snug"
                                 >
                                     Add Subcategory
                                 </button>

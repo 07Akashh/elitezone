@@ -40,7 +40,7 @@ const BillingDetails = ({ onProceed }) => {
                     {savedAddresses.map((address, index) => (
                         <li
                             key={index}
-                            className={`cursor-pointer shadow-md drop-shadow-sm rounded px-4 p-2 ${selectedAddressIndex === index ? 'bg-[#DB4444] text-white rounded' : ''}`}
+                            className={`cursor-pointer shadow-md drop-shadow-sm rounded px-4 p-2 ${selectedAddressIndex === index ? 'bg-primary text-white rounded' : ''}`}
                             onClick={() => handleAddressSelect(index)}
                         >
                             <h4 className='font-semibold'>{address?.firstName} {address?.lastName}</h4>
@@ -53,7 +53,7 @@ const BillingDetails = ({ onProceed }) => {
                 </ul>
 
                 <button
-                    className="bg-[#DB4444] text-white py-[16px] px-[20px] sm:px-[48px] text-base font-normal rounded mb-2 w-full sm:w-auto"
+                    className="bg-primary text-white py-[16px] px-[20px] sm:px-[48px] text-base font-normal rounded mb-2 w-full sm:w-auto"
                     onClick={handleClick}
                 >
                     Add New Billing Address

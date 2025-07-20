@@ -7,7 +7,7 @@ import SearchBar from '../header_component/SearchBar';
 const Header = () => {
 
   return (
-    <div className='fixed z-20 w-full sm:pt-[40px]  sm:pb-[16px] bg-[#FFFFFF] border-b'>
+    <div className='fixed z-20 w-full sm:pt-[40px]  sm:pb-[16px] bg-wht border-b'>
       <div>
         <header className="bg-none text-[#2F2F2F] py-4 sm:py-0 px-[10px] xl:px-[135px] lg:px-[100px] md:px-[60px] flex justify-between items-center">
         <div className='flex gap-2 '>

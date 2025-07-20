@@ -103,14 +103,14 @@ const LoginPage = () => {
                     onChange={(e) => setPassword(e.target.value)}
                     required
                 />
-                <button type="submit" disabled={loading} className='mt-[23px] text-lg font-semibold bg-[#DB4444] text-white rounded px-10 py-1'>
+                <button type="submit" disabled={loading} className='mt-[23px] text-lg font-semibold bg-primary text-white rounded px-10 py-1'>
                     {loading ? 'Loading...' : 'Login'}
                 </button>
                 {error && <p>{error}</p>}
             </form>
             <h2 className="mt-4 text-[#969ab8] text-[15px] text-center font-['poppins']">
                 Don’t have an account?{' '}
-                <Link to='/register' className="text-[15px] text-[#DB4444]">
+                <Link to='/register' className="text-[15px] text-primary">
                 Sign Up
                 </Link>
                 <p className='font-extrabold text-[#C1C1C1]'>-OR-</p>

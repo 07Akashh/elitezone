@@ -108,7 +108,7 @@ const CampaignModal = ({ isOpen, onClose }) => {
                         Cancel
                     </button>
                     <button
-                        className="px-4 py-3 bg-[#DB4444] hover:opacity-80 text-white rounded justify-start items-start gap-4 inline-flex text-sm font-semibold font-Inter leading-snug">
+                        className="px-4 py-3 bg-primary hover:opacity-80 text-white rounded justify-start items-start gap-4 inline-flex text-sm font-semibold font-Inter leading-snug">
                         Save Campaign
                     </button>
                 </div>

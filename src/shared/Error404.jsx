@@ -12,7 +12,7 @@ const Error404 = () => {
 
                     <a
                         href="/"
-                        className="mt-12 inline-block px-[48px] py-[16px] bg-[#DB4444] text-white text-sm rounded-lg hover:bg-[#DB4444]/80"
+                        className="mt-12 inline-block px-[48px] py-[16px] bg-primary text-white text-sm rounded-lg hover:bg-primary/80"
                     >
                         Back to home page
                     </a>

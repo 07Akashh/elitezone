@@ -25,9 +25,9 @@ const SimilarProductsPage = ({ categoryId, subCategoryId }) => {
             <div className='text-start mb-5'>
                 <div className="h-10 justify-start items-center gap-x-4 inline-flex ">
                     <div className="w-5 h-10 relative">
-                        <div className="w-5 h-10 left-0 top-0 absolute bg-[#db4444] rounded" />
+                        <div className="w-5 h-10 left-0 top-0 absolute bg-primary rounded" />
                     </div>
-                    <div className="text-[#db4444] text-base font-semibold font-Poppins leading-tight">Related Item</div>
+                    <div className="text-primary text-base font-semibold font-Poppins leading-tight">Related Item</div>
                 </div>
             </div>
             <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-5 border-black mx-auto py-4">

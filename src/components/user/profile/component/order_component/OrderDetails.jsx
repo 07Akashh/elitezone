@@ -112,7 +112,7 @@ const OrderDetailsPage = () => {
     if (status === 'succeeded') {
         return (
             <div className="w-full sm:py-5 py-2 px-2 sm:px-5 bg-white shadow-xl rounded-lg font-Inter">
-                <h1 className="text-xl sm:text-2xl lg:text-3xl font-me text-[#DB4444] mb-1 border-[#DB4444]">Order ID: <span className="text-[#130f26]/80">{id.toUpperCase()}</span></h1>
+                <h1 className="text-xl sm:text-2xl lg:text-3xl font-me text-primary mb-1 border-primary">Order ID: <span className="text-[#130f26]/80">{id.toUpperCase()}</span></h1>
                 <div className='flex border-b border-gray-300 pb-3 lg:gap-4 gap-2 text-[8px] sm:text-[10px] lg:text-sm'>
                     <p className='text-[#78756e] '>Order Date: <span className='text-black '>{formatDate(order.createdAt)}</span></p>
                     <p className='text-[#78756e]'>|</p>

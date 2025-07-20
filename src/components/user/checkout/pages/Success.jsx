@@ -31,7 +31,7 @@ const Success = () => {
                     {isSuccess ? <SuccessAnimation /> : <FailedAnimation />}
                 </div>
 
-                <h1 className={`text-2xl sm:text-3xl font-bold mb-4 ${isSuccess ? 'text-green-500' : 'text-red-500'}`}>
+                <h1 className={`text-2xl sm:text-3xl font-bold mb-4 ${isSuccess ? 'text-green-500' : 'text-primary'}`}>
                     {orderData.field9 || (isSuccess ? 'Payment Successful!' : 'Payment Failed')}
                 </h1>
                 
@@ -42,17 +42,17 @@ const Success = () => {
                 <div className="mt-6 text-black text-start">
                     <p className="text-md sm:text-lg flex justify-between font-semibold">
                         Status: 
-                        <span className={`font-bold ${isSuccess ? 'text-green-500' : 'text-red-500'} line-clamp-1`}>
+                        <span className={`font-bold ${isSuccess ? 'text-green-500' : 'text-primary'} line-clamp-1`}>
                             {orderData.status}
                         </span>
                     </p>
                     <p className="text-md sm:text-lg flex justify-between font-semibold mt-2 line-clamp-1">
                         Txn ID: 
-                        <span className="font-bold text-[#DB4444]">{orderData.txnid}</span>
+                        <span className="font-bold text-primary">{orderData.txnid}</span>
                     </p>
                     <p className="text-md sm:text-lg flex justify-between font-semibold mt-2">
                         Total: 
-                        <span className="font-bold text-[#DB4444]">₹{orderData.amount}</span>
+                        <span className="font-bold text-primary">₹{orderData.amount}</span>
                     </p>
                 </div>
 
@@ -60,14 +60,14 @@ const Success = () => {
                     {isSuccess ? (
                         <Link
                             to={`/my-account/orders/details/${orderData.udf1}`}
-                            className="inline-block text-sm sm:text-base px-6 py-3 bg-[#DB4444] text-white rounded-lg hover:bg-red-700 transition duration-300"
+                            className="inline-block text-sm sm:text-base px-6 py-3 bg-primary text-white rounded-lg hover:bg-red-700 transition duration-300"
                         >
                             View Orders
                         </Link>
                     ) : (
                         <Link
                             to="/cart"
-                            className="inline-block text-sm sm:text-base px-6 py-3 bg-red-500 text-white rounded-lg hover:bg-red-600 transition duration-300"
+                            className="inline-block text-sm sm:text-base px-6 py-3 bg-primary text-white rounded-lg hover:bg-red-600 transition duration-300"
                         >
                             Try Again
                         </Link>

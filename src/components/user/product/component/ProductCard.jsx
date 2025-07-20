@@ -9,6 +9,39 @@ import Modals from '../../../../shared/Modal';
 import Login from '../../auth/component/Login';
 import Register from '../../auth/component/Register';
 
+// Enhanced Skeleton Loader Component
+const ProductCardSkeleton = () => {
+  return (
+    <div className="max-w-[140px] sm:max-w-[270px] sm:w-[270px] font-Poppins relative mx-auto">
+      <div>
+        <div className='group font-Poppins relative sm:h-[280px] border-black overflow-hidden'>
+          {/* Image Skeleton with shimmer effect */}
+          <div className="sm:w-[270px] rounded bg-gray-200 w-[165px] max-h-[200px] h-[180px] sm:max-h-[300px] sm:h-[280px] mb-1 relative overflow-hidden">
+            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent animate-shimmer"></div>
+          </div>
+          
+          {/* Badge Skeleton */}
+          <div className="absolute ml-2 mt-2 sm:mt-3 sm:ml-3 w-12 h-6 bg-gray-200 rounded animate-pulse"></div>
+          
+          {/* Heart Icon Skeleton */}
+          <div className="absolute sm:h-[35px] h-[25px] w-[25px] sm:w-[35px] ml-2 right-2 sm:right-3 mt-2 sm:mt-3 rounded-full bg-gray-200 animate-pulse"></div>
+        </div>
+      </div>
+
+      {/* Title Skeleton with shimmer */}
+      <div className="relative overflow-hidden">
+        <div className="h-4 bg-gray-200 rounded mt-2 mb-2 w-3/4 animate-pulse"></div>
+        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent animate-shimmer"></div>
+      </div>
+      
+      {/* Price Skeleton with shimmer */}
+      <div className="relative overflow-hidden">
+        <div className="h-4 bg-gray-200 rounded w-1/2 animate-pulse"></div>
+        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent animate-shimmer"></div>
+      </div>
+    </div>
+  );
+};
 
 const ProductCard = ({ product, data }) => {
 
@@ -103,12 +136,12 @@ const ProductCard = ({ product, data }) => {
   const isLiked = value.isLiked;
 
   return (
-    <div className=" max-w-[140px]  sm:max-w-[270px] sm:w-[270px] font-Poppins relative">
+    <div className="max-w-[140px] sm:max-w-[270px] sm:w-[270px] font-Poppins relative mx-auto">
       <div>
         <div className='group font-Poppins relative sm:h-[280px] border-black overflow-hidden'>
           <Link to={generateLink()}>
             {percentageOffer && !offerPrice && (
-              <div className='absolute ml-2 mt-2 sm:mt-3 sm:ml-3 font-Poppins bg-[#DB4444] text-[#f9f9f9] text-xs sm:text-xs font-light rounded leading-[18px] px-3 py-1 flex items-center justify-center'>
+              <div className='absolute ml-2 mt-2 sm:mt-3 sm:ml-3 font-Poppins bg-primary text-[#f9f9f9] text-xs sm:text-xs font-light rounded leading-[18px] px-3 py-1 flex items-center justify-center'>
                 {percentageOffer.percentOff}%
               </div>
             )}
@@ -147,13 +180,13 @@ const ProductCard = ({ product, data }) => {
       {
         offerPrice ? (
           <div>
-            <p className="mb-0 text-start text-base font-Poppins text-[#DB4444]">
+            <p className="mb-0 text-start text-base font-Poppins text-primary">
               &#8377;{offerPrice.offerPrice.toFixed(2)}
               <span className='opacity-50 text-black text-base line-through ml-2'>&#8377;{value.price.toFixed(2)}</span>
             </p>
           </div>
         ) : (
-          <p className=" text-start text-base leading-normal font-Poppins text-[#DB4444] line-clamp-1">
+          <p className=" text-start text-base leading-normal font-Poppins text-primary line-clamp-1">
             &#8377;{finalPrice?.toFixed(2)}
             {value.price !== finalPrice && (
               <span className='opacity-50 text-black text-base line-through ml-2'>
@@ -163,7 +196,7 @@ const ProductCard = ({ product, data }) => {
             {value.inStock ? (
               <span className="text-start leading-normal text-green-500 text-xs font-Poppins ml-2">In Stock</span>
             ) : (
-              <span className="text-start leading-normal text-red-500 text-xs font-Poppins ml-2">Out of Stock</span>
+              <span className="text-start leading-normal text-primary text-xs font-Poppins ml-2">Out of Stock</span>
             )}
           </p>
         )
@@ -172,4 +205,5 @@ const ProductCard = ({ product, data }) => {
   );
 };
 
+export { ProductCardSkeleton };
 export default ProductCard;

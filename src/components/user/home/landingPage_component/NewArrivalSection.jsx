@@ -4,22 +4,28 @@ import ArrivalCards from './ArrivalSections'
 const NewArrivalSection = ({ title, subtitle }) => {
 
     return (
-        <div className="mt-5 sm:mt-12">
-            <div className="h-10 justify-start items-center gap-4 inline-flex xl:px-[135px] lg:px-[100px] md:px-[60px] px-[20px]">
-                <div className="w-5 h-10 relative">
-                    <div className="w-5 h-10 left-0 top-0 absolute bg-[#db4444] rounded" />
+        <div className="mt-16 bg-white">
+            <div className="xl:px-[135px] lg:px-[100px] md:px-[60px] px-[20px]">
+                {/* Header Section */}
+                <div className="flex items-center gap-4 mb-8">
+                    <div className="w-1 h-12 bg-gradient-to-b from-primary to-accent rounded-full"></div>
+                    <div className="flex-1">
+                        <div className="text-primary text-sm font-semibold font-Poppins uppercase tracking-wider mb-1">
+                            {subtitle}
+                        </div>
+                        <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 font-Inter leading-tight">
+                            {title}
+                        </h2>
+                        <p className="text-gray-600 mt-2 font-Poppins text-sm sm:text-base">
+                            Discover the latest trends and newest additions to our collection
+                        </p>
+                    </div>
                 </div>
-                <div className="text-[#db4444] text-base font-semibold font-Poppins leading-tight">{subtitle}</div>
-            </div>
-            <div className='flex mt-[16px]'>
-                <div className='flex  justify-between w-full xl:px-[135px] lg:px-[100px] md:px-[60px] px-[20px]'>
-                    <h2 className="text-black text-xl sm:text-3xl md:text-4xl font-semibold font-Inter sm:leading-[48px] tracking-wider">
-                        {title}
-                    </h2>
+
+                {/* Products Grid */}
+                <div className='relative'>
+                        <ArrivalCards />
                 </div>
-            </div>
-            <div className='sm:mt-[10px]'>
-                <ArrivalCards />
             </div>
         </div>
     )

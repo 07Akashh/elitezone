@@ -55,7 +55,7 @@ const OrderSummary = ({ cartItems, subtotal, shipping, total, onPlaceOrder, load
                                 value="Prepaid"
                                 checked={selectedOption === 'Prepaid'}
                                 onChange={handleOptionChange}
-                                className="form-radio h-4 w-4 accent-[#DB4444] text-red-600 "
+                                className="form-radio h-4 w-4 accent-primary text-red-600 "
                             />
                             <div className='w-full flex h-full justify-between'>
                                 <span>Bank</span>
@@ -77,7 +77,7 @@ const OrderSummary = ({ cartItems, subtotal, shipping, total, onPlaceOrder, load
                                 disabled
                                 checked={selectedOption === 'COD'}
                                 onChange={handleOptionChange}
-                                className="form-radio h-4 w-4 accent-[#DB4444] text-red-600"
+                                className="form-radio h-4 w-4 accent-primary text-red-600"
                             />
                             <span>Cash On Delivery (Unavailable)</span>
                         </label>
@@ -94,13 +94,13 @@ const OrderSummary = ({ cartItems, subtotal, shipping, total, onPlaceOrder, load
                         className="border py-[16px] xl:py-[16px] sm:py-[13px] lg:py-[12px] w-full  px-4 sm:w-[300px] xl:w-[300px] outline-none  md:w-auto border-black bg-transparent"
                     />
                     <button
-                        className="py-[16px] sm:px-[48px] lg:text-sm  xl:text-base font-normal rounded text-white bg-[#DB4444] w-full md:w-auto"
+                        className="py-[16px] sm:px-[48px] lg:text-sm  xl:text-base font-normal rounded text-white bg-primary w-full md:w-auto"
                     >
                         Apply Coupon
                     </button>
                 </form>
             </div>
-            <button onClick={handlePayment} className="bg-[#DB4444] text-white py-[16px] px-[48px] text-base font-normal rounded mb-4 w-full sm:w-auto"
+            <button onClick={handlePayment} className="bg-primary text-white py-[16px] px-[48px] text-base font-normal rounded mb-4 w-full sm:w-auto"
             >
                 {loading ? "Placing Order..." : "Place Order"}
             </button>

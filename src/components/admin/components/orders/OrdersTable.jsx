@@ -47,7 +47,7 @@ const OrdersTable = () => {
 					<input
 						type='text'
 						placeholder='Search orders...'
-						className='bg-gray-100 border text-black placeholder-gray-400 rounded-lg pl-10 pr-4 py-2 focus:outline-none focus:ring-2 focus:ring-[#DB4444]'
+						className='bg-gray-100 border text-black placeholder-gray-400 rounded-lg pl-10 pr-4 py-2 focus:outline-none focus:ring-2 focus:ring-primary'
 						value={searchTerm}
 						onChange={handleSearch}
 					/>

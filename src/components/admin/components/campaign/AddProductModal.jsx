@@ -161,7 +161,7 @@ const AddProductModal = ({ isOpen, onClose }) => {
                             placeholder="ex. The Indian Garage Co"
                             value={productData.productName}
                             onChange={handleInputChange}
-                            className="mt-1 p-2 border rounded w-full focus:outline-none focus:ring-1 focus:ring-[#DB4444]"
+                            className="mt-1 p-2 border rounded w-full focus:outline-none focus:ring-1 focus:ring-primary"
                         />
                     </div>
                     <div>
@@ -172,7 +172,7 @@ const AddProductModal = ({ isOpen, onClose }) => {
                             placeholder="ex. 799"
                             value={productData.price}
                             onChange={handleInputChange}
-                            className="mt-1 p-2 border rounded w-full focus:outline-none focus:ring-1 focus:ring-[#DB4444]"
+                            className="mt-1 p-2 border rounded w-full focus:outline-none focus:ring-1 focus:ring-primary"
                         />
                     </div>
                     <div>
@@ -182,7 +182,7 @@ const AddProductModal = ({ isOpen, onClose }) => {
                             placeholder="ex. Men Relaxed Fit Trousers"
                             value={productData.description}
                             onChange={handleInputChange}
-                            className="mt-1 p-2 border rounded w-full focus:outline-none focus:ring-1 focus:ring-[#DB4444]"
+                            className="mt-1 p-2 border rounded w-full focus:outline-none focus:ring-1 focus:ring-primary"
                         />
                     </div>
                     <div>
@@ -193,7 +193,7 @@ const AddProductModal = ({ isOpen, onClose }) => {
                             placeholder="ex. Mod Mauve"
                             value={productData.color.name}
                             onChange={handleColorChange}
-                            className="mt-1 p-2 border rounded w-full focus:outline-none focus:ring-1 focus:ring-[#DB4444]"
+                            className="mt-1 p-2 border rounded w-full focus:outline-none focus:ring-1 focus:ring-primary"
                         />
                     </div>
                     <div>
@@ -204,7 +204,7 @@ const AddProductModal = ({ isOpen, onClose }) => {
                             placeholder="ex. #C7B2D6"
                             value={productData.color.colorCode}
                             onChange={handleColorChange}
-                            className="mt-1 p-2 border rounded w-full focus:outline-none focus:ring-1 focus:ring-[#DB4444]"
+                            className="mt-1 p-2 border rounded w-full focus:outline-none focus:ring-1 focus:ring-primary"
                         />
                     </div>
                     <div>
@@ -213,7 +213,7 @@ const AddProductModal = ({ isOpen, onClose }) => {
                             value={selectedCategoryId}
                             onChange={handleCategoryChange}
                             name='offer'
-                            className=" appearance-none border rounded w-full py-2 mt-2 px-3 text-gray-700 focus:outline-none focus:ring-1 focus:ring-[#DB4444]"
+                            className=" appearance-none border rounded w-full py-2 mt-2 px-3 text-gray-700 focus:outline-none focus:ring-1 focus:ring-primary"
                         >
                             <option value="">Select a category</option>
                             {categories.length > 0 && categories.map((category) => (
@@ -228,7 +228,7 @@ const AddProductModal = ({ isOpen, onClose }) => {
                         <select
                             value={selectedSubCategoryId}
                             onChange={handleSubCategoryChange}
-                            className=" appearance-none border rounded w-full py-2 mt-2 px-3 text-gray-700 focus:outline-none focus:ring-1 focus:ring-[#DB4444]"
+                            className=" appearance-none border rounded w-full py-2 mt-2 px-3 text-gray-700 focus:outline-none focus:ring-1 focus:ring-primary"
                         >
                             <option value="">Select a category</option>
                             {subCategories.length > 0 && subCategories.map((category) => (
@@ -246,7 +246,7 @@ const AddProductModal = ({ isOpen, onClose }) => {
                             placeholder="30, 32, 34"
                             value={productData.size}
                             onChange={handleInputChange}
-                            className="mt-1 p-2 border rounded w-full focus:outline-none focus:ring-1 focus:ring-[#DB4444]"
+                            className="mt-1 p-2 border rounded w-full focus:outline-none focus:ring-1 focus:ring-primary"
                         />
                     </div>
                 </div>
@@ -259,7 +259,7 @@ const AddProductModal = ({ isOpen, onClose }) => {
                         <select
                         onChange={handleOfferChange}
                         value={selectedOfferId}
-                        className="appearance-none border rounded w-full py-2 mt-2 px-3 text-gray-700 focus:outline-none focus:ring-1 focus:ring-[#DB4444]"
+                        className="appearance-none border rounded w-full py-2 mt-2 px-3 text-gray-700 focus:outline-none focus:ring-1 focus:ring-primary"
                     >
                         <option value="">Select an offer</option>
                         {offers.map((offer) => (
@@ -281,7 +281,7 @@ const AddProductModal = ({ isOpen, onClose }) => {
                             step="0.1"
                             value={productData.rating}
                             onChange={handleInputChange}
-                            className="mt-1 p-2 border rounded w-full focus:outline-none focus:ring-1 focus:ring-[#DB4444]"
+                            className="mt-1 p-2 border rounded w-full focus:outline-none focus:ring-1 focus:ring-primary"
                         />
                     </div>
                     <div>
@@ -291,7 +291,7 @@ const AddProductModal = ({ isOpen, onClose }) => {
                             name="reviewCount"
                             value={productData.reviewCount}
                             onChange={handleInputChange}
-                            className="mt-1 p-2 border rounded w-full focus:outline-none focus:ring-1 focus:ring-[#DB4444]"
+                            className="mt-1 p-2 border rounded w-full focus:outline-none focus:ring-1 focus:ring-primary"
                         />
                     </div>
                     <div>
@@ -301,7 +301,7 @@ const AddProductModal = ({ isOpen, onClose }) => {
                             name="stock"
                             value={productData.stock}
                             onChange={handleInputChange}
-                            className="mt-1 p-2 border rounded w-full focus:outline-none focus:ring-1 focus:ring-[#DB4444]"
+                            className="mt-1 p-2 border rounded w-full focus:outline-none focus:ring-1 focus:ring-primary"
                         />
                     </div>
                 </div>
@@ -337,7 +337,7 @@ const AddProductModal = ({ isOpen, onClose }) => {
                     </button>
                     <button
                         onClick={handleSubmit}
-                        className="px-4 py-3 bg-[#DB4444] hover:opacity-80 text-white rounded justify-start items-start gap-4 inline-flex text-sm font-semibold font-Inter leading-snug">
+                        className="px-4 py-3 bg-primary hover:opacity-80 text-white rounded justify-start items-start gap-4 inline-flex text-sm font-semibold font-Inter leading-snug">
                         Add Product
                     </button>
                 </div>

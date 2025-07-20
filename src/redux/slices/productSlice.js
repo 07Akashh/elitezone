@@ -28,6 +28,7 @@ const initialState = {
   allProducts: {
     data: [],
     colors: [],
+    pagination: {},
     isLoading: false,
     error: null,
   },
@@ -74,6 +75,7 @@ export const fetchAllProducts = createAsyncThunk(
 
       const products = response.data.products || [];
       const newColors = response.data.colors || [];
+      const pagination = response.data.pagination || {};
 
       const previousColors = getState().products.allProducts.colors || [];
 
@@ -81,7 +83,8 @@ export const fetchAllProducts = createAsyncThunk(
 
       return {
         data: products,
-        colors: colorsToStore
+        colors: colorsToStore,
+        pagination: pagination
       };
     } catch (error) {
       return rejectWithValue(error);
@@ -209,6 +212,7 @@ const productSlice = createSlice({
         state.allProducts.isLoading = false;
         state.allProducts.data = action.payload.data;
         state.allProducts.colors = action.payload.colors;
+        state.allProducts.pagination = action.payload.pagination;
       })
       .addCase(fetchAllProducts.rejected, (state, action) => {
         state.allProducts.isLoading = false;

@@ -10,7 +10,7 @@ const Layout = () => {
         <Toaster />
             <div className="min-h-screen h-full ">
             <div className="flex flex-col md:flex-row h-full">
-                <div className="w-[100px] fixed h-full bg-[#DB4444]">
+                <div className="w-[100px] fixed h-full bg-primary">
                     <Sidebar />
                 </div>
                 <div className=" w-full ml-[100px]  h-full ">

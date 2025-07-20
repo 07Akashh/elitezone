@@ -58,13 +58,13 @@ const CampaignPage = () => {
                 >
                     <div className="p-8 flex gap-8 justify-end">
                         <button
-                            className="px-4 py-3 bg-[#DB4444] hover:opacity-80 text-white rounded justify-start items-start gap-4 inline-flex text-sm font-semibold font-Inter leading-snug"
+                            className="px-4 py-3 bg-primary hover:opacity-80 text-white rounded justify-start items-start gap-4 inline-flex text-sm font-semibold font-Inter leading-snug"
                             onClick={() => setIsOfferModalOpen(true)}
                         >
                             Add / Create Offer
                         </button>
                         <button
-                            className="px-4 py-3 bg-[#DB4444] hover:opacity-80 text-white rounded justify-start items-start gap-4 inline-flex text-sm font-semibold font-Inter leading-snug"
+                            className="px-4 py-3 bg-primary hover:opacity-80 text-white rounded justify-start items-start gap-4 inline-flex text-sm font-semibold font-Inter leading-snug"
                             onClick={openModal}
                         >
                             Add / Create Campaign

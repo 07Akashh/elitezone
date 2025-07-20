@@ -161,7 +161,7 @@ const Checkout = () => {
                         <input type="hidden" name="hash" value={payuData.paymentData.hash} />
                         <input type="hidden" name="udf1" value={orderId} />
                         <input type="hidden" name="udf2" value={userId} />
-                        <button type="submit" className='bg-[#DB4444] text-white py-[16px] px-[48px] text-base font-normal rounded mb-4 w-full sm:w-auto'>Pay Now</button>
+                        <button type="submit" className='bg-primary text-white py-[16px] px-[48px] text-base font-normal rounded mb-4 w-full sm:w-auto'>Pay Now</button>
                     </form>
                 </Modals>
             )}

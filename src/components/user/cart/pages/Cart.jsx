@@ -100,13 +100,13 @@ const Cart = () => {
             <div className="text-center flex justify-between sm:text-left">
                 <button
                     onClick={() => navigate('/')}
-                    className='bg-transparent border border-black rounded py-[10px] px-[20px] sm:px-[30px] text-sm sm:text-md font-Poppins focus:bg-[#DB4444] focus:border-none focus:text-white focus:border-[#DB4444]'
+                    className='bg-transparent border border-black rounded py-[10px] px-[20px] sm:px-[30px] text-sm sm:text-md font-Poppins focus:bg-primary focus:border-none focus:text-white focus:border-primary'
                 >
                     Return To Shop
                 </button>
                 <button
                     onClick={() => navigate('/')}
-                    className='bg-transparent border border-black rounded py-[10px] px-[20px] sm:px-[30px] text-sm sm:text-md font-Poppins focus:bg-[#DB4444] focus:border-none focus:text-white focus:border-[#DB4444]'
+                    className='bg-transparent border border-black rounded py-[10px] px-[20px] sm:px-[30px] text-sm sm:text-md font-Poppins focus:bg-primary focus:border-none focus:text-white focus:border-primary'
                 >
                     Update Cart
                 </button>

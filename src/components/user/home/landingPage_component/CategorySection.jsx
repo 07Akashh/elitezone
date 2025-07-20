@@ -2,8 +2,7 @@ import React, { useRef } from 'react';
 import ProductList from '../../product/component/ProductList';
 import { GoArrowRight, GoArrowLeft } from 'react-icons/go';
 
-
-const CategorySection = ({ title, subtitle, category }) => {
+const CategorySection = ({ title, subtitle, category, description }) => {
     const scrollContainerRef = useRef(null);
 
     const scrollLeft = () => {
@@ -15,37 +14,44 @@ const CategorySection = ({ title, subtitle, category }) => {
     };
 
     return (
-        <div className="mt-5 sm:mt-12">
-            <div className="h-10 justify-start items-center gap-4 inline-flex xl:px-[135px] lg:px-[100px] md:px-[60px] px-[20px]">
-                <div className="w-5 h-10 relative">
-                    <div className="w-5 h-10 left-0 top-0 absolute bg-[#db4444] rounded" />
-                </div>
-                <div className="text-[#db4444] text-base font-semibold font-Poppins leading-tight">{subtitle}</div>
-            </div>
-            <div className='flex mt-[16px]'>
-                <div className='flex  justify-between w-full xl:px-[135px] lg:px-[100px] md:px-[60px] px-[20px]'>
-                    <h2 className="text-black text-xl sm:text-3xl md:text-4xl font-semibold font-Inter sm:leading-[48px] tracking-wider">
-                        {title}
-                    </h2>
+        <div className="mt-8 sm:mt-16">
+            <div className="xl:px-[135px] lg:px-[100px] md:px-[60px] px-[20px]">
+                {/* Header Section */}
+                <div className="flex items-center gap-4 mb-6">
+                    <div className="w-1 h-12 bg-gradient-to-b from-primary to-accent rounded-full"></div>
+                    <div className="flex-1">
+                        <div className="text-primary text-sm font-semibold font-Poppins uppercase tracking-wider mb-1">
+                            {subtitle}
+                        </div>
+                        <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 font-Inter leading-tight">
+                            {title}
+                        </h2>
+                        {description && (
+                            <p className="text-gray-600 line-clamp-1 mt-2 font-Poppins text-sm sm:text-base">
+                                {description}
+                            </p>
+                        )}
+                    </div>
+
                     {category === 'trending' && (
-                        <div className="flex gap-x-2 mb-[10px]">
+                        <div className="flex gap-2">
                             <button
-                                className="bg-neutral-100 rounded-full p-2"
+                                className="bg-white border border-gray-200 hover:border-primary hover:bg-primary hover:text-white rounded-full p-3 transition-all duration-200 shadow-sm hover:shadow-md"
                                 onClick={scrollLeft}
                             >
-                                <GoArrowLeft className='h-[24px] w-[24px]' />
+                                <GoArrowLeft className='h-5 w-5' />
                             </button>
                             <button
-                                className="bg-neutral-100 rounded-full p-2"
+                                className="bg-white border border-gray-200 hover:border-primary hover:bg-primary hover:text-white rounded-full p-3 transition-all duration-200 shadow-sm hover:shadow-md"
                                 onClick={scrollRight}
                             >
-                                <GoArrowRight className='h-[24px] w-[24px]' />
+                                <GoArrowRight className='h-5 w-5' />
                             </button>
                         </div>
                     )}
                 </div>
-            </div>
-            <div className='sm:mt-[30px]'>
+
+                {/* Products Section */}
                 <ProductList category={category} ref={scrollContainerRef} />
             </div>
         </div>

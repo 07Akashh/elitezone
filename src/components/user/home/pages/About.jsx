@@ -37,35 +37,35 @@ const About = () => {
 
                 {/* Statistics Section */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 xl:px-[135px] lg:px-[100px] md:px-[60px] px-[20px]">
-                    <div className="bg-white w-[270px] py-5 mx-auto h-[230px] border rounded shadow text-center hover:bg-[#DB4444] hover:text-white transition-all duration-300 ease-in-out group">
+                    <div className="bg-white w-[270px] py-5 mx-auto h-[230px] border rounded shadow text-center hover:bg-primary hover:text-white transition-all duration-300 ease-in-out group">
                         <div className="p-2 bg-black/50 group-hover:bg-white/50 h-20 w-20 rounded-full mb-[24px] mx-auto transition-all duration-300 ease-in-out">
                             <BiStoreAlt className="h-full w-full group-hover:bg-white group-hover:text-black bg-black text-white py-3 rounded-full mx-auto transition-all duration-300 ease-in-out" />
                         </div>
-                        <div className="text-4xl font-bold text-[#DB4444] mb-2 group-hover:text-white transition-all duration-300 ease-in-out">100+</div>
+                        <div className="text-4xl font-bold text-primary mb-2 group-hover:text-white transition-all duration-300 ease-in-out">100+</div>
                         <p className="text-gray-600 text-sm group-hover:text-white transition-all duration-300 ease-in-out">Brand Sells active on our site</p>
                     </div>
 
-                    <div className="bg-white w-[270px] py-5 mx-auto h-[230px] border rounded shadow text-center hover:bg-[#DB4444] hover:text-white transition-all duration-300 ease-in-out group">
+                    <div className="bg-white w-[270px] py-5 mx-auto h-[230px] border rounded shadow text-center hover:bg-primary hover:text-white transition-all duration-300 ease-in-out group">
                         <div className="p-2 bg-black/50 group-hover:bg-white/50 h-20 w-20 rounded-full mb-[24px] mx-auto transition-all duration-300 ease-in-out">
                             <HiOutlineCurrencyRupee className="h-full w-full group-hover:bg-white group-hover:text-black bg-black text-white p-2 rounded-full mx-auto transition-all duration-300 ease-in-out" />
                         </div>
-                        <div className="text-4xl font-bold text-[#DB4444] mb-2 group-hover:text-white transition-all duration-300 ease-in-out">1.0K</div>
+                        <div className="text-4xl font-bold text-primary mb-2 group-hover:text-white transition-all duration-300 ease-in-out">1.0K</div>
                         <p className="text-gray-600 text-sm group-hover:text-white transition-all duration-300 ease-in-out">Monthly product sales</p>
                     </div>
 
-                    <div className="bg-white w-[270px] py-5 mx-auto h-[230px] border rounded shadow text-center hover:bg-[#DB4444] hover:text-white transition-all duration-300 ease-in-out group">
+                    <div className="bg-white w-[270px] py-5 mx-auto h-[230px] border rounded shadow text-center hover:bg-primary hover:text-white transition-all duration-300 ease-in-out group">
                         <div className="p-2 bg-black/50 group-hover:bg-white/50 h-20 w-20 rounded-full mb-[24px] mx-auto transition-all duration-300 ease-in-out">
                             <HiOutlineShoppingBag className="h-full w-full group-hover:bg-white group-hover:text-black bg-black text-white py-3 rounded-full mx-auto transition-all duration-300 ease-in-out" />
                         </div>
-                        <div className="text-4xl font-bold text-[#DB4444] mb-2 group-hover:text-white transition-all duration-300 ease-in-out">3.8K</div>
+                        <div className="text-4xl font-bold text-primary mb-2 group-hover:text-white transition-all duration-300 ease-in-out">3.8K</div>
                         <p className="text-gray-600 text-sm group-hover:text-white transition-all duration-300 ease-in-out">Customers active on our site</p>
                     </div>
 
-                    <div className="bg-white w-[270px] py-5 mx-auto h-[230px] border rounded shadow text-center hover:bg-[#DB4444] hover:text-white transition-all duration-300 ease-in-out group">
+                    <div className="bg-white w-[270px] py-5 mx-auto h-[230px] border rounded shadow text-center hover:bg-primary hover:text-white transition-all duration-300 ease-in-out group">
                         <div className="p-2 bg-black/50 group-hover:bg-white/50 h-20 w-20 rounded-full mb-[24px] mx-auto transition-all duration-300 ease-in-out">
                             <TbMoneybag className="h-full w-full group-hover:bg-white group-hover:text-black bg-black text-white p-3 rounded-full mx-auto transition-all duration-300 ease-in-out" />
                         </div>
-                        <div className="text-4xl font-bold text-[#DB4444] mb-2 group-hover:text-white transition-all duration-300 ease-in-out">&#8377;10L+</div>
+                        <div className="text-4xl font-bold text-primary mb-2 group-hover:text-white transition-all duration-300 ease-in-out">&#8377;10L+</div>
                         <p className="text-gray-600 text-sm group-hover:text-white transition-all duration-300 ease-in-out">Annual gross sales on our site</p>
                     </div>
                 </div>

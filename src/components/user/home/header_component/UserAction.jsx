@@ -46,10 +46,10 @@ const UserActions = () => {
             </Link>
             <Link to="/cart" className="relative flex">
                 <IoCartOutline className='sm:h-[24px] sm:w-[24px] h-[20px] w-[20px] my-auto' />
-                <p className='bg-[#DB4444] text-sm h-5 w-5 text-center text-white rounded-full font-Poppins'>{itemCount}</p>
+                <p className='bg-primary text-sm h-5 w-5 text-center text-white rounded-full font-Poppins'>{itemCount}</p>
             </Link>
             <button onClick={handleUserIconClick}>
-                <FiUser className='sm:h-8 sm:w-8 h-7 w-7 p-1.5 align-middle rounded-full bg-[#DB4444] text-white text-xs border-black my-auto' />
+                <FiUser className='sm:h-8 sm:w-8 h-7 w-7 p-1.5 align-middle rounded-full bg-primary text-white text-xs border-black my-auto' />
             </button>
             <Modals isOpen={open} closeModal={handleClose} handleClose={handleClose} contentLabel="Login Modal">
                 {isLogin ? (

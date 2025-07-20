@@ -59,20 +59,20 @@ const AddressBook = () => {
         <>
             <div className='p-2 sm:p-5 w-full py-[40px] font-TenorSans'>
                 <div className="flex justify-between">
-                    <h2 className="text-xl sm:text-2xl mb-5 text-[#db4444] font-medium font-Poppins leading-7 ">My Address</h2>
-                    <button onClick={handleClick} className='text-xl sm:text-2xl mb-5 text-[#db4444] font-medium font-Poppins leading-7'>Add</button>
+                    <h2 className="text-xl sm:text-2xl mb-5 text-primary font-medium font-Poppins leading-7 ">My Address</h2>
+                    <button onClick={handleClick} className='text-xl sm:text-2xl mb-5 text-primary font-medium font-Poppins leading-7'>Add</button>
                 </div>
                 <div className=' h-[350px] no-scrollbar overflow-scroll'>
                     {loading ? (
                         <p className='text-center'>Loading...</p>
                     ) : error ? (
-                        <p className="text-red-500">Error: {error}</p>
+                        <p className="text-primary">Error: {error}</p>
                     ) : addresses.length > 0 ? (
                         <ul className="mb-4 space-y-2 mt-5 text-white">
                             {addresses?.map((address, index) => (
                                 <li
                                     key={address?._id}
-                                    className={`cursor-pointer bg-[#DB4444] flex justify-between py-5  px-4 ${selectedAddressIndex === index ? 'bg-[#DB4444] text-white rounded' : ''}`}
+                                    className={`cursor-pointer bg-primary flex justify-between py-5  px-4 ${selectedAddressIndex === index ? 'bg-primary text-white rounded' : ''}`}
                                     onClick={() => handleAddressSelect(index)}
                                 >
                                     <div>

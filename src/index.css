@@ -2,13 +2,50 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
 
+:root {
+  --color-primary: #DB4444;
+  --color-primary-rgb: 219, 68, 68;
+  --color-secondary: #111827;
+  --color-secondary-rgb: 17, 24, 39;
+  --color-accent: #FF6B6B;
+  --color-accent-rgb: 255, 107, 107;
+  --color-background: #ffffff;
+  --color-wht: #ffffff;
+  --color-surface: #f5f5f5;
+  --color-error: #EF4444;
+  --color-success: #22C55E;
+  --color-warning: #F59E42;
+  --color-info: #3B82F6;
+  --color-brand: #DB4444;
+  --color-brand-dark: #B91C1C;
+  --color-brand-light: #FCA5A5;
+
+  /* Text colors */
+  --color-text1: #111827;      /* Main text (black) */
+  --color-text2: #555555;      /* Secondary text */
+  --color-text3: #888888;      /* Tertiary text */
+  --color-text-inverse: #fff;  /* For dark backgrounds (white) */
+
+  /* Background colors */
+  --color-bg1: #fff;           /* Main background */
+  --color-bg2: #f5f5f5;        /* Secondary background */
+  --color-bg3: #ececec;        /* Tertiary background */
+  --color-bg-inverse: #111827; /* For light text on dark bg */
+
+  /* Border colors */
+  --color-border1: #e5e7eb;    /* Main border */
+  --color-border2: #d1d5db;    /* Secondary border */
+  --color-border3: #9ca3af;    /* Tertiary border */
+  --color-border-inverse: #fff;/* Border for dark bg */
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-body{
-  background-color: #ffffff;
-}
+/* body{
+  /* background-color: var(--color-background); */
+/* } */
 
 @layer utilities {
   .no-scrollbar::-webkit-scrollbar {
@@ -69,6 +106,7 @@ body{
 .arrow-auto-animate {
   animation: moveForward 10s ease-in-out infinite alternate, moveBackward .8s ease-in-out infinite alternate;
 }
+
 @keyframes borderBottomFadeIn {
   from {
     border-bottom-width: 0;
@@ -109,6 +147,7 @@ body{
       opacity: 1;
   }
 }
+
 /* Ensure smooth transitions for max-height */
 .accordion-content {
   overflow: hidden;
@@ -134,11 +173,15 @@ body{
 
 @keyframes shimmer {
   0% {
-    background-position: -500px 0;
+    transform: translateX(-100%);
   }
   100% {
-    background-position: 500px 0;
+    transform: translateX(100%);
   }
+}
+
+.animate-shimmer {
+  animation: shimmer 1.5s infinite;
 }
 
 .skeleton {
@@ -213,7 +256,6 @@ body{
   }
 }
 
-
 @layer components {
   .spinner {
     -moz-appearance: textfield;
@@ -226,7 +268,6 @@ body{
     -webkit-appearance: none;
   }
 }
-
 
 @keyframes clickEffect {
   0% {
@@ -242,6 +283,162 @@ body{
 
 .animate-click {
   animation: clickEffect 0.15s ease-out;
+}
+
+/* New Modern Animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeInRight {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInFromTop {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes glow {
+  0%, 100% {
+    box-shadow: 0 0 5px rgba(219, 68, 68, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 20px rgba(219, 68, 68, 0.6);
+  }
+}
+
+/* Animation Classes */
+.animate-fade-in-up {
+  animation: fadeInUp 0.6s ease-out;
+}
+
+.animate-fade-in-left {
+  animation: fadeInLeft 0.6s ease-out;
+}
+
+.animate-fade-in-right {
+  animation: fadeInRight 0.6s ease-out;
+}
+
+.animate-slide-in-top {
+  animation: slideInFromTop 0.5s ease-out;
+}
+
+.animate-scale-in {
+  animation: scaleIn 0.4s ease-out;
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+.animate-glow {
+  animation: glow 2s ease-in-out infinite;
+}
+
+/* Hover Effects */
+.hover-lift {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.hover-lift:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+.hover-glow:hover {
+  box-shadow: 0 0 20px rgba(219, 68, 68, 0.4);
+}
+
+/* Gradient Text */
+.gradient-text {
+  background: linear-gradient(135deg, #DB4444, #FF6B6B);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Glass Effect */
+.glass {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Smooth Scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #DB4444;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #c13a3a;
 }
 
 

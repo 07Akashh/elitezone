@@ -11,7 +11,7 @@ const Tabs = ({ activeTab, onTabClick }) => {
         >
             <motion.button
                 whileTap={{ scale: 0.95 }}
-                className={`px-4 w-full py-2 border-b-2 border-[#DB4444] transition-colors duration-300 ${activeTab === "details" ? "border-[#DB4444]" : "border-gray-200"
+                className={`px-4 w-full py-2 border-b-2 border-primary transition-colors duration-300 ${activeTab === "details" ? "border-primary" : "border-gray-200"
                     }`}
                 onClick={() => onTabClick("details")}
             >
@@ -19,7 +19,7 @@ const Tabs = ({ activeTab, onTabClick }) => {
             </motion.button>
             <motion.button
                 whileTap={{ scale: 0.95 }}
-                className={`px-4 w-full py-2 border-b-2 border-[#DB4444] transition-colors duration-300 ${activeTab === "reviews" ? "border-[#DB4444] " : "border-gray-200"
+                className={`px-4 w-full py-2 border-b-2 border-primary transition-colors duration-300 ${activeTab === "reviews" ? "border-primary " : "border-gray-200"
                     }`}
                 onClick={() => onTabClick("reviews")}
             >

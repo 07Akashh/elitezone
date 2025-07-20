@@ -62,7 +62,7 @@ const Navigation = () => {
                         <li>
                             <NavLink
                                 to="/"
-                                className={`block ${matchHome ? 'text-[#db4444] font-normal' : ''}`}
+                                className={`block ${matchHome ? 'text-primary font-normal' : ''}`}
                                 onClick={toggleSidebar}
                             >
                                 Home
@@ -71,7 +71,7 @@ const Navigation = () => {
                         <li>
                             <NavLink
                                 to="/contact"
-                                className={`block ${matchContact ? 'text-[#db4444] font-normal' : ''}`}
+                                className={`block ${matchContact ? 'text-primary font-normal' : ''}`}
                                 onClick={toggleSidebar}
                             >
                                 Contact Us
@@ -80,7 +80,7 @@ const Navigation = () => {
                         <li>
                             <NavLink
                                 to="/about"
-                                className={`block ${matchAbout ? 'text-[#db4444] font-normal' : ''}`}
+                                className={`block ${matchAbout ? 'text-primary font-normal' : ''}`}
                                 onClick={toggleSidebar}
                             >
                                 About Us
@@ -90,7 +90,7 @@ const Navigation = () => {
                             <li>
                                 <NavLink
                                     to="/register"
-                                    className={`block ${matchSignUp ? 'text-[#db4444] font-normal' : ''}`}
+                                    className={`block ${matchSignUp ? 'text-primary font-normal' : ''}`}
                                     onClick={toggleSidebar}
                                 >
                                     Sign Up
@@ -108,7 +108,7 @@ const Navigation = () => {
                                 <li>
                                     <NavLink
                                         to="/my-account/profile"
-                                        className={`block ${matchProfile ? 'text-[#db4444] font-normal' : ''}`}
+                                        className={`block ${matchProfile ? 'text-primary font-normal' : ''}`}
                                         onClick={toggleSidebar}
                                     >
                                         My Profile
@@ -117,7 +117,7 @@ const Navigation = () => {
                                 <li>
                                     <NavLink
                                         to="/my-account/address-book"
-                                        className={`block ${matchAddressBook ? 'text-[#db4444] font-normal' : ''}`}
+                                        className={`block ${matchAddressBook ? 'text-primary font-normal' : ''}`}
                                         onClick={toggleSidebar}
                                     >
                                         Address Book
@@ -126,7 +126,7 @@ const Navigation = () => {
                                 <li>
                                     <NavLink
                                         to="/my-account/orders"
-                                        className={`block ${matchOrders ? 'text-[#db4444] font-normal' : ''}`}
+                                        className={`block ${matchOrders ? 'text-primary font-normal' : ''}`}
                                         onClick={toggleSidebar}
                                     >
                                         My Orders

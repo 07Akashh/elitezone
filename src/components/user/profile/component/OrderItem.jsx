@@ -11,7 +11,7 @@ const OrderItem = ({ productName, orderId, finalPrice, status, date, photo, id, 
 
     return (
         <Link to={`details/${orderId}`} key={orderId}>
-            <div className="flex flex-row  bg-[#db4444]  p-2 sm:p-4 mb-4">
+            <div className="flex flex-row  bg-primary  p-2 sm:p-4 mb-4">
                 <Link to={`/${categoryId}/${subCategoryId}/${id}`}>
                     <img
                         src={photo}

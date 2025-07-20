@@ -89,7 +89,7 @@ const MyProfile = () => {
             )}
             <div className={`${loading ? 'opacity-50' : ''}`}>
                 <div className=' w-full px-5 sm:px-[40px] md:px-[80px] py-[20px] md:py-[40px] font-Poppins'>
-                    <h2 className="text-xl sm:text-2xl mb-5 text-[#db4444] font-medium font-Poppins leading-7 ">Edit Your Profile</h2>
+                    <h2 className="text-xl sm:text-2xl mb-5 text-primary font-medium font-Poppins leading-7 ">Edit Your Profile</h2>
                     <div className="space-y-3">
                         <form className='gap-5' onSubmit={handleSubmit}>
                             <div className='grid grid-cols-1 sm:grid-cols-2 gap-x-[50px] font-normal text-sm gap-y-[24px]'>
@@ -145,7 +145,7 @@ const MyProfile = () => {
                                         onChange={handleChange}
                                     />
                                     {!isPhoneValid && (
-                                        <p className='text-red-500 text-[12px] text-start'>
+                                        <p className='text-primary text-[12px] text-start'>
                                             Number must be at least 10 digits
                                         </p>
                                     )}
@@ -165,7 +165,7 @@ const MyProfile = () => {
                                         onChange={handleChange}
                                     />
                                     {!isPinValid && (
-                                        <p className='text-red-500 text-[12px] text-start'>
+                                        <p className='text-primary text-[12px] text-start'>
                                             Pincode must be at least 6 digits
                                         </p>
                                     )}
@@ -216,7 +216,7 @@ const MyProfile = () => {
                     </div> */}
                             <div className='mt-[24px] justify-end flex gap-5'>
                                 <button type="button" onClick={handleReset} className=' text-sm font-normal leading-normal'>Cancel</button>
-                                <button type="submit" className=' py-[16px] px-[30px] sm:px-[48px] bg-[#DB4444] text-xs text-white sm:text-sm font-normal leading-normal rounded'>Save Changes</button>
+                                <button type="submit" className=' py-[16px] px-[30px] sm:px-[48px] bg-primary text-xs text-white sm:text-sm font-normal leading-normal rounded'>Save Changes</button>
                             </div>
                         </form>
                     </div>

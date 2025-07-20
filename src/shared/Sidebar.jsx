@@ -31,7 +31,7 @@ const Sidebar = () => {
                     <li>
                         <NavLink
                             to="profile"
-                            className={`block ${matchProfile ? 'text-[#db4444] font-normal' : ''}`}
+                            className={`block ${matchProfile ? 'text-primary font-normal' : ''}`}
                         >
                             My Profile
                         </NavLink>
@@ -39,7 +39,7 @@ const Sidebar = () => {
                     <li>
                         <NavLink
                             to="address-book"
-                            className={`block ${matchAddressBook ? 'text-[#db4444]  font-normal' : ''}`}
+                            className={`block ${matchAddressBook ? 'text-primary  font-normal' : ''}`}
                         >
                             Address Book
                         </NavLink>
@@ -51,7 +51,7 @@ const Sidebar = () => {
                     <li>
                         <NavLink
                             to="orders"
-                            className={`block ${matchOrders ? 'text-[#db4444] opacity-100 font-normal' : ''}`}
+                            className={`block ${matchOrders ? 'text-primary opacity-100 font-normal' : ''}`}
                         >
                             My Orders
                         </NavLink>
@@ -59,7 +59,7 @@ const Sidebar = () => {
                     {/* <li>
                         <NavLink
                             to="detail"
-                            className={`block ${matchDetailsDemo ? 'text-[#db4444] font-semibold' : ''}`}
+                            className={`block ${matchDetailsDemo ? 'text-primary font-semibold' : ''}`}
                         >
                             Order Details Demo
                         </NavLink>

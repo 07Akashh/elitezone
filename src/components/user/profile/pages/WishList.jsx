@@ -25,7 +25,7 @@ const Wishlist = () => {
                     </h2>
                     <button
 
-                        className='bg-transparent  border border-black rounded py-[10px] px-[15px] sm:px-[30px] text-sm font-normal font-Poppins focus:bg-[#DB4444] focus:border-none focus:text-white focus:border-[#DB4444]'
+                        className='bg-transparent  border border-black rounded py-[10px] px-[15px] sm:px-[30px] text-sm font-normal font-Poppins focus:bg-primary focus:border-none focus:text-white focus:border-primary'
                     >
                         Move All To Bag
                     </button>
@@ -42,7 +42,7 @@ const Wishlist = () => {
                 <div className='lg:mb-[60px] mb-[20px] mt-[40px] lg:mt-[80px] flex align-middle justify-between  h-[48px]'>
                     <div className='flex gap-4'>
                         <div className="w-5 h-10 relative">
-                            <div className="w-5 h-10 left-0 top-0 absolute bg-[#db4444] rounded" />
+                            <div className="w-5 h-10 left-0 top-0 absolute bg-primary rounded" />
                         </div>
                         <h2 className="text-xl font-normal py-1 leading-relaxed font-Poppins">
                             Just For You
@@ -50,7 +50,7 @@ const Wishlist = () => {
                     </div>
                     <button
                     onClick={(()=> navigate('/product'))}
-                        className='bg-transparent border border-black rounded py-[10px] px-[30px] text-sm font-normal font-Poppins focus:bg-[#DB4444] focus:border-none focus:text-white focus:border-[#DB4444]'
+                        className='bg-transparent border border-black rounded py-[10px] px-[30px] text-sm font-normal font-Poppins focus:bg-primary focus:border-none focus:text-white focus:border-primary'
                     >
                         See All
                     </button>

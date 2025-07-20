@@ -11,7 +11,7 @@ const UserProfileLayout = () => {
             <div className="sm:mb-[140px] sm:mt-[80px] xl:px-[135px] lg:px-[100px] md:px-[60px] px-[10px]">
             <div className="   flex flex-col md:flex-row sm:justify-between sm:items-center font-Poppins">
                 <Breadcrumbs />
-                <p className="mt-2 md:mt-0 text-center sm:text-justify">Welcome! <span className="text-[#DB4444]">{user.firstName}</span></p>
+                <p className="mt-2 md:mt-0 text-center sm:text-justify">Welcome! <span className="text-primary">{user.firstName}</span></p>
             </div>
             <div className="my-5 flex flex-col md:flex-row justify-between h-full">
                 <Sidebar className="md:w-1/4  lg:w-1/5" />

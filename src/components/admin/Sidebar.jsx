@@ -31,7 +31,7 @@ const Sidebar = () => {
                 <p className="text-md">Are you sure you want to logout?</p>
                 <div className="flex space-x-4">
                     <button
-                        className="px-5 py-2 bg-red-500 text-white rounded"
+                        className="px-5 py-2 bg-primary text-white rounded"
                         onClick={() => {
                             handleLogout();
                             toast.dismiss(t.id);
@@ -61,7 +61,7 @@ const Sidebar = () => {
                     <li className="w-full">
                         <NavLink
                             to="dashboard"
-                            className={`flex items-center justify-center h-[52px] rounded-lg ${matchDashboard ? 'bg-white text-[#DB4444] font-normal shadow-md backdrop-blur-md' : 'text-white bg-[#ffffff52]'}`}
+                            className={`flex items-center justify-center h-[52px] rounded-lg ${matchDashboard ? 'bg-white text-primary font-normal shadow-md backdrop-blur-md' : 'text-white bg-[#ffffff52]'}`}
                         >
                             <AiOutlineHome className="text-3xl" />
                         </NavLink>
@@ -69,7 +69,7 @@ const Sidebar = () => {
                     <li className="w-full">
                         <NavLink
                             to="orders"
-                            className={`flex items-center justify-center h-[52px] rounded-lg ${matchOrders ? 'bg-white text-[#DB4444] font-normal shadow-md backdrop-blur-md' : 'text-white bg-[#ffffff52]'}`}
+                            className={`flex items-center justify-center h-[52px] rounded-lg ${matchOrders ? 'bg-white text-primary font-normal shadow-md backdrop-blur-md' : 'text-white bg-[#ffffff52]'}`}
                         >
                             <RiLayoutHorizontalLine className="text-3xl" />
                         </NavLink>
@@ -77,7 +77,7 @@ const Sidebar = () => {
                     <li className="w-full">
                         <NavLink
                             to="products"
-                            className={`flex items-center justify-center h-[52px] rounded-lg ${matchProducts ? 'bg-white text-[#DB4444] font-normal shadow-md backdrop-blur-md' : 'text-white bg-[#ffffff52]'}`}
+                            className={`flex items-center justify-center h-[52px] rounded-lg ${matchProducts ? 'bg-white text-primary font-normal shadow-md backdrop-blur-md' : 'text-white bg-[#ffffff52]'}`}
                         >
                             <RiShoppingBag3Line className="text-3xl" />
                         </NavLink>
@@ -85,7 +85,7 @@ const Sidebar = () => {
                     <li className="w-full">
                         <NavLink
                             to="customers"
-                            className={`flex items-center justify-center h-[52px] rounded-lg ${matchCustomers ? 'bg-white text-[#DB4444] font-normal shadow-md backdrop-blur-md' : 'text-white bg-[#ffffff52]'}`}
+                            className={`flex items-center justify-center h-[52px] rounded-lg ${matchCustomers ? 'bg-white text-primary font-normal shadow-md backdrop-blur-md' : 'text-white bg-[#ffffff52]'}`}
                         >
                             <RiUser3Line className="text-3xl" />
                         </NavLink>
@@ -93,7 +93,7 @@ const Sidebar = () => {
                     <li className="w-full">
                         <NavLink
                             to="search"
-                            className={`flex items-center justify-center h-[52px] rounded-lg ${matchSearch ? 'bg-white text-[#DB4444] font-normal shadow-md backdrop-blur-md' : 'text-white bg-[#ffffff52]'}`}
+                            className={`flex items-center justify-center h-[52px] rounded-lg ${matchSearch ? 'bg-white text-primary font-normal shadow-md backdrop-blur-md' : 'text-white bg-[#ffffff52]'}`}
                         >
                             <AiOutlineSearch className="text-3xl" />
                         </NavLink>
@@ -101,7 +101,7 @@ const Sidebar = () => {
                     <li className="w-full">
                         <NavLink
                             to="campaign"
-                            className={`flex items-center justify-center h-[52px] rounded-lg ${matchCampaign ? 'bg-white text-[#DB4444] font-normal shadow-md backdrop-blur-md' : 'text-white bg-[#ffffff52]'}`}
+                            className={`flex items-center justify-center h-[52px] rounded-lg ${matchCampaign ? 'bg-white text-primary font-normal shadow-md backdrop-blur-md' : 'text-white bg-[#ffffff52]'}`}
                         >
                             <AiOutlineGift className="text-3xl" />
                         </NavLink>
@@ -110,7 +110,7 @@ const Sidebar = () => {
                     <li>
                         <button
                             onClick={showLogoutToast}
-                            className="w-full h-[52px] rounded-lg bg-[#ffffff52] focus:bg-white focus:text-[#DB4444] text-white  active:bg-[#f0f0f0] active:text-[#d32f2f] focus:outline-none"
+                            className="w-full h-[52px] rounded-lg bg-[#ffffff52] focus:bg-white focus:text-primary text-white  active:bg-[#f0f0f0] active:text-[#d32f2f] focus:outline-none"
                         >
                             <RiLogoutBoxRLine className="text-3xl m-auto align-middle " />
                         </button>

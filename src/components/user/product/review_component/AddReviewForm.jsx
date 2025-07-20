@@ -73,7 +73,7 @@ const AddReviewForm = ({  id }) => {
             <div className="mb-4">
                 <label className="block text-gray-700">Your Review</label>
                 <textarea
-                    className="w-full p-2 border outline-[#DB4444]"
+                    className="w-full p-2 border outline-primary"
                     rows="4"
                     value={reviewText}
                     onChange={(e) => setReviewText(e.target.value)}
@@ -169,7 +169,7 @@ const AddReviewForm = ({  id }) => {
 
             <button
                 type="submit"
-                className="px-4 py-2 bg-[#DB4444] hover:bg-[#DB4444]/80 focus:bg-[#DB4444] text-white rounded-lg"
+                className="px-4 py-2 bg-primary hover:bg-primary/80 focus:bg-primary text-white rounded-lg"
             >
                 {loading ? 'Submitting' : 'Submit Review'}
             </button>

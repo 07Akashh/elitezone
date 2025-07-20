@@ -161,7 +161,7 @@ const Register = () => {
                         required
                     />
                     {!isPhoneValid && (
-                        <p className='text-red-500 text-sm text-left'>
+                        <p className='text-primary text-sm text-left'>
                             Number must be 10 digits
                         </p>
                     )}
@@ -187,7 +187,7 @@ const Register = () => {
                         required
                     />
                     {!isPinValid && (
-                        <p className='text-red-500 text-sm text-left'>
+                        <p className='text-primary text-sm text-left'>
                             Pincode must be 6 digits
                         </p>
                     )}
@@ -200,14 +200,14 @@ const Register = () => {
                         onChange={handleChange}
                         required
                     />
-                    <button type="submit" disabled={loading} className='w-full  text-lg font-normal bg-[#DB4444] text-white rounded py-2'>
+                    <button type="submit" disabled={loading} className='w-full  text-lg font-normal bg-primary text-white rounded py-2'>
                         {loading ? 'Loading...' : 'Create Account'}
                     </button>
-                    {error && <p className='text-red-500 mt-2'>{error}</p>}
+                    {error && <p className='text-primary mt-2'>{error}</p>}
                 </form>
                 <div className="mt-4 text-gray-600 text-sm text-center">
                     Already Have an Account?{' '}
-                    <Link to='/login' className="text-[15px] text-[#DB4444]">
+                    <Link to='/login' className="text-[15px] text-primary">
                         Log In
                     </Link>
                     <p className='font-extrabold text-gray-400'>-OR-</p>

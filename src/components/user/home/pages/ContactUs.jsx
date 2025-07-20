@@ -13,9 +13,9 @@ const ContactUs = () => {
             </div>
             <div className="flex flex-col md:flex-row gap-y-[40px] sm:gap-y-0 border-black gap-x-[30px] justify-between ">
                 {/* Contact Information Section */}
-                <div className="md:w-[340px] w-full h-auto xl:h-[457px]  text-black font-normal shadow-md drop-shadow-sm py-[40px] px-[35px] bg-[#FFFFFF] flex flex-col">
+                <div className="md:w-[340px] w-full h-auto xl:h-[457px]  text-black font-normal shadow-md drop-shadow-sm py-[40px] px-[35px] bg-wht flex flex-col">
                     <div className='flex items-center gap-x-3 mb-5'>
-                        <IoCallOutline className='text-2xl h-[40px] w-[40px] p-2 bg-[#DB4444] text-white rounded-full' />
+                        <IoCallOutline className='text-2xl h-[40px] w-[40px] p-2 bg-primary text-white rounded-full' />
                         <div>
                             <h2 className="font-medium text-lg leading-normal mb-1">Call Us</h2>
                         </div>
@@ -29,7 +29,7 @@ const ContactUs = () => {
 
                     <div className="border-t border-gray-300 my-[32px]"></div>
                     <div className='flex items-center gap-x-3 mb-5'>
-                        <div className='text-2xl h-[40px] w-[40px] p-2 bg-[#DB4444] text-white rounded-full py-auto border-black' >
+                        <div className='text-2xl h-[40px] w-[40px] p-2 bg-primary text-white rounded-full py-auto border-black' >
                             <FaRegEnvelope className=' m-auto border-black' />
                         </div>
                         <div>
@@ -85,7 +85,7 @@ const ContactUs = () => {
                         </div>
                         <div>
                             <button
-                                className=" w-full sm:w-auto bg-[#DB4444] hover:bg-[#DB4444]/80 font-TenorSans float-end text-[#FAFAFA] rounded px-[48px] py-[16px] font-medium "
+                                className=" w-full sm:w-auto bg-primary hover:bg-primary/80 font-TenorSans float-end text-[#FAFAFA] rounded px-[48px] py-[16px] font-medium "
                                 type="submit"
                             >
                                 Send Message

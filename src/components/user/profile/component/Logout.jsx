@@ -11,13 +11,13 @@ const Logout = ({ isOpen, onClose, onConfirm }) => {
                 <div className="flex justify-center gap-4">
                     <button
                         onClick={onClose}
-                        className="bg-gray-300 hover:bg-gray-300/80 text-[#DB4444]/90 font-semibold py-2 px-4 rounded"
+                        className="bg-gray-300 hover:bg-gray-300/80 text-primary/90 font-semibold py-2 px-4 rounded"
                     >
                         Cancel
                     </button>
                     <button
                         onClick={onConfirm}
-                        className="bg-[#DB4444] hover:bg-[#DB4444]/80 text-white font-semibold py-2 px-4 rounded"
+                        className="bg-primary hover:bg-primary/80 text-white font-semibold py-2 px-4 rounded"
                     >
                         Logout
                     </button>

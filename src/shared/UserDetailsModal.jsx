@@ -102,7 +102,7 @@ const UserDetailsModal = ({ onSubmit, user }) => {
                         required
                     />
                     {!isPinValid && (
-                        <p className='text-red-500 text-[12px] text-start'>
+                        <p className='text-primary text-[12px] text-start'>
                             Pincode must be at least 6 digits
                         </p>
                     )}
@@ -121,12 +121,12 @@ const UserDetailsModal = ({ onSubmit, user }) => {
                         required
                     />
                     {!isPhoneValid && (
-                        <p className='text-red-500 text-[12px] text-start'>
+                        <p className='text-primary text-[12px] text-start'>
                             Number must be at least 10 digits
                         </p>
                     )}
                     <div className="text-center">
-                        <button type="submit" className='mt-[23px] text-lg font-semibold bg-[#DB4444] hover:bg-[#DB4444]/80 text-white rounded-xl px-10 py-1'>
+                        <button type="submit" className='mt-[23px] text-lg font-semibold bg-primary hover:bg-primary/80 text-white rounded-xl px-10 py-1'>
                             Submit
                         </button>
                     </div>

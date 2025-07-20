@@ -50,7 +50,7 @@ const OfferModal = ({ isOpen, onClose }) => {
                             name="offerName"
                             value={offerData.offerName}
                             onChange={handleOfferChange}
-                            className="mt-1 p-2 border rounded w-full focus:outline-none focus:ring-1 focus:ring-[#DB4444]"
+                            className="mt-1 p-2 border rounded w-full focus:outline-none focus:ring-1 focus:ring-primary"
                         />
                     </div>
                     <div>
@@ -60,7 +60,7 @@ const OfferModal = ({ isOpen, onClose }) => {
                             name="offerDescription"
                             value={offerData.offerDescription}
                             onChange={handleOfferChange}
-                            className="mt-1 p-2 border rounded w-full focus:outline-none focus:ring-1 focus:ring-[#DB4444]"
+                            className="mt-1 p-2 border rounded w-full focus:outline-none focus:ring-1 focus:ring-primary"
                         />
                     </div>
                     <div>
@@ -69,7 +69,7 @@ const OfferModal = ({ isOpen, onClose }) => {
                             name="offerType"
                             value={offerData.offerType}
                             onChange={handleOfferChange}
-                            className="mt-1 p-2 border rounded w-full focus:outline-none focus:ring-1 focus:ring-[#DB4444]"
+                            className="mt-1 p-2 border rounded w-full focus:outline-none focus:ring-1 focus:ring-primary"
                         >
                             <option value="percentOff">Percent Off</option>
                             <option value="offerPrice">Offer Price</option>
@@ -83,7 +83,7 @@ const OfferModal = ({ isOpen, onClose }) => {
                                 name="percentOff"
                                 value={offerData.percentOff}
                                 onChange={handleOfferChange}
-                                className="mt-1 p-2 border rounded w-full focus:outline-none focus:ring-1 focus:ring-[#DB4444]"
+                                className="mt-1 p-2 border rounded w-full focus:outline-none focus:ring-1 focus:ring-primary"
                             />
                         </div>
                     )}
@@ -95,7 +95,7 @@ const OfferModal = ({ isOpen, onClose }) => {
                                 name="offerPrice"
                                 value={offerData.offerPrice}
                                 onChange={handleOfferChange}
-                                className="mt-1 p-2 border rounded w-full focus:outline-none focus:ring-1 focus:ring-[#DB4444]"
+                                className="mt-1 p-2 border rounded w-full focus:outline-none focus:ring-1 focus:ring-primary"
                             />
                         </div>
                     )}
@@ -109,7 +109,7 @@ const OfferModal = ({ isOpen, onClose }) => {
                     </button>
                     <button
                         onClick={handleSubmitOffer}
-                        className="w-full py-2 bg-red-500 text-white rounded-lg hover:bg-red-600"
+                        className="w-full py-2 bg-primary text-white rounded-lg hover:bg-red-600"
                     >
                         Submit Offer
                     </button>
