@@ -361,7 +361,7 @@ const ProductFilterPage = () => {
     }
 
     return (
-        <div className='xl:px-[135px] lg:px-[100px] md:px-[60px] py-6 min-h-[60vh] -z-[1000]'>
+        <div className='xl:px-[135px] lg:px-[100px] md:px-[60px] py-6 min-h-[60vh] '>
             <div className='text-center sm:mb-3'></div>
             <div className='sm:mt-[40px] sm:mb-[40px] px-[20px] sm:px-0'>
                 <Breadcrumbs />
@@ -386,14 +386,14 @@ const ProductFilterPage = () => {
                 </select>
             </div>
 
-            <div className="flex flex-col lg:flex-row gap-6 border-black -z-[1000]">
+            <div className="flex flex-col lg:flex-row gap-6 border-black">
                 {/* Filter Sidebar */}
-                <aside className={`fixed inset-0 bg-white backdrop-blur border border-border1 py-4 px-4 lg:w-[300px] xl:w-[350px] lg:h-full rounded-xl overflow-y-auto lg:sticky lg:top-28 z-50 ${showFilter ? 'block' : 'hidden'} lg:block`}>
+                <aside className={`fixed inset-0 bg-white backdrop-blur border border-border1 py-4 px-4 lg:w-[300px] xl:w-[350px] lg:h-full rounded-xl overflow-y-auto lg:sticky lg:top-28 ${showFilter ? 'block' : 'hidden'} lg:block`}>
                     <div className="sticky top-0  backdrop-blur rounded-t-xl pb-2 mb-2 border-b border-border1 flex items-center gap-2">
                         <FiFilter className="w-5 h-5 text-primary" />
                         <span className="text-lg font-semibold text-text1 tracking-wide">Filters</span>
                         <button
-                        className="absolute top-2 right-3 z-50 lg:hidden p-1 rounded-full hover:bg-bg2 transition"
+                        className="absolute top-2 right-3 lg:hidden p-1 rounded-full hover:bg-bg2 transition"
                         onClick={toggleFilter}
                         aria-label="Close filter sidebar"
                         type="button"
@@ -554,7 +554,7 @@ const ProductFilterPage = () => {
             {/* Mobile Filter Overlay */}
             {showFilter && (
                 <div 
-                    className="fixed inset-0 bg-black opacity-50 z-40 lg:hidden" 
+                    className="fixed inset-0 bg-black opacity-50 lg:hidden" 
                     onClick={toggleFilter}
                 />
             )}
